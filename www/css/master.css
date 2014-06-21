@@ -92,6 +92,54 @@ a img {
 .auth-screen {
   background: #54a2d6;
 }
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.header h1 {
+  background-color: #252a2b;
+  width: 80px;
+  background-image: url("/img/logo.svg");
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  height: 100px;
+  margin-left: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-indent: 100%;
+  overflow: hidden;
+}
+.header nav {
+  padding-left: 90px;
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  width: 100%;
+}
+.header nav li {
+  display: inline-block;
+}
+.header nav a {
+  color: #fff;
+  padding: 10px 20px 30px 20px;
+  display: block;
+  text-transform: lowercase;
+}
+.header nav a:hover {
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0));
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0));
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0));
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0));
+}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -99,4 +147,10 @@ a img {
 }
 body {
   font-family: Arial, Sans-Serif;
+}
+a {
+  text-decoration: none;
+}
+.main {
+  margin-top: 100px;
 }
