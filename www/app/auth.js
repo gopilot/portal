@@ -82,6 +82,8 @@ angular.module('pilot.auth', ['ui.router'])
             return token;
         },
         destroy: function() {
+            // TODO close session on server
+            
             $cookieStore.remove("pilotSession");
             delete sessionStorage["pilotSession"];
             CurrentUser.isLoggedIn = false;
