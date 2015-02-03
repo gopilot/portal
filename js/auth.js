@@ -5,7 +5,7 @@ angular.module('pilot.auth', ['ui.router'])
     $stateProvider
     .state('login', {
         url: '/login',
-        templateUrl: '/app/partials/auth/login.html',
+        templateUrl: '/auth/login.html',
         controller: "LoginController"
     })
 })
@@ -24,35 +24,28 @@ angular.module('pilot.auth', ['ui.router'])
 
 .factory('CheckAuth', function($cookieStore, $http, CurrentUser) {
     return function(callback){
-        var token = null;
-        if($cookieStore.get("pilotSession")) token = $cookieStore.get("pilotSession");
-        
-        // Validate token with server
-        if(token) {
-            console.log("T", token);
-            
-            $http({
-                method: 'GET',
-                url: window.server + "/auth/retrieve_user",
-                headers: {
-                    'session': token
-                }
-            }).success(function(data) {
-                // Setup CurrentUser object
-                CurrentUser.isLoggedIn = true;
-                CurrentUser.username = data.email;
-                CurrentUser.name = data.name;
-                CurrentUser.type = data.type;
-                $http.defaults.headers.common['session'] = token
+        if(!$cookieStore.get("pilotSession"))
+            return callback(false);
 
-                callback(CurrentUser)
-            }).error(function(){
-                callback(false);
-            });
+        var token = $cookieStore.get("pilotSession");
+        $http({
+            method: 'GET',
+            url: window.server + "/auth/retrieve_user",
+            headers: {
+                'session': token
+            }
+        }).success(function(data) {
+            // Setup CurrentUser object
+            CurrentUser.isLoggedIn = true;
+            CurrentUser.username = data.email;
+            CurrentUser.name = data.name;
+            CurrentUser.type = data.type;
+            $http.defaults.headers.common['session'] = token
 
-        }else{
-            callback(false);
-        }
+            return callback(CurrentUser);
+        }).error(function(){
+            return callback(false);
+        });
     }
 })
 

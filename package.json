@@ -1,18 +1,24 @@
 {
-  "name": "portal",
+  "name": "event-beta",
   "version": "0.0.0",
   "description": "ERROR: No README.md file found!",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "~3.8.1",
-    "gulp-stylus": "~1.0.2",
-    "nib": "~1.0.3",
-    "rupture": "~0.1.0"
+    "gulp": "~3.5.5",
+    "gulp-jade": "~0.4.2",
+    "gulp-stylus": "0.0.14",
+    "node-static": "~0.7.6",
+    "js-yaml": "~3.0.2",
+    "gulp-gh-pages": "~0.1.4",
+    "when": "~3.5.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gopilot/event-base.git"
+  }
 }

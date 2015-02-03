@@ -3,19 +3,20 @@ angular.module('pilot.portal', ['ui.router'])
     $stateProvider
     .state('portal', {
         abstract: true,
-        templateUrl: '/app/partials/portal/layout.html',
+        templateUrl: '/portal/layout.html',
         controller: "PortalController"
     })
     .state('portal.dashboard', {
     	url: '/',
-    	templateUrl: '/app/partials/portal/dashboard.html',
+    	templateUrl: '/portal/dashboard.html',
     	controller: 'DashboardController'
     })
 })
 
 // Top-level controller, used in all logged-in requests
 .controller("PortalController", function($scope, $location, CurrentUser, CheckAuth, Session){
-	$scope.user = CurrentUser;
+	console.log("Portal controller", CurrentUser)
+    $scope.user = CurrentUser;
     
     CheckAuth(function(user){
         if(!user){
