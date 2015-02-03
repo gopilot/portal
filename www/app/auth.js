@@ -1,95 +1,119 @@
 angular.module('pilot.auth', ['ui.router'])
 
-
+// Router code
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
     .state('login', {
         url: '/login',
-        templateUrl: '/app/auth/partials/login.html',
-        controller: "LoginCtrl"
+        templateUrl: '/app/partials/auth/login.html',
+        controller: "LoginController"
     })
 })
-
-.controller("LoginCtrl", function($scope, $http, Session, CurrentUser) {
-    $scope.user = {};
-
-    $scope.doLogin = function() {
-        $http.post(window.server + "/login", {
-            email: $scope.user.email,
-            password: $scope.user.password,
-        }).success(function(data) {
-            Session.create(data.session, data.user);
-        });
-    };
-})
-
 .factory('CurrentUser', function() {
     var user = {
         isLoggedIn: false,
         username: '',
+        callbacks: [],
+        registerCallback: function(cb){
+            this.callbacks.push(cb);
+        }
     }
 
     return user;
 })
 
-.factory('Session', function($cookieStore, $http, CurrentUser) {
-    var token;
-
-    var retrieveToken = function() {
-        console.log(sessionStorage);
-        if($cookieStore.get("pilotSession")) return $cookieStore.get("pilotSession");
-        if("pilotSession" in sessionStorage) return sessionStorage.pilotSession;
-
-        return null;
-    }
-
-    var updateUser = function(u) {
-        CurrentUser.isLoggedIn = true;
-        CurrentUser.username = u.email;
-        CurrentUser.name = u.name;
-        CurrentUser.type = u.type;
-    }
-
-    var validateAndSetUser = function() {
+.factory('CheckAuth', function($cookieStore, $http, CurrentUser) {
+    return function(callback){
+        var token = null;
+        if($cookieStore.get("pilotSession")) token = $cookieStore.get("pilotSession");
+        
+        // Validate token with server
         if(token) {
             console.log("T", token);
-            $http.get(window.server + "/retrieve_user", {
-                params: {
-                    session: token 
+            
+            $http({
+                method: 'GET',
+                url: window.server + "/auth/retrieve_user",
+                headers: {
+                    'session': token
                 }
             }).success(function(data) {
-                updateUser(data);
-            })
-        }
-    };
+                // Setup CurrentUser object
+                CurrentUser.isLoggedIn = true;
+                CurrentUser.username = data.email;
+                CurrentUser.name = data.name;
+                CurrentUser.type = data.type;
+                $http.defaults.headers.common['session'] = token
 
-    token = retrieveToken();
-    validateAndSetUser();
+                callback(CurrentUser)
+            }).error(function(){
+                callback(false);
+            });
+
+        }else{
+            callback(false);
+        }
+    }
+})
+
+.factory('Session', function($cookieStore, $http, CurrentUser) {
+    var token = null;
 
     return {
-        create: function(t, u, rememberUser) {
-            if(rememberUser) {
-                $cookieStore.put("pilotSession", t);
-            }
-            else {
-                sessionStorage["pilotSession"] = t;
-            }
+        // Called to create a session when the user logs in
+        create: function(t, data, rememberUser) {
+            $cookieStore.put("pilotSession", t);
+            
             token = t;
+            $http.defaults.headers.common['session'] = t
 
-            updateUser(u);
+            CurrentUser.isLoggedIn = true;
+            CurrentUser.username = data.email;
+            CurrentUser.name = data.name;
+            CurrentUser.type = data.type;
         },
+
         getToken: function() {
             return token;
         },
+        
+        // Called to remove a session when the user logs out
         destroy: function() {
             // TODO close session on server
-            
             $cookieStore.remove("pilotSession");
-            delete sessionStorage["pilotSession"];
+            delete $http.defaults.headers.common['session']
+
             CurrentUser.isLoggedIn = false;
             CurrentUser.username = "";
             CurrentUser.name = "";
             CurrentUser.type = "";
         },
     }
+})
+
+// Controller for the Login Page
+.controller("LoginController", function($scope, $location, $http, Session, CurrentUser, CheckAuth) {
+    
+    CheckAuth(function(user){
+        if(user){
+            $location.path('/');
+        }
+    })
+
+    $scope.user = {};
+    console.log("Login controller", CurrentUser)
+
+
+    $scope.doLogin = function() {
+        console.log("logging in")
+        $http.post(window.server + "/auth/login", {
+            email: $scope.user.email,
+            password: $scope.user.password,
+        }).success(function(data) {
+            Session.create(data.session, data.user);
+            console.log("success in doLogin")
+            // Redirect to dashboard
+            $location.path('/');
+        });
+    };
 })
