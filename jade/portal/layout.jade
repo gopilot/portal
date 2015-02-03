@@ -1,6 +1,17 @@
 .header
-    h1 Pilot  
-    nav: ul
-        li: a(ng-click='doLogout()', href='') log out
-
-section(ui-view='')
+    .container
+        h1 Pilot   
+        nav: ul
+            li: a(ng-click="goto('/')") Dashboard
+        .next-event
+            .upcoming UPCOMING
+            .eventname(ng-click="alert('goto next event')") Washington DC
+        .right
+            .greet Hello, 
+                span.name {{user.name.split(' ')[0]}}
+            .links
+                a(href="#/settings") Settings
+                |  | 
+                a(ng-click='doLogout()', href='') Log out
+.portal-main
+    .container(ui-view='')

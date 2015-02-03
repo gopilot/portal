@@ -29,6 +29,9 @@ angular.module('pilot.portal', ['ui.router'])
         Session.destroy();
         $location.path('/login');
     }
+    $scope.goto = function(path){
+        $location.path(path);
+    }
 })
 
 // GET /

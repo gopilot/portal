@@ -51,7 +51,7 @@ gulp.task('static', function(){
         gulp.src('./img/**')
         .pipe(gulp.dest('./out/img')),
 
-        gulp.src('./statuc/**')
+        gulp.src('./static/**')
         .pipe(gulp.dest('./out'))
     ]);
 });

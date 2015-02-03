@@ -3,32 +3,75 @@
     top 0
     left 0
     width 100%
+    height: $sizes.header-height
+    background-color white
+    font-weight: 200
     h1
+        display inline-block
         background-color: $colors.slate
-        width: 80px
-        background-image: url('/img/logo.svg')
-        background-size: contain
-        background-repeat: no-repeat
-        background-position: bottom center
-        height: 100px
-        margin-left 10px
-        absolute top 0 left 0
-        text-indent: 100%
+        background-image url('/img/logo.svg')
+        background-size contain
+        background-repeat no-repeat
+        background-position bottom center
+        width 135px
+        height 100%
+        position relative
+        top 0
+        text-indent 100%
         overflow hidden
+        vertical-align top
 
     nav
-        padding-left 90px
-        background-image: linear-gradient(top, rgba(black, .4), rgba(black, 0))
-        width 100%
-        li
-            display inline-block
-        a
-            color: white
-            padding: 10px 20px 30px 20px
-            display: block
-            text-transform: lowercase
-
+        display inline-block
+        // padding-left 135px
+        height 100%
+        ul
+            height 100%
+            li
+                cursor pointer
+                position relative
+                display inline-block
+                border-right: 2px solid $colors.light-gray
+                height 100%
+                vertical-align top
+                color: $colors.slate
+                &:hover
+                    background-color: $colors.light-gray
+            a
+                width 190px
+                display block
+                text-align center
+                vertical-align top
+                line-height: $sizes.header-height
+                font-size 25px
+    .next-event
+        display inline-block
+        height 100%
+        padding-top 40px
+        padding-left 40px
+        vertical-align top
+        .upcoming
+            text-transform uppercase
+            font-size 15px
+            line-height 15px
+            margin-bottom 4px
+        .eventname
+            font-size 20px
+            line-height 25px
+            height 25px
+        cursor pointer
+        &:hover
+            color: $colors.blue
+    .right
+        display inline-block
+        position relative
+        float right
+        height 100%
+        padding 40px
+        text-align right
+        .greet
+            padding-bottom 4px
+        .links a
+            color: $colors.slate
             &:hover
-                background-image: linear-gradient(top, rgba(black, .2), rgba(black, 0))
-
-            
+                color: $colors.blue

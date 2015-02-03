@@ -1,6 +1,7 @@
 @import nib
 
 global-reset()
+@import _font
 @import _settings
 @import _auth
 @import _header
@@ -10,10 +11,18 @@ global-reset()
   box-sizing: border-box
 
 body
-  font-family: Arial, Sans-Serif
+  font-family: 'DIN', Arial, Sans-Serif
 
 a
     text-decoration: none
 
 .main
-    margin-top: 100px
+    margin-top: 125px
+
+.portal-main
+	background: $colors.gray
+	min-height 100vh
+
+.container
+	max-width $maxwidth
+	height 100%
