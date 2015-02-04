@@ -3,9 +3,10 @@
         h1 Pilot   
         nav: ul
             li: a(ng-click="goto('/')") Dashboard
+            li: a(ng-click="goto('/discover')") All Events
         .next-event
             .upcoming UPCOMING
-            .eventname(ng-click="alert('goto next event')") Washington DC
+            a.eventname(ng-click="alert('goto next event')") Washington DC
         .right
             .greet Hello, 
                 span.name {{user.name.split(' ')[0]}}
