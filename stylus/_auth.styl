@@ -1,3 +1,63 @@
-// sign up, log in screens
 .auth-screen
-  background: $colors.blue-base
+    position absolute
+    background: $colors.light-gray // Eventually a background image
+    width: 100%
+    height 100%
+    form.login
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -70%)
+        width 450px
+        img.logo
+            display block
+            width 200px
+            height auto
+            margin auto
+            margin-bottom 30px
+        input
+            border none
+            -webkit-appearance none
+            padding 20px 25px
+            outline 0
+            display block
+            margin-bottom 3px
+            width 100%
+            height 70px
+            font-size 30px
+            font-family 'DIN'
+            font-weight 200
+            color: $colors.slate
+            &:first-of-type
+                border-top-left-radius 5px
+                border-top-right-radius 5px
+            &:last-of-type
+                border-bottom-left-radius 5px
+                border-bottom-right-radius 5px
+        button
+            border none
+            outline none
+            display block
+            width 100%
+            height 70px
+            margin-top 15px
+            padding 20px 25px
+            font-size 30px
+            line-height 15px
+            font-family 'DIN'
+            font-weight 400
+            color white
+            background-color: $colors.blue
+            border: 2px solid $colors.blue
+            border-radius 5px
+            cursor pointer
+            transition all 0.3s ease-in-out
+            &:hover
+                color: $colors.blue
+                background: rgba(54,132,184, 0.0) // Blue color, 0 opacity
+            &:active
+                color: darken($colors.blue, 50%)
+                border-color: darken($colors.blue, 50%)
+                
+            
+        

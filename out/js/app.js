@@ -6,4 +6,7 @@ angular.module('app', [
 	'pilot.portal',
 	'ngCookies'
 ])
+.config(function($urlMatcherFactoryProvider){
+	$urlMatcherFactoryProvider.strictMode(false);
+})
 

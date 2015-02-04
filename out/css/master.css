@@ -117,12 +117,12 @@ a img {
 body {
   font-family: 'DIN', Arial, Sans-Serif;
   font-weight: 200;
+  background: #d1d4d6;
 }
 a {
   text-decoration: none;
 }
 .portal-main {
-  background: #d1d4d6;
   min-height: 100vh;
   position: relative;
   top: 0;
@@ -132,7 +132,82 @@ a {
   height: 100%;
 }
 .auth-screen {
-  background: ;
+  position: absolute;
+  background: #e5e5e5;
+  width: 100%;
+  height: 100%;
+}
+.auth-screen form.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -70%);
+  -moz-transform: translate(-50%, -70%);
+  -o-transform: translate(-50%, -70%);
+  -ms-transform: translate(-50%, -70%);
+  transform: translate(-50%, -70%);
+  width: 450px;
+}
+.auth-screen form.login img.logo {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: auto;
+  margin-bottom: 30px;
+}
+.auth-screen form.login input {
+  border: none;
+  -webkit-appearance: none;
+  padding: 20px 25px;
+  outline: 0;
+  display: block;
+  margin-bottom: 3px;
+  width: 100%;
+  height: 70px;
+  font-size: 30px;
+  font-family: 'DIN';
+  font-weight: 200;
+  color: #252a2b;
+}
+.auth-screen form.login input:first-of-type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.auth-screen form.login input:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.auth-screen form.login button {
+  border: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  height: 70px;
+  margin-top: 15px;
+  padding: 20px 25px;
+  font-size: 30px;
+  line-height: 15px;
+  font-family: 'DIN';
+  font-weight: 400;
+  color: #fff;
+  background-color: #54a2d6;
+  border: 2px solid #54a2d6;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.auth-screen form.login button:hover {
+  color: #54a2d6;
+  background: rgba(54,132,184,0);
+}
+.auth-screen form.login button:active {
+  color: #1d5478;
+  border-color: #1d5478;
 }
 .header {
   position: relative;
@@ -140,10 +215,9 @@ a {
   left: 0;
   width: 100%;
   height: 125px;
-  background-color: #fff;
   font-weight: 200;
 }
-.header h1 {
+.header .h1 {
   display: inline-block;
   background-color: #252a2b;
   background-image: url("/img/logo.svg");
@@ -159,49 +233,58 @@ a {
   text-indent: 100%;
   overflow: hidden;
   vertical-align: top;
-}
-.header nav {
-  display: inline-block;
-  height: 100%;
-}
-.header nav ul {
-  height: 100%;
-}
-.header nav ul li {
   cursor: pointer;
+  float: left;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+.header .h1:hover {
+  background-color: #54a2d6;
+}
+.header .page-title-container {
+  display: inline-block;
+  background-color: #fff;
+  height: 100%;
+  float: left;
+}
+.header .page-title-container .page-title {
   position: relative;
   display: inline-block;
-  border-right: 2px solid #e5e5e5;
   height: 100%;
   vertical-align: top;
   color: #252a2b;
-}
-.header nav ul li:hover {
-  background-color: #e5e5e5;
-}
-.header nav ul a {
-  width: 190px;
-  display: block;
   text-align: center;
-  vertical-align: top;
   line-height: 125px;
-  font-size: 22px;
+  font-size: 30px;
+  padding: 0px 50px;
 }
 .header .next-event {
-  display: inline-block;
+  display: block;
   height: 100%;
-  margin-top: 40px;
-  padding-left: 40px;
   vertical-align: top;
+  background-color: #fff;
+  width: auto;
+  float: none;
   cursor: pointer;
 }
-.header .next-event .upcoming {
+.header .next-event .border-container {
+  padding-top: 40px;
+  padding-left: 40px;
+  height: 100%;
+  width: auto;
+  overflow: hidden;
+  border-left: 2px solid #e5e5e5;
+}
+.header .next-event .border-container .upcoming {
   text-transform: uppercase;
   font-size: 15px;
   line-height: 15px;
   margin-bottom: 4px;
 }
-.header .next-event .eventname {
+.header .next-event .border-container .eventname {
   font-size: 22px;
   line-height: 22px;
   height: 25px;
@@ -216,6 +299,7 @@ a {
   height: 100%;
   padding: 40px;
   text-align: right;
+  background-color: #fff;
 }
 .header .right .greet {
   padding-bottom: 4px;

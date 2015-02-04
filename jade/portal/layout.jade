@@ -1,18 +1,17 @@
 .header
-    .container
-        h1 Pilot   
-        nav: ul
-            li: a(ng-click="goto('/')") Dashboard
-            li: a(ng-click="goto('/discover')") All Events
-        .next-event
+    a.h1(ui-sref="portal.dashboard" ui-sref-opts="{ reload: true }") Pilot   
+    .page-title-container
+        .page-title {{$$childHead.pageTitle}}
+    .right
+        .greet Hello, 
+            span.name {{user.name.split(' ')[0]}}
+        .links
+            a(ui-sref="portal.settings" ui-sref-opts="{ reload: true }") Settings
+            |  | 
+            a(ng-click='doLogout()', href='') Log out
+    .next-event(ng-show="$$childHead.fullHeader")
+        .border-container
             .upcoming UPCOMING
             a.eventname(ng-click="alert('goto next event')") Washington DC
-        .right
-            .greet Hello, 
-                span.name {{user.name.split(' ')[0]}}
-            .links
-                a(href="#/settings") Settings
-                |  | 
-                a(ng-click='doLogout()', href='') Log out
 .portal-main
     .container(ui-view='')

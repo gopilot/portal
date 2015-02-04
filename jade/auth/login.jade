@@ -1,4 +1,6 @@
-form(ng-submit='doLogin()')
-    input(type='email', ng-model='user.email')     
-    input(type='password', ng-model='user.password')    
-    button(type='submit') Log in 
+.auth-screen
+    form.login(ng-submit='doLogin()')
+        img.logo(src="/img/logo_blue.png" alt="Pilot")
+        input(type='email', placeholder="Email", ng-model='user.email')     
+        input(type='password', placeholder="Password", ng-model='user.password')    
+        button(type='submit') Login 

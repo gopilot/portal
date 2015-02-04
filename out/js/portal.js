@@ -1,4 +1,4 @@
-angular.module('pilot.portal', ['ui.router'])
+angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 .config(function($stateProvider) {
     $stateProvider
     .state('portal', {
@@ -10,6 +10,11 @@ angular.module('pilot.portal', ['ui.router'])
     	url: '/',
     	templateUrl: '/portal/dashboard.html',
     	controller: 'DashboardController'
+    })
+    .state('portal.events', {
+        url: '/events',
+        templateUrl: '/portal/events.html',
+        controller: 'EventListController'
     })
 })
 
@@ -24,7 +29,6 @@ angular.module('pilot.portal', ['ui.router'])
         }
     });
 
-
     $scope.doLogout = function() {
         Session.destroy();
         $location.path('/login');
@@ -36,5 +40,12 @@ angular.module('pilot.portal', ['ui.router'])
 
 // GET /
 .controller("DashboardController", function($scope, $state, $http, Session, CurrentUser) {
-    console.log("Dashboard controller", CurrentUser)
+    $scope.pageTitle = "Dashboard";
+    $scope.fullHeader = true; 
+})
+
+// GET /events
+.controller("EventListController", function($scope, $state, $http, Session, CurrentUser) {
+    $scope.pageTitle = "All Events";
+    $scope.fullHeader = true; 
 })
