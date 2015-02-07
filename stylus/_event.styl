@@ -56,5 +56,59 @@
 					border-width 15px
 					margin-left -15px
 	
-section.event-tab
-	margin-top 15px
+section.announcements
+	display inline-block
+	height auto
+	width: $sizes.announcements-width
+	margin-top 25px
+	background white
+	padding 25px 0px
+	.title
+		display inline-block
+		font-size 50px
+		color: $colors.blue
+		margin 25px
+		margin-bottom 0
+	.time
+		display inline-block
+		font-size 20px
+		text-transfrom uppercase
+		color: lighten($colors.slate, 50%)
+	.text
+		margin 25px
+		font-size 20px
+	.post-divider
+		width 135px
+		border-bottom: 2px solid $colors.gray
+
+section.twitter
+	display inline-block
+	vertical-align top
+	margin-left 45px
+	margin-top 25px
+	background white
+	width 360px
+	.tabs
+		ul
+			list-style none
+			width 100%
+			li
+				display inline-block
+				width 50%
+				font-size 18px
+				text-transform uppercase
+				padding 15px 0px
+				text-align center
+				cursor pointer
+				background: white
+				color: $colors.slate
+				&:last-of-type
+					border-left: 3px solid $colors.gray
+				&:hover, &.selected
+					color: $colors.blue
+	.twitter-content
+		display block
+		width 100%
+		height 300px
+				
+		

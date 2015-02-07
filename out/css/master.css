@@ -392,7 +392,7 @@ a {
   -moz-background-size: cover;
   background-size: cover;
   background-position-y: 60%;
-  height: 320px;
+  height: 280px;
   width: 100%;
 }
 .event-cover .tab-navigation {
@@ -460,6 +460,67 @@ a {
   border-width: 15px;
   margin-left: -15px;
 }
-section.event-tab {
-  margin-top: 15px;
+section.announcements {
+  display: inline-block;
+  height: auto;
+  width: 800px;
+  margin-top: 25px;
+  background: #fff;
+  padding: 25px 0px;
+}
+section.announcements .title {
+  display: inline-block;
+  font-size: 50px;
+  color: #54a2d6;
+  margin: 25px;
+  margin-bottom: 0;
+}
+section.announcements .time {
+  display: inline-block;
+  font-size: 20px;
+  text-transfrom: uppercase;
+  color: #8b999c;
+}
+section.announcements .text {
+  margin: 25px;
+  font-size: 20px;
+}
+section.announcements .post-divider {
+  width: 135px;
+  border-bottom: 2px solid #d1d4d6;
+}
+section.twitter {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 45px;
+  margin-top: 25px;
+  background: #fff;
+  width: 360px;
+}
+section.twitter .tabs ul {
+  list-style: none;
+  width: 100%;
+}
+section.twitter .tabs ul li {
+  display: inline-block;
+  width: 50%;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 15px 0px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  color: #252a2b;
+}
+section.twitter .tabs ul li:last-of-type {
+  border-left: 3px solid #d1d4d6;
+}
+section.twitter .tabs ul li:hover,
+section.twitter .tabs ul li.selected {
+  color: #54a2d6;
+}
+section.twitter .twitter-content {
+  display: block;
+  width: 100%;
+  height: 300px;
 }
