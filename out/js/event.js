@@ -24,6 +24,10 @@ angular.module('pilot.event', ['ui.router'])
         templateUrl: '/portal/event/team.html',
         controller: 'TeamController'
     })
+    .state('portal.event.projects', {
+        templateUrl: '/portal/event/projects.html',
+        controller: 'ProjectsController'
+    })
 })
 
 .factory('AllEvents', function($http, $q) {
@@ -73,19 +77,18 @@ angular.module('pilot.event', ['ui.router'])
         $scope.pageTitle = $scope.event.city;
     });
 })
-
 .controller("AnnouncementsController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "announcements";
 })
-
 .controller("MentorsController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "mentors";
 })
-
 .controller("ScheduleController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "schedule"
 })
-
 .controller("TeamController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "team"
+})
+.controller("ProjectsController", function($stateParams, $scope, $state, $http, AllEvents) {
+    $scope.tab = "projects"
 })

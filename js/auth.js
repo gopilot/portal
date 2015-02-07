@@ -85,11 +85,11 @@ angular.module('pilot.auth', ['ui.router'])
 })
 
 // Controller for the Login Page
-.controller("LoginController", function($scope, $location, $http, Session, CurrentUser) {
+.controller("LoginController", function($scope, $state, $http, Session, CurrentUser) {
     
     CurrentUser.then(function(user){
         if(user)
-            $location.path('/');
+            $state.go('portal.dashboard');
     });
 
     $scope.user = {};
@@ -103,7 +103,7 @@ angular.module('pilot.auth', ['ui.router'])
             Session.create(data.session, data.user);
             console.log("success in doLogin")
             // Redirect to dashboard
-            $location.path('/');
+            $state.go('portal.dashboard'); // Not working??
         });
     };
 })
