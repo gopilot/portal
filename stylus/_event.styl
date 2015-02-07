@@ -1,0 +1,60 @@
+.event-cover
+	display block
+	position relative
+	background-size cover
+	background-position-y 60%
+	height: $sizes.event-cover-height
+	width: 100%
+	.tab-navigation
+		position absolute
+		height: $sizes.event-nav-height
+		width auto
+		bottom 0
+		left 0
+		background: $colors.slate
+		ul
+			list-style none
+			li
+				display inline-block
+				background: $colors.slate
+				position relative
+				box-sizing:border-box;
+				-moz-box-sizing:border-box;
+				-webkit-box-sizing:border-box;
+				vertical-align top
+				height: $sizes.event-nav-height
+				text-transform uppercase
+				font-size 14px
+				font-weight 200
+				line-height: $sizes.event-nav-height
+				color white
+				padding 0px 25px
+				border-top: 3px solid $colors.slate
+				a
+					display block
+					width auto
+					height 100%
+					text-align center
+					cursor pointer
+					color white
+				&:hover, &.selected
+					background: linear-gradient(to top, #E2E5E6, #FAFCFD)
+					border-color: $colors.blue
+					a
+						color: $colors.blue
+				&.selected:after
+					top 100%
+					left 50%
+					border solid transparent
+					content " "
+					height 0
+					width 0
+					position absolute
+					pointer-events none
+					border-color rgba(226, 229, 230, 0)
+					border-top-color #E2E5E6
+					border-width 15px
+					margin-left -15px
+	
+section.event-tab
+	margin-top 15px

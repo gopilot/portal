@@ -1,10 +1,11 @@
 .header
-    position relative
+    position absolute
     top 0
     left 0
     width 100%
     height: $sizes.header-height
-    font-weight: 200
+    font-weight 200
+    z-index 200
     .h1
         display inline-block
         background-color: $colors.slate
@@ -42,7 +43,7 @@
             font-size 30px
             padding 0px 50px
             
-    .next-event
+    .header-middle
         display block
         height 100%
         vertical-align top
@@ -56,18 +57,19 @@
             width auto
             overflow hidden
             border-left: 2px solid $colors.light-gray
-            .upcoming
-                text-transform uppercase
-                font-size 15px
-                line-height 15px
-                margin-bottom 4px
-            .eventname
-                font-size 22px
-                line-height 22px
-                height 25px
-        cursor pointer
-        &:hover
-            color: $colors.blue
+            .next-event
+                cursor pointer
+                .upcoming
+                    text-transform uppercase
+                    font-size 15px
+                    line-height 15px
+                    margin-bottom 4px
+                .eventname
+                    font-size 22px
+                    line-height 22px
+                    height 25px
+                &:hover
+                    color: $colors.blue
     
     .right
         display inline-block

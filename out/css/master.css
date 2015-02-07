@@ -133,7 +133,8 @@ a {
 }
 .auth-screen {
   position: absolute;
-  background: #e5e5e5;
+  background-image: ;
+  background-position: -40% 35%;
   width: 100%;
   height: 100%;
 }
@@ -150,7 +151,7 @@ a {
 }
 .auth-screen form.login img.logo {
   display: block;
-  width: 200px;
+  width: 160px;
   height: auto;
   margin: auto;
   margin-bottom: 30px;
@@ -163,7 +164,7 @@ a {
   display: block;
   margin-bottom: 3px;
   width: 100%;
-  height: 70px;
+  height: 65px;
   font-size: 30px;
   font-family: 'DIN';
   font-weight: 200;
@@ -182,7 +183,7 @@ a {
   outline: none;
   display: block;
   width: 100%;
-  height: 70px;
+  height: 65px;
   margin-top: 15px;
   padding: 20px 25px;
   font-size: 30px;
@@ -210,12 +211,13 @@ a {
   border-color: #1d5478;
 }
 .header {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 125px;
   font-weight: 200;
+  z-index: 200;
 }
 .header .h1 {
   display: inline-block;
@@ -261,16 +263,15 @@ a {
   font-size: 30px;
   padding: 0px 50px;
 }
-.header .next-event {
+.header .header-middle {
   display: block;
   height: 100%;
   vertical-align: top;
   background-color: #fff;
   width: auto;
   float: none;
-  cursor: pointer;
 }
-.header .next-event .border-container {
+.header .header-middle .border-container {
   padding-top: 40px;
   padding-left: 40px;
   height: 100%;
@@ -278,18 +279,21 @@ a {
   overflow: hidden;
   border-left: 2px solid #e5e5e5;
 }
-.header .next-event .border-container .upcoming {
+.header .header-middle .border-container .next-event {
+  cursor: pointer;
+}
+.header .header-middle .border-container .next-event .upcoming {
   text-transform: uppercase;
   font-size: 15px;
   line-height: 15px;
   margin-bottom: 4px;
 }
-.header .next-event .border-container .eventname {
+.header .header-middle .border-container .next-event .eventname {
   font-size: 22px;
   line-height: 22px;
   height: 25px;
 }
-.header .next-event:hover {
+.header .header-middle .border-container .next-event:hover {
   color: #54a2d6;
 }
 .header .right {
@@ -313,12 +317,15 @@ a {
 .header .right .links a:hover {
   color: #54a2d6;
 }
-section.events {
+.dashboard {
+  margin-top: 125px;
+}
+.dashboard section.events {
   display: block;
   padding: 40px 0px;
   width: 1000px;
 }
-section.events .label {
+.dashboard section.events .label {
   display: inline-block;
   padding: 15px 25px;
   text-transform: uppercase;
@@ -327,19 +334,20 @@ section.events .label {
   overflow: hidden;
   font-size: 22px;
 }
-section.events .event-background {
+.dashboard section.events .event-background {
   height: 250px;
   width: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   background-position: center;
+  background-position-y: 60%;
   padding-left: 30px;
   display: table;
   cursor: pointer;
   position: relative;
 }
-section.events .event-background .background-darken {
+.dashboard section.events .event-background .background-darken {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -356,24 +364,102 @@ section.events .event-background .background-darken {
   transition: opacity 0.4s;
   z-index: 1;
 }
-section.events .event-background:hover .background-darken {
+.dashboard section.events .event-background:hover .background-darken {
   opacity: 0.7;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
   filter: alpha(opacity=70);
 }
-section.events .event-background .event-labels {
+.dashboard section.events .event-background .event-labels {
   position: relative;
   display: table-cell;
   vertical-align: middle;
   z-index: 10;
 }
-section.events .event-background .event-labels .event-name {
+.dashboard section.events .event-background .event-labels .event-name {
   font-size: 50px;
   color: #fff;
   margin-bottom: 10px;
 }
-section.events .event-background .event-labels .event-date {
+.dashboard section.events .event-background .event-labels .event-date {
   font-size: 22px;
   text-transform: uppercase;
   color: #e5e5e5;
+}
+.event-cover {
+  display: block;
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position-y: 60%;
+  height: 320px;
+  width: 100%;
+}
+.event-cover .tab-navigation {
+  position: absolute;
+  height: 50px;
+  width: auto;
+  bottom: 0;
+  left: 0;
+  background: #252a2b;
+}
+.event-cover .tab-navigation ul {
+  list-style: none;
+}
+.event-cover .tab-navigation ul li {
+  display: inline-block;
+  background: #252a2b;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  vertical-align: top;
+  height: 50px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 50px;
+  color: #fff;
+  padding: 0px 25px;
+  border-top: 3px solid #252a2b;
+}
+.event-cover .tab-navigation ul li a {
+  display: block;
+  width: auto;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+}
+.event-cover .tab-navigation ul li:hover,
+.event-cover .tab-navigation ul li.selected {
+  background: -webkit-linear-gradient(bottom, #e2e5e6, #fafcfd);
+  background: -moz-linear-gradient(bottom, #e2e5e6, #fafcfd);
+  background: -o-linear-gradient(bottom, #e2e5e6, #fafcfd);
+  background: -ms-linear-gradient(bottom, #e2e5e6, #fafcfd);
+  background: linear-gradient(to top, #e2e5e6, #fafcfd);
+  border-color: #54a2d6;
+}
+.event-cover .tab-navigation ul li:hover a,
+.event-cover .tab-navigation ul li.selected a {
+  color: #54a2d6;
+}
+.event-cover .tab-navigation ul li.selected:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(226,229,230,0);
+  border-top-color: #e2e5e6;
+  border-width: 15px;
+  margin-left: -15px;
+}
+section.event-tab {
+  margin-top: 15px;
 }

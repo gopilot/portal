@@ -1,1 +1,9 @@
-p {{eventSlug}}
+.event-cover(ng-style="{'background-image':'url('+event.image+')'}")
+	.tab-navigation: ul
+		li(ng-class="{selected: $$childHead.tab=='announcements'}"): a(ui-sref="portal.event.announcements") Announcements
+		li(ng-class="{selected: $$childHead.tab=='mentors'}"): a(ui-sref="portal.event.mentors") Request a Mentor
+		li(ng-class="{selected: $$childHead.tab=='schedule'}"): a(ui-sref="portal.event.schedule") Schedule
+		li(ng-class="{selected: $$childHead.tab=='team'}"): a(ui-sref="portal.event.team") Your Team
+
+section.event-tab
+	.container(ui-view='')

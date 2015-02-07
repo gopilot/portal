@@ -19,14 +19,18 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 })
 
 // Top-level controller, used in all logged-in requests
-.controller("PortalController", function($scope, $location, CurrentUser, CheckAuth, Session){
+.controller("PortalController", function($scope, $location, CurrentUser, AllEvents, Session){
 	console.log("Portal controller", CurrentUser)
-    $scope.user = CurrentUser;
-    
-    CheckAuth(function(user){
-        if(!user){
+    CurrentUser.then(function(user){
+        if(user)
+            $scope.user = user;
+        else
             $location.path('/login');
-        }
+    });
+
+    AllEvents.then(function(events){
+        $scope.upcomingEvents = events.upcoming;
+        $scope.pastEvents = events.past;
     });
 
     $scope.doLogout = function() {
@@ -39,13 +43,13 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 })
 
 // GET /
-.controller("DashboardController", function($scope, $state, $http, Session, CurrentUser) {
+.controller("DashboardController", function($filter, $scope, $state) {
     $scope.pageTitle = "Dashboard";
     $scope.fullHeader = true; 
 })
 
 // GET /events
-.controller("EventListController", function($scope, $state, $http, Session, CurrentUser) {
+.controller("EventListController", function($scope, $state, $http) {
     $scope.pageTitle = "All Events";
     $scope.fullHeader = true; 
 })

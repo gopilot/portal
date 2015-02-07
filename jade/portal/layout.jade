@@ -9,9 +9,10 @@
             a(ui-sref="portal.settings" ui-sref-opts="{ reload: true }") Settings
             |  | 
             a(ng-click='doLogout()', href='') Log out
-    .next-event(ng-show="$$childHead.fullHeader")
+    .header-middle(ng-show="$$childHead.fullHeader")
         .border-container
-            .upcoming UPCOMING
-            a.eventname(ng-click="alert('goto next event')") Washington DC
+            div.next-event(ng-if="upcomingEvents.length > 0")
+                .upcoming UPCOMING
+                a.eventname(ui-sref="portal.event({slug: upcomingEvents[0].slug})" ui-sref-opts="{ reload: true }") {{upcomingEvents[0].city}}
 .portal-main
     .container(ui-view='')

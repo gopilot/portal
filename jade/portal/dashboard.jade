@@ -1,20 +1,21 @@
-section.events.upcoming
-	.label Your Upcoming Events
-	a.event-background(ng-style="{'background-image':'url(https://gopilot.org/img/dc.jpg)'}")
-		.event-labels
-			.event-name Washington DC 2015
-			.event-date June 19, 2015
-		.background-darken
+.dashboard
+	section.events.upcoming(ng-show="upcomingEvents.length > 0")
+		.label
+			span(ng-if="user.type != 'organizer'") Your
+			| Past Events
+		div(ng-repeat="event in upcomingEvents| orderBy:'date':false")
+			a.event-background(ui-sref="portal.event.announcements({slug: event.slug})"  ui-sref-opts="{ reload: true }" ng-style="{'background-image':'url('+event.image+')'}")
+					.event-name {{event.name + " " + event.date.format('YYYY') }}
+					.event-date {{event.date.format('MMMM D, YYYY')}}
+				.background-darken
 
-section.events.past
-	.label Your Past Events
-	a.event-background(ng-style="{'background-image':'url(https://gopilot.org/img/philly.jpg)'}")
-		.event-labels
-			.event-name Philly 2015
-			.event-date January 30, 2015
-		.background-darken
-	a.event-background(ng-style="{'background-image':'url(https://gopilot.org/img/oxy.jpg)'}")
-		.event-labels
-			.event-name Oxy 2014
-			.event-date June 17, 2014
-		.background-darken
+	section.events.past(ng-show="pastEvents.length > 0")
+		.label
+			span(ng-if="user.type != 'organizer'") Your
+			| Past Events
+		div(ng-repeat="event in pastEvents | orderBy:'date':true")
+			a.event-background(ui-sref="portal.event.announcements({slug: event.slug})"  ui-sref-opts="{ reload: true }" ng-style="{'background-image':'url('+event.image+')'}")
+				.event-labels
+					.event-name {{event.name + " " + event.date.format('YYYY') }}
+					.event-date {{event.date.format('MMMM D, YYYY')}}
+				.background-darken

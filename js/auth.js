@@ -9,25 +9,23 @@ angular.module('pilot.auth', ['ui.router'])
         controller: "LoginController"
     })
 })
-.factory('CurrentUser', function() {
+.factory('CurrentUser', function($cookieStore, $http, $q) {
     var user = {
         isLoggedIn: false,
         username: '',
-        callbacks: [],
-        registerCallback: function(cb){
-            this.callbacks.push(cb);
-        }
+        type: ''
     }
 
-    return user;
-})
+    var deferred = $q.defer();
 
-.factory('CheckAuth', function($cookieStore, $http, CurrentUser) {
-    return function(callback){
-        if(!$cookieStore.get("pilotSession"))
-            return callback(false);
-
+    if(!$cookieStore.get("pilotSession")){
+        deferred.resolve(false);
+    }else if(sessionCache.user){
+        console.log("using user cache");
+        deferred.resolve(sessionCache.user);
+    }else{
         var token = $cookieStore.get("pilotSession");
+        console.log("GET /retrieve_user")
         $http({
             method: 'GET',
             url: window.server + "/auth/retrieve_user",
@@ -36,17 +34,19 @@ angular.module('pilot.auth', ['ui.router'])
             }
         }).success(function(data) {
             // Setup CurrentUser object
-            CurrentUser.isLoggedIn = true;
-            CurrentUser.username = data.email;
-            CurrentUser.name = data.name;
-            CurrentUser.type = data.type;
+            user.isLoggedIn = true;
+            user.username = data.email;
+            user.name = data.name;
+            user.type = data.type;
             $http.defaults.headers.common['session'] = token
-
-            return callback(CurrentUser);
+            
+            sessionCache.user = user;
+            deferred.resolve(user);
         }).error(function(){
-            return callback(false);
         });
     }
+
+    return deferred.promise;
 })
 
 .factory('Session', function($cookieStore, $http, CurrentUser) {
@@ -85,17 +85,14 @@ angular.module('pilot.auth', ['ui.router'])
 })
 
 // Controller for the Login Page
-.controller("LoginController", function($scope, $location, $http, Session, CurrentUser, CheckAuth) {
+.controller("LoginController", function($scope, $location, $http, Session, CurrentUser) {
     
-    CheckAuth(function(user){
-        if(user){
+    CurrentUser.then(function(user){
+        if(user)
             $location.path('/');
-        }
-    })
+    });
 
     $scope.user = {};
-    console.log("Login controller", CurrentUser)
-
 
     $scope.doLogin = function() {
         console.log("logging in")
