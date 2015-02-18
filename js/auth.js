@@ -74,7 +74,7 @@ angular.module('pilot.auth', ['ui.router'])
         destroy: function() {
             // TODO close session on server
             $cookieStore.remove("pilotSession");
-            delete $http.defaults.headers.common['session']
+            delete $httpProvider.defaults.headers.common['session']
 
             CurrentUser.isLoggedIn = false;
             CurrentUser.username = "";

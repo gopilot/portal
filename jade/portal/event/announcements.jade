@@ -1,16 +1,16 @@
 section.announcements
-	.announcement-container
-		h3.title Pitch practice
-		.time 2 mins ago
-		.text Mentors will be in 304 to listen to your pitches and provide feedback so you can do your best to prepare for the judges. 
-	.announcement-container
+	div.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
+		.announcement-container
+			h3.title {{a.title}}
+			.time {{ a.fromNow }}
+			.text {{a.body}}
 		.post-divider
-		h3.title Dinner is served
-		.time 10 mins ago
-		.text Fried chicken and biscuits are available in Levine starting now. Food will only be served for 45 minutes so come soon!
 
-section.twitter
-	.tabs: ul
-		li.hashtag.selected #PilotDC
-		li.twitter @GrabTheYoke
+section.twitter(ng-show="tweets.length > 0")
+	.hashtag {{'#'+event.name}}
 	.twitter-content
+		.tweet-container(ng-repeat="t in tweets | orderBy:'time':true")
+			.handle {{t.user}}
+			.tweet {{t.text}}
+			.time {{t.fromNow}}
+

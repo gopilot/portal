@@ -77,8 +77,28 @@ angular.module('pilot.event', ['ui.router'])
         $scope.pageTitle = $scope.event.city;
     });
 })
-.controller("AnnouncementsController", function($stateParams, $scope, $state, $http, AllEvents) {
+.controller("AnnouncementsController", function($stateParams, $scope, $state, $http, AllEvents, CurrentUser) {
     $scope.tab = "announcements";
+    console.log($http.defaults.headers);
+
+    CurrentUser.then(function(){
+        $http.get(server+"/events/"+$stateParams.slug+"/posts")
+        .success(function(data){
+            for(var i in data){
+                data[i].fromNow = moment.utc(data[i].time).fromNow();
+            }
+            $scope.announcements = data;
+        });    
+    });
+
+    $http.get(server+"/events/"+$stateParams.slug+"/tweets")
+    .success(function(data){
+        console.log("tweets", data);
+        for(var i in data){
+            data[i].fromNow = moment.utc(data[i].time).fromNow();
+        }
+        $scope.tweets = data;
+    });
 })
 .controller("MentorsController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "mentors";

@@ -337,6 +337,7 @@ a {
 .dashboard section.events .event-background {
   height: 250px;
   width: 100%;
+  background-color: #252a2b;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -467,21 +468,25 @@ section.announcements {
   margin-top: 25px;
   background: #fff;
   padding: 25px 0px;
+  padding-top: 0px;
 }
-section.announcements .title {
+section.announcements .announcement-container {
+  padding-bottom: 10px;
+}
+section.announcements .announcement-container .title {
   display: inline-block;
   font-size: 50px;
   color: #54a2d6;
   margin: 25px;
   margin-bottom: 0;
 }
-section.announcements .time {
+section.announcements .announcement-container .time {
   display: inline-block;
   font-size: 20px;
   text-transfrom: uppercase;
   color: #8b999c;
 }
-section.announcements .text {
+section.announcements .announcement-container .text {
   margin: 25px;
   font-size: 20px;
 }
@@ -489,19 +494,17 @@ section.announcements .post-divider {
   width: 135px;
   border-bottom: 2px solid #d1d4d6;
 }
+section.announcements .repeat-announcement:last-of-type .post-divider {
+  display: none;
+}
 section.twitter {
   display: inline-block;
   vertical-align: top;
-  margin-left: 45px;
+  margin-left: 40px;
   margin-top: 25px;
-  background: #fff;
   width: 360px;
 }
-section.twitter .tabs ul {
-  list-style: none;
-  width: 100%;
-}
-section.twitter .tabs ul li {
+section.twitter .hashtag {
   display: inline-block;
   width: 50%;
   font-size: 18px;
@@ -512,15 +515,34 @@ section.twitter .tabs ul li {
   background: #fff;
   color: #252a2b;
 }
-section.twitter .tabs ul li:last-of-type {
-  border-left: 3px solid #d1d4d6;
-}
-section.twitter .tabs ul li:hover,
-section.twitter .tabs ul li.selected {
-  color: #54a2d6;
-}
 section.twitter .twitter-content {
   display: block;
   width: 100%;
   height: 300px;
+  background: #fff;
+  overflow-y: scroll;
+  padding: 0px 12px;
+}
+section.twitter .twitter-content .tweet-container {
+  padding: 15px;
+  font-size: 15px;
+  border-top: 1px solid #d1d4d6;
+}
+section.twitter .twitter-content .tweet-container:first-of-type {
+  border-top: none;
+}
+section.twitter .twitter-content .tweet-container .handle {
+  display: inline;
+  font-weight: 400;
+  margin-right: 6px;
+}
+section.twitter .twitter-content .tweet-container .tweet {
+  display: inline;
+}
+section.twitter .twitter-content .tweet-container .time {
+  margin-left: 6px;
+  display: inline;
+  font-size: 12px;
+  text-transfrom: uppercase;
+  color: #8b999c;
 }

@@ -8,7 +8,7 @@ angular.module('app', [
     'pilot.portal',
     'ngCookies'
 ])
-.config(function($urlRouterProvider, $locationProvider){
+.config(function($urlRouterProvider, $locationProvider, $httpProvider){
     // $urlRouterProvider.rule(function($injector, $location) {
 
     //     var path = $location.path();
@@ -22,5 +22,5 @@ angular.module('app', [
     //       return newPath; 
     //     } 
     // });
-})
+});
 
