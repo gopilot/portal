@@ -10,7 +10,8 @@ section.twitter(ng-show="tweets.length > 0")
 	.hashtag {{'#'+event.name}}
 	.twitter-content
 		.tweet-container(ng-repeat="t in tweets | orderBy:'time':true")
-			.handle {{t.user}}
-			.tweet {{t.text}}
-			.time {{t.fromNow}}
+			a.tweet-link(href="{{t.url}}", target="_blank")
+				.handle {{t.user}}
+				.tweet {{t.text}}
+				.time {{t.fromNow}}
 

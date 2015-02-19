@@ -126,6 +126,7 @@ a {
   min-height: 100vh;
   position: relative;
   top: 0;
+  padding-bottom: 25px;
 }
 .container {
   max-width: 1400px;
@@ -467,8 +468,6 @@ section.announcements {
   width: 800px;
   margin-top: 25px;
   background: #fff;
-  padding: 25px 0px;
-  padding-top: 0px;
 }
 section.announcements .announcement-container {
   padding-bottom: 10px;
@@ -527,6 +526,11 @@ section.twitter .twitter-content .tweet-container {
   padding: 15px;
   font-size: 15px;
   border-top: 1px solid #d1d4d6;
+}
+section.twitter .twitter-content .tweet-container .tweet-link {
+  display: block;
+  text-decoration: none;
+  color: #252a2b;
 }
 section.twitter .twitter-content .tweet-container:first-of-type {
   border-top: none;
