@@ -1,6 +1,8 @@
 window.server = "https://api.gopilot.org"
 
-var sessionCache = {};
+var sessionCache = {
+    user: null
+};
 
 angular.module('app', [
     'ui.router',

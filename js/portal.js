@@ -19,14 +19,15 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 })
 
 // Top-level controller, used in all logged-in requests
-.controller("PortalController", function($scope, $state, CurrentUser, AllEvents, Session){
-	console.log("Portal controller", CurrentUser)
-    CurrentUser.then(function(user){
-        if(user)
-            $scope.user = user;
-        else
-            $state.go('login');
-    });
+.controller("PortalController", function($scope, $window, $state, $cookieStore, CurrentUser, AllEvents, Session){
+    
+    if(!CurrentUser()){
+        console.log("redirecting back to login");
+        $state.go('login');
+    }else{
+        $scope.user = CurrentUser();
+    }
+
 
     AllEvents.then(function(events){
         $scope.upcomingEvents = events.upcoming;
@@ -35,7 +36,7 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 
     $scope.doLogout = function() {
         Session.destroy();
-        $state.go('login');
+        $state.go('login')
     }
 })
 
