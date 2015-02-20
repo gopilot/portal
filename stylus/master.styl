@@ -25,6 +25,101 @@ a
 .container
 	max-width $maxwidth
 	height 100%
+		
+.input-group
+	position relative
+	z-index 1
+	display block
+	max-width 400px
+	vertical-align top
+	font-size 20px
+	overflow hidden
+	
+	input
+		position relative
+		display block
+		float right
+		padding 0.75em 0.1em 0.25em
+		width 100%
+		border none
+		background: white
+		color: $colors.slate
+		-webkit-appearance none
+		z-index 10
+		background: transparent
+		font-size 20px
+		font-family 'DIN'
+		font-weight 200
+
+		&:focus
+			outline: none
+			& + label
+				pointer-events none
+				&::before
+					background-color: $colors.blue
+					transform scale3d(1, 1, 1)
+				span
+					color: $colors.blue
+					font-weight 400
+
+	label
+		display inline-block
+		position relative
+		overflow hidden
+		float right
+		padding 0
+		width 100%
+		color: $colors.slate
+		text-align left
+		-webkit-touch-callout none
+		user-select none
+		&::before
+			content ''
+			position absolute
+			top 0
+			width 100%
+			height 4px
+			background: $colors.slate
+			transform scale3d(1, 0.4, 1)
+			transform-origin 50% 100%
+			transition transform 0.3s, background-color 0.3s
+			transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
+		span
+			position relative
+			display block
+			padding 0.5em 0.15em
+			width 100%
+			font-weight 400
+			transition opacity 0.3s, transform 0.3s
+			transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
+		&.error
+			span
+				color: $colors.red
+			&::before
+				background: $colors.red
+
+button
+	box-sizing border-box
+	outline none
+	border none
+	background none
+	display inline-block
+	position relative
+	padding 0.75em
+	font-size 20px
+	font-family 'DIN'
+	font-weight 400
+	cursor pointer
+	color: $colors.slate
+	border: 2px solid $colors.slate	
+	transition border 0.3s, color 0.3s
+	transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
+	&:hover
+		border: 4px solid $colors.blue
+		color: $colors.blue
+
+.error-text
+	color: $colors.red
 	
 @import _auth
 @import _header

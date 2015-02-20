@@ -6,7 +6,7 @@ section.announcements
 			.text {{a.body}}
 		.post-divider
 
-section.twitter(ng-show="tweets.length > 0")
+section.twitter()
 	.hashtag {{'#'+event.name}}
 	.twitter-content
 		.tweet-container(ng-repeat="t in tweets | orderBy:'time':true")

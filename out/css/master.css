@@ -132,6 +132,149 @@ a {
   max-width: 1400px;
   height: 100%;
 }
+.input-group {
+  position: relative;
+  z-index: 1;
+  display: block;
+  max-width: 400px;
+  vertical-align: top;
+  font-size: 20px;
+  overflow: hidden;
+}
+.input-group input {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 0.75em 0.1em 0.25em;
+  width: 100%;
+  border: none;
+  background: #fff;
+  color: #252a2b;
+  -webkit-appearance: none;
+  z-index: 10;
+  background: transparent;
+  font-size: 20px;
+  font-family: 'DIN';
+  font-weight: 200;
+}
+.input-group input:focus {
+  outline: none;
+}
+.input-group input:focus + label {
+  pointer-events: none;
+}
+.input-group input:focus + label::before {
+  background-color: #54a2d6;
+  -webkit-transform: scale3d(1, 1, 1);
+  -moz-transform: scale3d(1, 1, 1);
+  -o-transform: scale3d(1, 1, 1);
+  -ms-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+}
+.input-group input:focus + label span {
+  color: #54a2d6;
+  font-weight: 400;
+}
+.input-group label {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  float: right;
+  padding: 0;
+  width: 100%;
+  color: #252a2b;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.input-group label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: #252a2b;
+  -webkit-transform: scale3d(1, 0.4, 1);
+  -moz-transform: scale3d(1, 0.4, 1);
+  -o-transform: scale3d(1, 0.4, 1);
+  -ms-transform: scale3d(1, 0.4, 1);
+  transform: scale3d(1, 0.4, 1);
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
+  -moz-transition: -moz-transform 0.3s, background-color 0.3s;
+  -o-transition: -o-transform 0.3s, background-color 0.3s;
+  -ms-transition: -ms-transform 0.3s, background-color 0.3s;
+  transition: transform 0.3s, background-color 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -ms-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.input-group label span {
+  position: relative;
+  display: block;
+  padding: 0.5em 0.15em;
+  width: 100%;
+  font-weight: 400;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+  -o-transition: opacity 0.3s, -o-transform 0.3s;
+  -ms-transition: opacity 0.3s, -ms-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -ms-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.input-group label.error span {
+  color: #ff4d4d;
+}
+.input-group label.error::before {
+  background: #ff4d4d;
+}
+button {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  background: none;
+  display: inline-block;
+  position: relative;
+  padding: 0.75em;
+  font-size: 20px;
+  font-family: 'DIN';
+  font-weight: 400;
+  cursor: pointer;
+  color: #252a2b;
+  border: 2px solid #252a2b;
+  -webkit-transition: border 0.3s, color 0.3s;
+  -moz-transition: border 0.3s, color 0.3s;
+  -o-transition: border 0.3s, color 0.3s;
+  -ms-transition: border 0.3s, color 0.3s;
+  transition: border 0.3s, color 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -ms-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+button:hover {
+  border: 4px solid #54a2d6;
+  color: #54a2d6;
+}
+.error-text {
+  color: #ff4d4d;
+}
 .auth-screen {
   position: absolute;
   background-image: ;
@@ -159,17 +302,11 @@ a {
 }
 .auth-screen form.login input {
   border: none;
-  -webkit-appearance: none;
-  padding: 20px 25px;
-  outline: 0;
-  display: block;
+  margin: none;
   margin-bottom: 3px;
   width: 100%;
   height: 65px;
   font-size: 30px;
-  font-family: 'DIN';
-  font-weight: 200;
-  color: #252a2b;
 }
 .auth-screen form.login input:first-of-type {
   border-top-left-radius: 5px;
@@ -549,4 +686,26 @@ section.twitter .twitter-content .tweet-container .time {
   font-size: 12px;
   text-transfrom: uppercase;
   color: #8b999c;
+}
+section.mentors {
+  display: block;
+  min-height: 400px;
+  padding: 25px;
+  width: 800px;
+  margin-top: 25px;
+  background: #fff;
+}
+section.mentors p {
+  font-size: 20px;
+}
+section.mentors .input-group {
+  margin: 25px 0px;
+  max-width: 70%;
+}
+section.mentors button {
+  width: 400px;
+  height: 70px;
+}
+section.mentors .error-text {
+  margin-top: 25px;
 }

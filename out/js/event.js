@@ -13,18 +13,22 @@ angular.module('pilot.event', ['ui.router'])
         controller: 'AnnouncementsController'
     })
     .state('portal.event.mentors', {
+        url: "/request-mentor",
         templateUrl: '/portal/event/mentors.html',
         controller: 'MentorsController'
     })
     .state('portal.event.schedule', {
+        url: '/schedule',
         templateUrl: '/portal/event/schedule.html',
         controller: 'ScheduleController'
     })
     .state('portal.event.team', {
+        url: '/team',
         templateUrl: '/portal/event/team.html',
         controller: 'TeamController'
     })
     .state('portal.event.projects', {
+        url: '/projects',
         templateUrl: '/portal/event/projects.html',
         controller: 'ProjectsController'
     })
@@ -97,6 +101,26 @@ angular.module('pilot.event', ['ui.router'])
 })
 .controller("MentorsController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "mentors";
+    $scope.mentorRequest = {};
+    $scope.errors = {}
+    $scope.formError = false;
+
+    $scope.requestMentor = function(){
+        // TODO implement server-side for this
+        
+        $scope.errors.name = ! $scope.mentorRequest.name
+        $scope.errors.location = ! $scope.mentorRequest.location
+        $scope.errors.platform = ! $scope.mentorRequest.platform
+        $scope.errors.problem = ! $scope.mentorRequest.problem
+
+        if($scope.errors.name || $scope.errors.location || $scope.errors.platform || $scope.errors.problem){
+            $scope.formError = true;
+            return false
+        }
+        $scope.formError = false;
+
+        alert($scope.mentorRequest.name+" is requesting a "+$scope.mentorRequest.platform+" mentor to come to "+$scope.mentorRequest.location+" to help him solve his problem: "+$scope.mentorRequest.problem);
+    }
 })
 .controller("ScheduleController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "schedule"

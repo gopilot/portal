@@ -9,8 +9,12 @@ angular.module('pilot.auth', ['ui.router'])
         controller: "LoginController"
     })
 })
-.factory('CurrentUser', function($cookieStore) {
+.factory('CurrentUser', function($cookieStore, $http) {
     return function(){
+        var sess = $cookieStore.get('pilotSession');
+        if(sess){
+            $http.defaults.headers.common['session'] = sess;
+        }
         return $cookieStore.get('pilotUser')
     }
 })
