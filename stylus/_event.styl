@@ -148,3 +148,89 @@ section.mentors
 		height 70px
 	.error-text
 		margin-top 25px
+
+section.team
+	.team-size
+		width 100%
+		text-align center
+		font-size 30px
+		margin 25px 0px
+	.team-container
+		display block
+		margin auto
+		overflow hidden
+		text-align center
+	.teammate-card
+		width 250px
+		height 280px
+		vertical-align top
+		display inline-block
+		background white
+		margin 15px
+		cursor pointer
+		img.profile
+			width 150px
+			height 150px
+			margin 30px 50px
+			border-radius 75px
+		.name
+			width 100%
+			text-align center
+			font-size 25px
+			transition color 0.3s
+		&.empty
+			background none
+			border: 4px dashed lighten($colors.slate, 50%)
+			transition border 0.5s
+			cursor pointer
+			&:before
+				content '+'
+				width 100%
+				height 100%
+				color: lighten($colors.slate, 50%)
+				font-size 160px
+				font-weight 200
+				line-height 210px
+				transition color 0.5s
+				cursor pointer
+			&:hover
+				border-color: $colors.blue
+				&:before
+					color: $colors.blue
+		&:hover .name
+			color: $colors.blue	
+			
+.add-teammate
+	form
+		width auto
+		display block
+		margin auto
+		text-align center
+		position relative
+		.input-group
+			display inline-block
+		button
+			display inline-block
+			margin-left 25px
+			height 60px
+			width 200px
+			position relative
+			margin-top 18px
+	.close-button
+		display block
+		position absolute
+		width 25px
+		height 100px
+		background white
+		right 25px
+		top 5px
+		font-size 50px
+		transition color 0.3s
+		cursor pointer
+		&:hover
+			color: $colors.blue
+	.error-text
+		width 100%
+		text-align center
+		margin-bottom none
+	

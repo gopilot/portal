@@ -14,4 +14,5 @@
             div.next-event(ng-if="upcomingEvents.length > 0")
                 .upcoming UPCOMING
                 a.eventname(ui-sref="portal.event({slug: upcomingEvents[0].slug})" ui-sref-opts="{ reload: true }") {{upcomingEvents[0].city}}
+
 .portal-main(ui-view='')

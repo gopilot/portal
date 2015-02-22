@@ -10,27 +10,27 @@ angular.module('pilot.event', ['ui.router'])
     .state('portal.event.announcements', {
         url: "",
         templateUrl: '/portal/event/announcements.html',
-        controller: 'AnnouncementsController'
+        controller: 'AnnouncementsController',
     })
     .state('portal.event.mentors', {
         url: "/request-mentor",
         templateUrl: '/portal/event/mentors.html',
-        controller: 'MentorsController'
+        controller: 'MentorsController',
     })
     .state('portal.event.schedule', {
         url: '/schedule',
         templateUrl: '/portal/event/schedule.html',
-        controller: 'ScheduleController'
+        controller: 'ScheduleController',
     })
     .state('portal.event.team', {
         url: '/team',
         templateUrl: '/portal/event/team.html',
-        controller: 'TeamController'
+        controller: 'TeamController',
     })
     .state('portal.event.projects', {
         url: '/projects',
         templateUrl: '/portal/event/projects.html',
-        controller: 'ProjectsController'
+        controller: 'ProjectsController',
     })
 })
 
@@ -104,6 +104,7 @@ angular.module('pilot.event', ['ui.router'])
     $scope.mentorRequest = {};
     $scope.errors = {}
     $scope.formError = false;
+    $scope.modalShown = false;
 
     $scope.requestMentor = function(){
         // TODO implement server-side for this
@@ -127,6 +128,32 @@ angular.module('pilot.event', ['ui.router'])
 })
 .controller("TeamController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "team"
+    $scope.inviteEmail = ""
+    $scope.errorText = ""
+    $scope.modalShown = false;
+
+    $scope.checkEmail = function(){
+        if($scope.errorText && $scope.inviteEmail){
+            $scope.errorText = "";
+        }
+    }
+    $scope.invite = function(){
+        if(!$scope.inviteEmail){
+            $scope.errorText = "You need to input an email"
+            return false
+        }
+        $scope.errorText = "";
+
+        $http.get(server+'/users/email/'+$scope.inviteEmail)
+        .success(function(data){
+            alert("Added user "+data.name);
+            // TODO make backend request to add teammate
+            $scope.modalShown = false;
+        })
+        .error(function(data){
+            $scope.errorText = "We couldn't find that email. Make sure this is the email your teammate used to register for this event.";
+        });
+    }
 })
 .controller("ProjectsController", function($stateParams, $scope, $state, $http, AllEvents) {
     $scope.tab = "projects"

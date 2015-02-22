@@ -122,6 +122,58 @@ body {
 a {
   text-decoration: none;
 }
+.modal-cover {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #252a2b;
+  z-index: 101;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  pointer-events: none;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.modal-cover.shown {
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+}
+.modal {
+  display: block;
+  position: fixed;
+  bottom: 150%;
+  right: 50%;
+  -webkit-transform: translate(50%, 50%);
+  -moz-transform: translate(50%, 50%);
+  -o-transform: translate(50%, 50%);
+  -ms-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+  background: #fff;
+  padding: 25px;
+  width: 800px;
+  height: auto;
+  z-index: 102;
+  pointer-events: none;
+  -webkit-transition: bottom 0.5s;
+  -moz-transition: bottom 0.5s;
+  -o-transition: bottom 0.5s;
+  -ms-transition: bottom 0.5s;
+  transition: bottom 0.5s;
+}
+.modal.shown {
+  pointer-events: auto;
+  bottom: 50%;
+}
 .portal-main {
   min-height: 100vh;
   position: relative;
@@ -131,6 +183,7 @@ a {
 .container {
   max-width: 1400px;
   height: 100%;
+  position: relative;
 }
 .input-group {
   position: relative;
@@ -257,11 +310,11 @@ button {
   cursor: pointer;
   color: #252a2b;
   border: 2px solid #252a2b;
-  -webkit-transition: border 0.3s, color 0.3s;
-  -moz-transition: border 0.3s, color 0.3s;
-  -o-transition: border 0.3s, color 0.3s;
-  -ms-transition: border 0.3s, color 0.3s;
-  transition: border 0.3s, color 0.3s;
+  -webkit-transition: border 0.3s, color 0.3s, background 0.3s;
+  -moz-transition: border 0.3s, color 0.3s, background 0.3s;
+  -o-transition: border 0.3s, color 0.3s, background 0.3s;
+  -ms-transition: border 0.3s, color 0.3s, background 0.3s;
+  transition: border 0.3s, color 0.3s, background 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -269,8 +322,9 @@ button {
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 button:hover {
-  border: 4px solid #54a2d6;
-  color: #54a2d6;
+  background: #54a2d6;
+  color: #fff;
+  border-color: #54a2d6;
 }
 .error-text {
   color: #ff4d4d;
@@ -355,7 +409,7 @@ button:hover {
   width: 100%;
   height: 125px;
   font-weight: 200;
-  z-index: 200;
+  z-index: 100;
 }
 .header .h1 {
   display: inline-block;
@@ -708,4 +762,118 @@ section.mentors button {
 }
 section.mentors .error-text {
   margin-top: 25px;
+}
+section.team .team-size {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  margin: 25px 0px;
+}
+section.team .team-container {
+  display: block;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+}
+section.team .teammate-card {
+  width: 250px;
+  height: 280px;
+  vertical-align: top;
+  display: inline-block;
+  background: #fff;
+  margin: 15px;
+  cursor: pointer;
+}
+section.team .teammate-card img.profile {
+  width: 150px;
+  height: 150px;
+  margin: 30px 50px;
+  -webkit-border-radius: 75px;
+  border-radius: 75px;
+}
+section.team .teammate-card .name {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  -ms-transition: color 0.3s;
+  transition: color 0.3s;
+}
+section.team .teammate-card.empty {
+  background: none;
+  border: 4px dashed #8b999c;
+  -webkit-transition: border 0.5s;
+  -moz-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  -ms-transition: border 0.5s;
+  transition: border 0.5s;
+  cursor: pointer;
+}
+section.team .teammate-card.empty:before {
+  content: '+';
+  width: 100%;
+  height: 100%;
+  color: #8b999c;
+  font-size: 160px;
+  font-weight: 200;
+  line-height: 210px;
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  -ms-transition: color 0.5s;
+  transition: color 0.5s;
+  cursor: pointer;
+}
+section.team .teammate-card.empty:hover {
+  border-color: #54a2d6;
+}
+section.team .teammate-card.empty:hover:before {
+  color: #54a2d6;
+}
+section.team .teammate-card:hover .name {
+  color: #54a2d6;
+}
+.add-teammate form {
+  width: auto;
+  display: block;
+  margin: auto;
+  text-align: center;
+  position: relative;
+}
+.add-teammate form .input-group {
+  display: inline-block;
+}
+.add-teammate form button {
+  display: inline-block;
+  margin-left: 25px;
+  height: 60px;
+  width: 200px;
+  position: relative;
+  margin-top: 18px;
+}
+.add-teammate .close-button {
+  display: block;
+  position: absolute;
+  width: 25px;
+  height: 100px;
+  background: #fff;
+  right: 25px;
+  top: 5px;
+  font-size: 50px;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  -ms-transition: color 0.3s;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.add-teammate .close-button:hover {
+  color: #54a2d6;
+}
+.add-teammate .error-text {
+  width: 100%;
+  text-align: center;
+  margin-bottom: none;
 }
