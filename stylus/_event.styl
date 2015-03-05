@@ -161,6 +161,7 @@ section.team
 		overflow hidden
 		text-align center
 	.teammate-card
+		position relative
 		width 250px
 		height 280px
 		vertical-align top
@@ -168,37 +169,65 @@ section.team
 		background white
 		margin 15px
 		cursor pointer
+		&:hover .icon
+			opacity 1
 		img.profile
 			width 150px
 			height 150px
-			margin 30px 50px
+			margin 30px 40px
+			margin-bottom 15px
 			border-radius 75px
 		.name
 			width 100%
 			text-align center
 			font-size 25px
 			transition color 0.3s
+			margin-bottom 15px
+			&:hover
+				color: $colors.blue
+		.email
+			width 100%
+			text-align center
+			font-size 15px
+			color: lighten($colors.slate, 30%)
+		.icon
+			position absolute
+			top 0
+			right 0
+			font-size 50px
+			margin-top -5px
+			margin-right 10px
+			transition all 0.3s
+			opacity 0
+			&:hover
+				color: $colors.blue
 		&.empty
 			background none
 			border: 4px dashed lighten($colors.slate, 50%)
 			transition border 0.5s
-			cursor pointer
+			cursor default
+			img.profile, .name, .icon
+				display none
+			font-size 200px
+			&.icon
+				cursor pointer
+				&:before
+					content '+'
+				&:hover
+					border-color: $colors.blue
+					&:before
+						color: $colors.blue
 			&:before
-				content '+'
 				width 100%
 				height 100%
 				color: lighten($colors.slate, 50%)
 				font-size 160px
 				font-weight 200
-				line-height 210px
 				transition color 0.5s
 				cursor pointer
-			&:hover
-				border-color: $colors.blue
-				&:before
-					color: $colors.blue
-		&:hover .name
-			color: $colors.blue	
+				vertical-align top
+				position relative
+				top 28px
 			
 .add-teammate
 	form
@@ -215,7 +244,7 @@ section.team
 			height 60px
 			width 200px
 			position relative
-			margin-top 18px
+			margin-top 15px
 	.close-button
 		display block
 		position absolute

@@ -1,3 +1,5 @@
+// TODO animate these tabs so that they all load at the same time
+
 angular.module('pilot.event', ['ui.router'])
 .config(function($stateProvider) {
     $stateProvider
@@ -131,7 +133,34 @@ angular.module('pilot.event', ['ui.router'])
     $scope.inviteEmail = ""
     $scope.errorText = ""
     $scope.modalShown = false;
+    $scope.team = [false, false, false, false];
+    $scope.teamCount = 0;
+    $scope.project = {};
 
+    $http.get(server+"/events/"+$stateParams.slug+"/projects?team="+$scope.user.id)
+    .success(function(data){
+        if(data[0]){
+            $scope.project = data[0];
+            console.log($scope.project);
+            var ids = _.map($scope.team, function(user){return user.id || user;});
+            for(var i in $scope.project.team){
+                if( !($scope.project.team[i].id == $scope.user.id || ids.indexOf($scope.project.team[i].id) > -1 ) ){
+                    for(var j in $scope.team)
+                        if(!$scope.team[j]){
+                            console.log("placing user at", j)
+                            $scope.team[j] = $scope.project.team[i];
+                            break
+                        }
+                    $scope.teamCount += 1;
+                }
+            }
+        }
+    })
+    $scope.openModal = function(i){
+        if($scope.team[i]) return;
+        console.log("opening modal");
+        $scope.modalShown = true;
+    }
     $scope.checkEmail = function(){
         if($scope.errorText && $scope.inviteEmail){
             $scope.errorText = "";
@@ -144,14 +173,54 @@ angular.module('pilot.event', ['ui.router'])
         }
         $scope.errorText = "";
 
-        $http.get(server+'/users/email/'+$scope.inviteEmail)
+        var url = '/projects';
+        if($scope.project.id) 
+            url = '/projects/'+$scope.project.id+'/addTeammate';
+        
+        $http.post(server+url, {
+            'teammate': $scope.inviteEmail,
+            'event': $stateParams.slug,
+        })
         .success(function(data){
-            alert("Added user "+data.name);
-            // TODO make backend request to add teammate
+            $scope.project = data;
+            console.log('returned!', data);
+            var ids = _.map($scope.team, function(user){return user.id || user;});
+            console.log(ids);
+            for(var i in data.team){
+                if( !(data.team[i].id == $scope.user.id || ids.indexOf(data.team[i].id) > -1 ) ){
+                    for(var j in $scope.team)
+                        if(!$scope.team[j]){
+                            $scope.team[j] = data.team[i];
+                            break
+                        }
+                    $scope.teamCount += 1;
+                }
+            }
             $scope.modalShown = false;
+            $scope.inviteEmail = "";
         })
         .error(function(data){
             $scope.errorText = "We couldn't find that email. Make sure this is the email your teammate used to register for this event.";
+        });
+    }
+    $scope.removeTeammate = function(i){
+        $http.post(server+'/projects/'+$scope.project.id+'/removeTeammate', {
+            'teammate': $scope.team[i].email
+        })
+        .success(function(data){
+            $scope.project = data;
+            $scope.teamCount -= 1;
+
+            // Collapse list
+            var k = i;
+            while($scope.team[k+1]){
+                $scope.team[k] = $scope.team[k+1];
+                k++;
+            }
+            $scope.team[k] = false
+        })
+        .error(function(data){
+            console.log("Error removing user", data);
         });
     }
 })

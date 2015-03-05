@@ -2,7 +2,7 @@
 	section.events.upcoming(ng-show="upcomingEvents.length > 0")
 		.label
 			span(ng-if="user.type != 'organizer'") Your
-			| Past Events
+			|  Past Events
 		div(ng-repeat="event in upcomingEvents | orderBy:'date':false")
 			a.event-background(ui-sref="portal.event.announcements({slug: event.slug})"  ui-sref-opts="{ reload: true }" ng-style="{'background-image':'url('+event.image+')'}")
 					.event-name {{event.name + " " + event.date.format('YYYY') }}
@@ -12,7 +12,7 @@
 	section.events.past(ng-show="pastEvents.length > 0")
 		.label
 			span(ng-if="user.type != 'organizer'") Your
-			| Past Events
+			|  Past Events
 		div(ng-repeat="event in pastEvents | orderBy:'date':true")
 			a.event-background(ui-sref="portal.event.announcements({slug: event.slug})"  ui-sref-opts="{ reload: true }" ng-style="{'background-image':'url('+event.image+')'}")
 				.event-labels

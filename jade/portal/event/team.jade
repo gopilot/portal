@@ -1,19 +1,12 @@
 section.team
 	h3.team-size You can invite up to 4 people to your team.
 	.team-container
-		.teammate-card
-			img.profile(src="https://scontent-atl.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/10906484_10152917754414286_2485551075520245023_n.jpg?oh=4db07afbff3a54970fd24e1ca841aa8f&oe=5589BC7E")
-			.name Will Strimling
-		.teammate-card
-			img.profile(src="https://scontent-atl.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/10351733_10203218815723881_3706788102353624332_n.jpg?oh=90bfc2526c2e2127b80255eb7aa8375a&oe=55928F96")
-			.name Christopher Su
-		.teammate-card
-			img.profile(src="https://scontent-atl.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/994115_10204116137324578_1620278634207927750_n.jpg?oh=28872561ea262cb60dfa83c57423b0c5&oe=555218FC")
-			.name Sanny Lin
-		//- .teammate-card
-		//- 	img.profile(src="https://scontent-atl.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10252059_891764460833616_6818135173160305639_n.jpg?oh=07ef97a05da7d8c818132ecb04f13336&oe=554DCFB8")
-		//- 	.name John Moss
-		.teammate-card.empty.pe-7s-plus(ng-click="modalShown = true")
+		span(ng-repeat="teammate in team track by $index")
+			.teammate-card(ng-click="openModal($index)" ng-class="{empty:(!teammate), 'icon pe-7s-plus':($index == teamCount)}" data-index="{{$index}}")
+				img.profile(ng-src="{{teammate.image}}")
+				.name {{teammate.name}}
+				.email {{teammate.email}}
+				.icon.pe-7s-close(ng-click="removeTeammate($index)")
 
 .modal.add-teammate(ng-class="{shown: modalShown}")
 	.close-button.pe-7s-close(ng-click="modalShown = false")

@@ -1,10 +1,10 @@
 .event-cover(ng-style="{'background-image':'url('+event.image+')'}")
 	.tab-navigation: ul
-		li(ng-class="{selected: $$childHead.tab=='announcements'}"): a(ui-sref="portal.event.announcements") Announcements
-		li(ng-class="{selected: $$childHead.tab=='mentors'}"): a(ui-sref="portal.event.mentors") Request a Mentor
-		li(ng-class="{selected: $$childHead.tab=='schedule'}"): a(ui-sref="portal.event.schedule") Schedule
-		li(ng-class="{selected: $$childHead.tab=='team'}"): a(ui-sref="portal.event.team") Your Team
-		li(ng-class="{selected: $$childHead.tab=='projects'}"): a(ui-sref="portal.event.projects") Projects
+		li(ng-class="{selected: ($$childHead.tab=='announcements' || $$nextSibling.tab=='announcements')}"): a(ui-sref="portal.event.announcements") Announcements
+		li(ng-class="{selected: ($$childHead.tab=='schedule' || $$nextSibling.tab=='schedule')}"): a(ui-sref="portal.event.schedule") Schedule
+		li(ng-if="user.type == 'student'" ng-class="{selected: ($$childHead.tab=='mentors' || $$nextSibling.tab=='mentors')}"): a(ui-sref="portal.event.mentors") Request a Mentor
+		li(ng-if="user.type == 'student'" ng-class="{selected: ($$childHead.tab=='team' || $$nextSibling.tab=='team')}"): a(ui-sref="portal.event.team") Your Team
+		li(ng-class="{selected: ($$childHead.tab=='projects' || $$nextSibling.tab=='projects')}"): a(ui-sref="portal.event.projects") Projects
 
 section.event-tab
 	.container(ui-view='')
