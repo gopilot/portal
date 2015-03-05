@@ -1,0 +1,88 @@
+.settings.container
+	.form-container
+		h3 User Settings
+		form(ng-submit='updateUser()')
+			.input-group
+				input(type="text" id="name" ng-model='user.name' placeholder="Johnny Appleseed")
+				label(for="name"  ng-class="{error: errors.name}")
+					span Name
+			.input-group
+				input(type="text" id="email" ng-model='user.email' placeholder="johnny.appleseed@example.com")
+				label(for="email" ng-class="{error: errors.email}")
+					span Email
+			.input-group
+				input(type="text" id="gender" ng-model='user.gender' placeholder="Male/Female")
+				label(for="gender" ng-class="{error: errors.gender}")
+					span Gender
+			.input-group
+				input(type="text" id="image" ng-model='user.image' placeholder="https://gopilot.org/img/dc.jpg")
+				label(for="image" ng-class="{error: errors.image}")
+					span Image URL
+			.input-group
+				input(type="phone" id="phone" ng-model='user.phone' placeholder="555-555-5555")
+				label(for="phone" ng-class="{error: errors.phone}")
+					span Phone
+			.input-group
+				input(type="text" id="shirt_type" ng-model='user.shirt_type' placeholder="Unisex/Women's")
+				label(for="shirt_type" ng-class="{error: errors.shirt_type}")
+					span Shirt Type
+			.input-group
+				input(type="text" id="shirt_size" ng-model='user.shirt_size' placeholder="S/M/L/XL")
+				label(for="shirt_size" ng-class="{error: errors.shirt_size}")
+					span Shirt Size
+			div(ng-if="user.type == 'student'")
+				.input-group
+					input(type="text" id="grade" ng-model='user.grade' placeholder="")
+					label(for="grade" ng-class="{error: errors.grade}")
+						span Grade
+				.input-group
+					input(type="text" id="birth_date" ng-model='user.birth_date' placeholder="MM/DD/YYYY")
+					label(for="birth_date" ng-class="{error: errors.birth_date}")
+						span Birth Date
+				.input-group
+					input(type="text" id="emergency_name" ng-model='user.emergency_name' placeholder="Parent/Guardian")
+					label(for="emergency_name" ng-class="{error: errors.emergency_name}")
+						span Emergency Contact Name
+				.input-group
+					input(type="email" id="emergency_email" ng-model='user.emergency_email' placeholder="parent@example.com")
+					label(for="emergency_email" ng-class="{error: errors.emergency_email}")
+						span Emergency Contact Email
+				.input-group
+					input(type="text" id="has_experience" ng-model='user.has_experience' placeholder="Yes/No")
+					label(for="has_experience" ng-class="{error: errors.has_experience}")
+						span Do you have experience in building Web/Mobile apps?
+				.input-group
+					input(type="text" id="experience_years" ng-model='user.experience_years' placeholder="1 year")
+					label(for="experience_years" ng-class="{error: errors.experience_years}")
+						span How many years?
+			div(ng-if="user.type == 'mentor'")
+				.input-group
+					input(type="text" id="title" ng-model='user.title' placeholder="")
+					label(for="title" ng-class="{error: errors.title}")
+						span Title
+				.input-group
+					input(type="text" id="company" ng-model='user.company' placeholder="")
+					label(for="company" ng-class="{error: errors.company}")
+						span Company
+				.input-group
+					input(type="text" id="has_experience" ng-model='user.has_experience' placeholder="Yes/No")
+					label(for="has_experience" ng-class="{error: errors.has_experience}")
+						span Do you have experience in building Web/Mobile apps?
+				.input-group
+					textarea(rows="2" id="skills" ng-model='user.skills' placeholder="Yes/No")
+					label(for="skills" ng-class="{error: errors.skills}")
+						span What technical, business, or design skills do you feel confident teaching?
+				.input-group
+					textarea(rows="2" id="profiles" ng-model='user.profiles' placeholder="LinkedIn, Github, Angellist, etc")
+					label(for="profiles" ng-class="{error: errors.profiles}")
+						span Online Profiles
+
+			.input-group
+				input(type="password" id="password" ng-model='user.password' placeholder="Fill to change password")
+				label(for="password"  ng-class="{error: errors.password}")
+					span Password
+			.input-group
+				input(type="password" id="confirm-password" ng-model='user.confirm-password' placeholder="Fill to change password")
+				label(for="confirm-password" ng-class="{error: errors.confirm-password}")
+					span Confirm Password
+			button(type="submit") Update User

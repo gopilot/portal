@@ -16,6 +16,11 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
         templateUrl: '/portal/events.html',
         controller: 'EventListController'
     })
+    .state('portal.settings', {
+        url: '/settings',
+        templateUrl: '/portal/settings.html',
+        controller: 'SettingsController'
+    })
 })
 
 // Top-level controller, used in all logged-in requests
@@ -49,5 +54,11 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 // GET /events
 .controller("EventListController", function($scope, $state, $http) {
     $scope.pageTitle = "All Events";
+    $scope.fullHeader = true; 
+})
+
+// GET /settings
+.controller("SettingsController", function($scope, $state, $http) {
+    $scope.pageTitle = "Settings";
     $scope.fullHeader = true; 
 })

@@ -606,6 +606,23 @@ button:hover {
   text-transform: uppercase;
   color: #e5e5e5;
 }
+.settings {
+  margin-top: 125px;
+  padding-top: 25px;
+}
+.settings .form-container {
+  width: 800px;
+  background-color: #fff;
+  overflow: hidden;
+  min-height: 200px;
+  padding: 25px;
+}
+.settings .form-container h3 {
+  font-size: 40px;
+}
+.settings .form-container .input-group {
+  margin: 15px 0px;
+}
 .event-cover {
   display: block;
   position: relative;
