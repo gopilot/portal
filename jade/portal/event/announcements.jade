@@ -1,17 +1,18 @@
-section.announcements
-	div.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
-		.announcement-container
-			h3.title {{a.title}}
-			.time {{ a.fromNow }}
-			.text {{a.body}}
-		.post-divider
+section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
+	.announcement-block
+		.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
+			.announcement-container
+				h3.title {{a.title}}
+				.time {{ a.fromNow }}
+				.text {{a.body}}
+			.post-divider
 
-section.twitter()
-	.hashtag {{'#'+event.name}}
-	.twitter-content
-		.tweet-container(ng-repeat="t in tweets | orderBy:'time':true")
-			a.tweet-link(href="{{t.url}}", target="_blank")
-				.handle {{'@'+t.user}}
-				.tweet {{t.text}}
-				.time {{t.fromNow}}
+	.twitter
+		.hashtag {{'#'+event.name}}
+		.twitter-content
+			.tweet-container(ng-repeat="t in tweets | orderBy:'time':true")
+				a.tweet-link(href="{{t.url}}", target="_blank")
+					.handle {{'@'+t.user}}
+					.tweet {{t.text}}
+					.time {{t.fromNow}}
 

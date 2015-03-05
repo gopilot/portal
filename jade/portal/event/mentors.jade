@@ -1,4 +1,4 @@
-section.mentors
+section.tab-section.mentors(ng-if="user.type == 'student'" ng-class="{shown: (tab == 'mentors')}")
 	p Need help learning a new language? Have a bug you can't fix? Need an idea for what to build? Fill out this form and we'll send a mentor over to help you out! 
 	form(ng-submit='requestMentor()')
 		p.error-text(ng-show="formError") All fields are required

@@ -1,4 +1,4 @@
-section.team
+section.tab-section.team(ng-if="user.type == 'student'" ng-class="{shown: (tab == 'team')}")
 	h3.team-size You can invite up to 4 people to your team.
 	.team-container
 		span(ng-repeat="teammate in team track by $index")
