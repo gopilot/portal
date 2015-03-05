@@ -12,6 +12,9 @@
 		bottom 0
 		left 0
 		background: $colors.slate
+		&.right
+			left auto
+			right 0
 		ul
 			list-style none
 			li
@@ -158,7 +161,8 @@ section.team
 		width 100%
 		text-align center
 		font-size 30px
-		margin 25px 0px
+		margin-top 25px
+		margin-bottom 15px
 	.team-container
 		display block
 		margin auto
@@ -172,7 +176,6 @@ section.team
 		display inline-block
 		background white
 		margin 15px
-		cursor pointer
 		&:hover .icon
 			opacity 1
 		img.profile
@@ -187,8 +190,6 @@ section.team
 			font-size 25px
 			transition color 0.3s
 			margin-bottom 15px
-			&:hover
-				color: $colors.blue
 		.email
 			width 100%
 			text-align center
@@ -203,6 +204,7 @@ section.team
 			margin-right 10px
 			transition all 0.3s
 			opacity 0
+			cursor pointer
 			&:hover
 				color: $colors.blue
 		&.empty
@@ -231,39 +233,38 @@ section.team
 				cursor pointer
 				vertical-align top
 				position relative
-				top 28px
-			
-.add-teammate
-	form
-		width auto
-		display block
-		margin auto
-		text-align center
-		position relative
-		.input-group
-			display inline-block
-		button
-			display inline-block
-			margin-left 25px
-			height 60px
-			width 200px
+				top 28px		
+	.add-teammate
+		form
+			width auto
+			display block
+			margin auto
+			text-align center
 			position relative
-			margin-top 15px
-	.close-button
-		display block
-		position absolute
-		width 25px
-		height 100px
-		background white
-		right 25px
-		top 5px
-		font-size 50px
-		transition color 0.3s
-		cursor pointer
-		&:hover
-			color: $colors.blue
-	.error-text
-		width 100%
-		text-align center
-		margin-bottom none
+			.input-group
+				display inline-block
+			button
+				display inline-block
+				margin-left 25px
+				height 60px
+				width 200px
+				position relative
+				margin-top 15px
+		.close-button
+			display block
+			position absolute
+			width 25px
+			height 100px
+			background white
+			right 25px
+			top 5px
+			font-size 50px
+			transition color 0.3s
+			cursor pointer
+			&:hover
+				color: $colors.blue
+		.error-text
+			width 100%
+			text-align center
+			margin-bottom none
 	

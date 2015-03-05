@@ -599,6 +599,10 @@ button:hover {
   left: 0;
   background: #252a2b;
 }
+.event-cover .tab-navigation.right {
+  left: auto;
+  right: 0;
+}
 .event-cover .tab-navigation ul {
   list-style: none;
 }
@@ -775,7 +779,8 @@ section.team .team-size {
   width: 100%;
   text-align: center;
   font-size: 30px;
-  margin: 25px 0px;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
 section.team .team-container {
   display: block;
@@ -791,7 +796,6 @@ section.team .teammate-card {
   display: inline-block;
   background: #fff;
   margin: 15px;
-  cursor: pointer;
 }
 section.team .teammate-card:hover .icon {
   opacity: 1;
@@ -817,9 +821,6 @@ section.team .teammate-card .name {
   transition: color 0.3s;
   margin-bottom: 15px;
 }
-section.team .teammate-card .name:hover {
-  color: #54a2d6;
-}
 section.team .teammate-card .email {
   width: 100%;
   text-align: center;
@@ -841,6 +842,7 @@ section.team .teammate-card .icon {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
+  cursor: pointer;
 }
 section.team .teammate-card .icon:hover {
   color: #54a2d6;
@@ -889,17 +891,17 @@ section.team .teammate-card.empty:before {
   position: relative;
   top: 28px;
 }
-.add-teammate form {
+section.team .add-teammate form {
   width: auto;
   display: block;
   margin: auto;
   text-align: center;
   position: relative;
 }
-.add-teammate form .input-group {
+section.team .add-teammate form .input-group {
   display: inline-block;
 }
-.add-teammate form button {
+section.team .add-teammate form button {
   display: inline-block;
   margin-left: 25px;
   height: 60px;
@@ -907,7 +909,7 @@ section.team .teammate-card.empty:before {
   position: relative;
   margin-top: 15px;
 }
-.add-teammate .close-button {
+section.team .add-teammate .close-button {
   display: block;
   position: absolute;
   width: 25px;
@@ -923,10 +925,10 @@ section.team .teammate-card.empty:before {
   transition: color 0.3s;
   cursor: pointer;
 }
-.add-teammate .close-button:hover {
+section.team .add-teammate .close-button:hover {
   color: #54a2d6;
 }
-.add-teammate .error-text {
+section.team .add-teammate .error-text {
   width: 100%;
   text-align: center;
   margin-bottom: none;

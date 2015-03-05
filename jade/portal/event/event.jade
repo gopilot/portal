@@ -2,9 +2,12 @@
 	.tab-navigation: ul
 		li(ng-class="{selected: (tab == 'announcements')}"): a(ng-click="tab = 'announcements'") Announcements
 		li(ng-class="{selected: (tab == 'schedule')}"): a(ng-click="tab = 'schedule'") Schedule
-		li(ng-class="{selected: (tab == 'mentors')}"): a(ng-click="tab = 'mentors'") Request a Mentor
-		li(ng-class="{selected: (tab == 'team')}"): a(ng-click="tab = 'team'") Your Team
+		li(ng-show="user.type == 'student'" ng-class="{selected: (tab == 'mentors')}"): a(ng-click="tab = 'mentors'") Request a Mentor
+		li(ng-show="user.type == 'student'" ng-class="{selected: (tab == 'team')}"): a(ng-click="tab = 'team'") Your Team
 		li(ng-class="{selected: (tab == 'projects')}"): a(ng-click="tab = 'projects'") Projects
+		li(ng-show="user.type == 'organizer'" ng-class="{selected: (tab == 'attendees')}"): a(ng-click="tab = 'attendees'") Attendees
+		li(ng-show="user.type == 'organizer'" ng-class="{selected: (tab == 'checkin')}"): a(ng-click="tab = 'checkin'") Check-in
+		li(ng-show="user.type == 'organizer'" ng-class="{selected: (tab == 'settings')}"): a(ng-click="tab = 'settings'") Settings
 
 section.event-tab
 	.container
@@ -13,3 +16,6 @@ section.event-tab
 		include mentors.jade
 		include team.jade
 		include projects.jade
+		include attendees.jade
+		include checkin.jade
+		include settings.jade

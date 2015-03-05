@@ -51,7 +51,7 @@ angular.module('pilot.event', ['ui.router'])
 // GET /event/(slug)
 .controller("EventController", function($stateParams, $scope, $http, AllEvents) {
     $scope.tab = "announcements" // Default tab
-    
+
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];
         $scope.pageTitle = $scope.event.city;
@@ -105,7 +105,9 @@ angular.module('pilot.event', ['ui.router'])
     }
 
     function team(){
-        $scope.inviteEmail = ""
+        $scope.invite = {
+            email: ""
+        }
         $scope.errorText = ""
         $scope.modalShown = false;
         $scope.team = [false, false, false, false];
@@ -116,21 +118,25 @@ angular.module('pilot.event', ['ui.router'])
         .success(function(data){
             if(data[0]){
                 $scope.project = data[0];
-                console.log($scope.project);
-                var ids = _.map($scope.team, function(user){return user.id || user;});
-                for(var i in $scope.project.team){
-                    if( !($scope.project.team[i].id == $scope.user.id || ids.indexOf($scope.project.team[i].id) > -1 ) ){
-                        for(var j in $scope.team)
-                            if(!$scope.team[j]){
-                                console.log("placing user at", j)
-                                $scope.team[j] = $scope.project.team[i];
-                                break
-                            }
-                        $scope.teamCount += 1;
-                    }
-                }
+                updateTeam()
             }
         })
+
+        function updateTeam(){
+            var ids = _.map($scope.team, function(user){return user.id || user;});
+            for(var i in $scope.project.team){
+                if( !($scope.project.team[i].id == $scope.user.id || ids.indexOf($scope.project.team[i].id) > -1 ) ){
+                    for(var j in $scope.team)
+                        if(!$scope.team[j]){
+                            console.log("placing user at", j)
+                            $scope.team[j] = $scope.project.team[i];
+                            break
+                        }
+                    $scope.teamCount += 1;
+                }
+            }
+        }
+
         $scope.openModal = function(i){
             if($scope.team[i]) return;
             console.log("opening modal");
@@ -142,7 +148,8 @@ angular.module('pilot.event', ['ui.router'])
             }
         }
         $scope.invite = function(){
-            if(!$scope.inviteEmail){
+            console.log("inviting", $scope.invite.email)
+            if(!$scope.invite.email){
                 $scope.errorText = "You need to input an email"
                 return false
             }
@@ -153,26 +160,14 @@ angular.module('pilot.event', ['ui.router'])
                 url = '/projects/'+$scope.project.id+'/addTeammate';
             
             $http.post(server+url, {
-                'teammate': $scope.inviteEmail,
+                'teammate': $scope.invite.email,
                 'event': $stateParams.slug,
             })
             .success(function(data){
                 $scope.project = data;
-                console.log('returned!', data);
-                var ids = _.map($scope.team, function(user){return user.id || user;});
-                console.log(ids);
-                for(var i in data.team){
-                    if( !(data.team[i].id == $scope.user.id || ids.indexOf(data.team[i].id) > -1 ) ){
-                        for(var j in $scope.team)
-                            if(!$scope.team[j]){
-                                $scope.team[j] = data.team[i];
-                                break
-                            }
-                        $scope.teamCount += 1;
-                    }
-                }
+                updateTeam();
                 $scope.modalShown = false;
-                $scope.inviteEmail = "";
+                $scope.invite.email = "";
             })
             .error(function(data){
                 $scope.errorText = "We couldn't find that email. Make sure this is the email your teammate used to register for this event.";
@@ -204,10 +199,29 @@ angular.module('pilot.event', ['ui.router'])
         return;
     }
 
-    // Call init functions
+    function attendees(){
+        return;
+    }
+
+    function checkin(){
+        return;
+    }
+
+    function settings(){
+
+    }
+
+    // Initialize tabs
     announcements();
     schedule();
-    mentors();
-    team();
+    if($scope.user.type == 'student'){
+        mentors();
+        team();
+    }
     projects();
+    if($scope.user.type == 'organizer'){
+        attendees();
+        checkin();
+        settings();
+    }
 });
