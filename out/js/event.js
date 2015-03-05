@@ -62,10 +62,16 @@ angular.module('pilot.event', ['ui.router'])
     });
 
     function announcements(){
+        $scope.announcementsTab = {
+            modalShown: false
+        };
+        $scope.postEditing = {};
+
         $http.get(server+"/events/"+$stateParams.slug+"/posts")
         .success(function(data){
             for(var i in data){
                 data[i].fromNow = moment.utc(data[i].time).fromNow();
+                data[i].index = i;
             }
             $scope.announcements = data;
         });
@@ -77,7 +83,61 @@ angular.module('pilot.event', ['ui.router'])
             }
             $scope.tweets = data;
         });
+        $scope.newPost = function(){
+            console.log("new");
+            $scope.announcementsTab.modalShown = true;
+        }
+        $scope.editPost = function(i){
+            console.log("edit", i);
+            $scope.postEditing = $scope.announcements[i];
+            $scope.announcementsTab.modalShown = true;
+        }
+        $scope.confirmDelete = function(i){
+            $scope.postEditing = $scope.announcements[i];
+            $scope.announcementsTab.deleteShown = true;
+        }
+        
+        $scope.deletePost = function(){
+            console.log("Deleting post", $scope.postEditing)
 
+            $http.delete(server+'/events/'+$scope.event.id+'/posts/'+$scope.postEditing.id)
+            .success(function(data){
+                console.log("Success!", data);
+                $scope.announcements.splice($scope.postEditing.index, 1);
+
+                $scope.postEditing = {}
+                $scope.announcementsTab.deleteShown = false;
+            })
+            .error(function(data){
+                console.log("Error deleting post", data);
+            })
+        }
+        $scope.submitPost = function(){
+            console.log("Submitting post", $scope.postEditing);
+            delete $scope.postEditing.event;
+            delete $scope.postEditing.author;
+            var request;
+            var isNew = false;
+            if($scope.postEditing.id){ // Post already exists on server
+                request = $http.put(server+'/events/'+$scope.event.id+'/posts/'+$scope.postEditing.id, $scope.postEditing)
+            }else{
+                isNew = true;
+                request = $http.post(server+'/events/'+$scope.event.id+'/posts', $scope.postEditing)
+            }
+            request.success(function(data){
+                if(isNew){
+                    data.fromNow = moment.utc(data.time).fromNow();
+                    data.index = $scope.announcements.length;
+                    $scope.announcements.push(data);
+                }
+                console.log("Success!", data);
+                $scope.postEditing = {}
+                $scope.announcementsTab.modalShown = false;
+            })
+            .error(function(data){
+                console.log("Error submitting post", data)
+            })
+        }
     }
 
     function schedule(){
@@ -110,10 +170,10 @@ angular.module('pilot.event', ['ui.router'])
 
     function team(){
         $scope.invite = {
-            email: ""
+            email: "",
+            modalShown: false
         }
-        $scope.errorText = ""
-        $scope.modalShown = false;
+        $scope.errorText = "";
         $scope.team = [false, false, false, false];
         $scope.teamCount = 0;
         $scope.project = {};
@@ -144,7 +204,7 @@ angular.module('pilot.event', ['ui.router'])
         $scope.openModal = function(i){
             if($scope.team[i]) return;
             console.log("opening modal");
-            $scope.modalShown = true;
+            $scope.invite.modalShown = true;
         }
         $scope.checkEmail = function(){
             if($scope.errorText && $scope.inviteEmail){
@@ -170,7 +230,7 @@ angular.module('pilot.event', ['ui.router'])
             .success(function(data){
                 $scope.project = data;
                 updateTeam();
-                $scope.modalShown = false;
+                $scope.invite.modalShown = false;
                 $scope.invite.email = "";
             })
             .error(function(data){

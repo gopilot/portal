@@ -174,6 +174,25 @@ a {
   pointer-events: auto;
   bottom: 50%;
 }
+.modal .close-button {
+  display: block;
+  position: absolute;
+  width: 25px;
+  height: 100px;
+  background: #fff;
+  right: 25px;
+  top: 5px;
+  font-size: 50px;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  -ms-transition: color 0.3s;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.modal .close-button:hover {
+  color: #54a2d6;
+}
 .portal-main {
   min-height: 100vh;
   position: relative;
@@ -194,7 +213,8 @@ a {
   font-size: 20px;
   overflow: hidden;
 }
-.input-group input {
+.input-group input,
+.input-group textarea {
   position: relative;
   display: block;
   float: right;
@@ -209,14 +229,18 @@ a {
   font-size: 20px;
   font-family: 'DIN';
   font-weight: 200;
+  resize: none;
 }
-.input-group input:focus {
+.input-group input:focus,
+.input-group textarea:focus {
   outline: none;
 }
-.input-group input:focus + label {
+.input-group input:focus + label,
+.input-group textarea:focus + label {
   pointer-events: none;
 }
-.input-group input:focus + label::before {
+.input-group input:focus + label::before,
+.input-group textarea:focus + label::before {
   background-color: #54a2d6;
   -webkit-transform: scale3d(1, 1, 1);
   -moz-transform: scale3d(1, 1, 1);
@@ -224,7 +248,8 @@ a {
   -ms-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
 }
-.input-group input:focus + label span {
+.input-group input:focus + label span,
+.input-group textarea:focus + label span {
   color: #54a2d6;
   font-weight: 400;
 }
@@ -666,15 +691,30 @@ button:hover {
 .tab-section.shown {
   display: block;
 }
+section.announcements {
+  padding-top: 25px;
+}
+section.announcements .button-container {
+  overflow: hidden;
+  width: 800px;
+}
+section.announcements .button-container button {
+  width: 220px;
+  height: 50px;
+  float: right;
+  display: block;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
 section.announcements .announcement-block {
   display: inline-block;
   height: auto;
   width: 800px;
-  margin-top: 25px;
   background: #fff;
 }
 section.announcements .announcement-block .announcement-container {
   padding-bottom: 10px;
+  position: relative;
 }
 section.announcements .announcement-block .announcement-container .title {
   display: inline-block;
@@ -693,6 +733,44 @@ section.announcements .announcement-block .announcement-container .text {
   margin: 25px;
   font-size: 20px;
 }
+section.announcements .announcement-block .announcement-container .image {
+  margin: 25px;
+  margin-top: 0;
+  max-width: 600px;
+  max-height: 600px;
+}
+section.announcements .announcement-block .announcement-container .icon {
+  font-size: 30px;
+  position: absolute;
+  top: 40px;
+  color: #8b999c;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  cursor: pointer;
+}
+section.announcements .announcement-block .announcement-container .icon.edit {
+  right: 70px;
+}
+section.announcements .announcement-block .announcement-container .icon.edit:hover {
+  color: #54a2d6;
+}
+section.announcements .announcement-block .announcement-container .icon.delete {
+  right: 40px;
+}
+section.announcements .announcement-block .announcement-container .icon.delete:hover {
+  color: #ff4d4d;
+}
+section.announcements .announcement-block .announcement-container:hover .icon {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
 section.announcements .announcement-block .post-divider {
   width: 135px;
   border-bottom: 2px solid #d1d4d6;
@@ -700,11 +778,43 @@ section.announcements .announcement-block .post-divider {
 section.announcements .announcement-block .repeat-announcement:last-of-type .post-divider {
   display: none;
 }
+section.announcements .confirm-delete {
+  width: 600px;
+  text-align: center;
+}
+section.announcements .confirm-delete .confirm {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  margin: 15px;
+  margin-top: 25px;
+}
+section.announcements .confirm-delete button:hover {
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+}
+section.announcements .edit-post {
+  width: 600px;
+}
+section.announcements .edit-post form {
+  width: 500px;
+  display: block;
+  margin: auto;
+  position: relative;
+}
+section.announcements .edit-post form .input-group {
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+section.announcements .edit-post form button {
+  height: 60px;
+  width: 300px;
+  position: relative;
+}
 section.announcements .twitter {
   vertical-align: top;
   display: inline-block;
   margin-left: 40px;
-  margin-top: 25px;
   width: 360px;
 }
 section.announcements .twitter .hashtag {
@@ -908,25 +1018,6 @@ section.team .add-teammate form button {
   width: 200px;
   position: relative;
   margin-top: 15px;
-}
-section.team .add-teammate .close-button {
-  display: block;
-  position: absolute;
-  width: 25px;
-  height: 100px;
-  background: #fff;
-  right: 25px;
-  top: 5px;
-  font-size: 50px;
-  -webkit-transition: color 0.3s;
-  -moz-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  -ms-transition: color 0.3s;
-  transition: color 0.3s;
-  cursor: pointer;
-}
-section.team .add-teammate .close-button:hover {
-  color: #54a2d6;
 }
 section.team .add-teammate .error-text {
   width: 100%;

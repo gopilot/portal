@@ -8,8 +8,8 @@ section.tab-section.team(ng-if="user.type == 'student'" ng-class="{shown: (tab =
 				.email {{teammate.email}}
 				.icon.pe-7s-close(ng-click="removeTeammate($index)")
 
-	.modal.add-teammate(ng-class="{shown: modalShown}")
-		.close-button.pe-7s-close(ng-click="modalShown = false")
+	.modal.add-teammate(ng-class="{shown: invite.modalShown}")
+		.close-button.pe-7s-close(ng-click="invite.modalShown = false")
 		p.error-text(ng-bind="errorText")
 		form(ng-submit="invite()")
 			.input-group
@@ -18,5 +18,5 @@ section.tab-section.team(ng-if="user.type == 'student'" ng-class="{shown: (tab =
 					span Enter your teammate's email
 			button(type="submit") Invite Teammate
 
-	.modal-cover(ng-class="{shown: modalShown}" ng-click="modalShown = false")
+	.modal-cover(ng-class="{shown: invite.modalShown}" ng-click="invite.modalShown = false")
 

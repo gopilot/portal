@@ -64,14 +64,25 @@
 		display block	
 
 section.announcements
+	padding-top 25px
+	.button-container
+		overflow hidden
+		width: $sizes.inner-width
+		button
+			width 220px
+			height 50px
+			float right
+			display block
+			padding-top 10px
+			margin-bottom 10px
 	.announcement-block
 		display inline-block
 		height auto
 		width: $sizes.inner-width
-		margin-top 25px
 		background white
 		.announcement-container
 			padding-bottom 10px
+			position relative
 			.title
 				display inline-block
 				font-size 50px
@@ -86,6 +97,30 @@ section.announcements
 			.text
 				margin 25px
 				font-size 20px
+			.image
+				margin 25px
+				margin-top 0
+				max-width: 600px
+				max-height: 600px
+			.icon
+				font-size 30px
+				position absolute
+				top 40px
+				color: lighten($colors.slate, 50%)
+				transition all 0.3s
+				opacity 0
+				cursor pointer
+				&.edit
+					right 70px
+					&:hover
+						color: $colors.blue
+				&.delete
+					right 40px
+					&:hover
+						color: $colors.red
+			&:hover .icon
+				opacity 1
+				
 		.post-divider
 			width 135px
 			border-bottom: 2px solid $colors.gray
@@ -93,11 +128,38 @@ section.announcements
 			.post-divider
 				display none
 
+	.confirm-delete
+		width 600px
+		text-align center
+		.confirm
+			width 100%
+			text-align center
+			font-size 20px
+			margin 15px
+			margin-top 25px
+		button:hover
+			background: $colors.red
+			border-color: $colors.red
+
+	.edit-post
+		width 600px
+		form
+			width 500px
+			display block
+			margin auto
+			position relative
+			.input-group
+				max-width 500px
+				margin-bottom 10px
+			button
+				height 60px
+				width 300px
+				position relative
+
 	.twitter
 		vertical-align top
 		display inline-block
 		margin-left 40px
-		margin-top 25px
 		width 360px
 		.hashtag
 			display inline-block
@@ -250,19 +312,6 @@ section.team
 				width 200px
 				position relative
 				margin-top 15px
-		.close-button
-			display block
-			position absolute
-			width 25px
-			height 100px
-			background white
-			right 25px
-			top 5px
-			font-size 50px
-			transition color 0.3s
-			cursor pointer
-			&:hover
-				color: $colors.blue
 		.error-text
 			width 100%
 			text-align center

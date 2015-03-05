@@ -1,10 +1,16 @@
 section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
+	.button-container
+		button(ng-if="user.type == 'organizer'" ng-click="newPost()") New Announcement
 	.announcement-block
 		.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
 			.announcement-container
 				h3.title {{a.title}}
 				.time {{ a.fromNow }}
 				.text {{a.body}}
+				img.image(ng-if="a.image" ng-src="{{a.image}}")
+				.actions(ng-if="user.type == 'organizer'")
+					.icon.delete.pe-7s-trash(ng-click="confirmDelete(a.index)")
+					.icon.edit.pe-7s-pen(ng-click="editPost(a.index)")
 			.post-divider
 
 	.twitter
@@ -15,4 +21,36 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 					.handle {{'@'+t.user}}
 					.tweet {{t.text}}
 					.time {{t.fromNow}}
+
+	.modal.edit-post(ng-if="user.type == 'organizer'" ng-class="{shown: announcementsTab.modalShown}")
+		.close-button.pe-7s-close(ng-click="announcementsTab.modalShown = false")
+		p.error-text(ng-bind="errorText")
+		form(ng-submit="submitPost()")
+			.input-group
+				input(type="text" id="title" ng-model='postEditing.title' placeholder="New Post")
+				label(for="title" ng-class="{error: errorText}")
+					span Announcement Title
+			.input-group
+				input(type="text" id="notif" ng-model='postEditing.notif' placeholder="New Post: Do something!")
+				label(for="notif" ng-class="{error: errorText}")
+					span Notification Text
+			.input-group
+				input(type="text" id="image" ng-model='postEditing.image' placeholder="http://gopilot.org/img/dc.jpg")
+				label(for="image" ng-class="{error: errorText}")
+					span Image URL (optional)
+			.input-group
+				textarea(rows="2" id="title" ng-model='postEditing.body' placeholder="Text of the announcement.")
+				label(for="title" ng-class="{error: errorText}")
+					span Announcement Body
+			button(type="submit") {{postEditing.id ? "Update": "Post"}}  Announcement
+
+	.modal.confirm-delete(ng-if="user.type == 'organizer'" ng-class="{shown: announcementsTab.deleteShown}")
+		.close-button.pe-7s-close(ng-click="announcementsTab.deleteShown = false")
+		.confirm Are you sure you want to delete this announcement?
+		button(ng-click="deletePost()") Delete Announcement
+
+
+
+	.modal-cover(ng-class="{shown: (announcementsTab.modalShown || announcementsTab.deleteShown)}" ng-click="announcementsTab.modalShown = false; announcementsTab.deleteShown = false")
+
 
