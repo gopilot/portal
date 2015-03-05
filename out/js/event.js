@@ -28,7 +28,11 @@ angular.module('pilot.event', ['ui.router'])
         .success(function(data){
             for(e in data){
 
-                data[e].date = moment(data[e].start_date, "YYYY-MM-DD hh:mm:ss")
+                data[e].date = moment.utc(data[e].start_date, serverDateFormat).local()
+                data[e].start_date_string = data[e].date.format(dateFormat)
+                data[e].end_date_string = moment.utc(data[e].end_date, serverDateFormat).local().format(dateFormat)
+                data[e].registration_end_string = moment.utc(data[e].registration_end, serverDateFormat).local().format(dateFormat)
+
                 results.all.push(data[e]);
                 results.bySlug[data[e].slug] = data[e]
                 if(data[e].date.unix() < moment().unix()){
@@ -208,7 +212,19 @@ angular.module('pilot.event', ['ui.router'])
     }
 
     function settings(){
-
+        $scope.updateEvent = function(){
+            console.log("Updating...", $scope.event);
+            $scope.event.start_date = moment($scope.event.start_date_string, dateFormat).utc().format(serverDateFormat);
+            $scope.event.end_date = moment($scope.event.end_date_string, dateFormat).utc().format(serverDateFormat);
+            $scope.event.registration_end = moment($scope.event.registration_end_string, dateFormat).utc().format(serverDateFormat);
+            $http.put(server+'/events/'+$stateParams.slug+"", $scope.event)
+            .success(function(data){
+                console.log("Event updated!", data);
+            })
+            .error(function(data){
+                alert("Error: "+data);
+            })
+        }
     }
 
     // Initialize tabs

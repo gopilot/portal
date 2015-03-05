@@ -1,2 +1,44 @@
 section.tab-section.settings(ng-if="user.type == 'organizer'" ng-class="{shown: (tab == 'settings')}")
-	p Settings
+	h3 Event Settings
+	form(ng-submit='updateEvent()')
+		.input-group
+			input(type="text" id="name" ng-model='event.name' placeholder="PilotDC")
+			label(for="name"  ng-class="{error: errors.name}")
+				span Name
+		.input-group
+			input(type="text" id="slug" ng-model='event.slug' placeholder="dc2015")
+			label(for="slug" ng-class="{error: errors.slug}")
+				span Slug
+		.input-group
+			input(type="text" id="city" ng-model='event.city' placeholder="Washington DC")
+			label(for="city"  ng-class="{error: errors.city}")
+				span City
+		.input-group
+			input(type="text" id="location" ng-model='event.location' placeholder="Microsoft")
+			label(for="location" ng-class="{error: errors.location}")
+				span Location
+		.input-group
+			input(type="text" id="address" ng-model='event.address' placeholder="5404 Wisconsin Ave, Suite 700, Chevy Chase, MD")
+			label(for="address" ng-class="{error: errors.address}")
+				span Address
+		.input-group
+			input(type="text" id="image" ng-model='event.image' placeholder="https://gopilot.org/img/dc.jpg")
+			label(for="image" ng-class="{error: errors.image}")
+				span Image URL
+		.input-group
+			input(type="text" id="start_date" ng-model='event.start_date_string' placeholder="06/06/2015 9:00AM")
+			label(for="start_date" ng-class="{error: errors.start_date}")
+				span Start Date
+		.input-group
+			input(type="text" id="end_date" ng-model='event.end_date_string' placeholder="06/07/2015 5:00PM")
+			label(for="end_date" ng-class="{error: errors.end_date}")
+				span End Date
+		.input-group
+			input(type="text" id="registration_end" ng-model='event.registration_end_string' placeholder="06/01/2015 12:00AM")
+			label(for="registration_end" ng-class="{error: errors.registration_end}")
+				span Registration End Date
+		.input-group
+			input(type="text" id="price" ng-model='event.price' placeholder="$20")
+			label(for="price" ng-class="{error: errors.price}")
+				span Price
+		button(type="submit") Update Event

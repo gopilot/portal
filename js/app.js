@@ -1,5 +1,6 @@
 window.server = "https://api.gopilot.org"
-
+window.dateFormat = "MM/DD/YYYY hh:mm A"
+window.serverDateFormat = "YYYY-MM-DD HH:mm:ss"
 var sessionCache = {
     user: null
 };

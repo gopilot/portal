@@ -933,3 +933,21 @@ section.team .add-teammate .error-text {
   text-align: center;
   margin-bottom: none;
 }
+section.settings {
+  min-height: 400px;
+  padding: 25px;
+  width: 800px;
+  margin-top: 25px;
+  background: #fff;
+}
+section.settings h3 {
+  font-size: 40px;
+}
+section.settings .input-group {
+  margin: 25px 0px;
+  max-width: 70%;
+}
+section.settings button {
+  width: 400px;
+  height: 70px;
+}
