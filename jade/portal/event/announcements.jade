@@ -4,9 +4,9 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 	.announcement-block
 		.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
 			.announcement-container
-				h3.title {{a.title}}
+				h3.title {{ a.title }}
 				.time {{ a.fromNow }}
-				.text {{a.body}}
+				.text {{ a.body }}
 				img.image(ng-if="a.image" ng-src="{{a.image}}")
 				.actions(ng-if="user.type == 'organizer'")
 					.icon.delete.pe-7s-trash(ng-click="confirmDelete(a.index)")
@@ -29,11 +29,11 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 			.input-group
 				input(type="text" id="title" ng-model='postEditing.title' placeholder="New Post")
 				label(for="title" ng-class="{error: errorText}")
-					span Announcement Title
+					span Title
 			.input-group
-				input(type="text" id="notif" ng-model='postEditing.notif' placeholder="New Post: Do something!")
+				input(type="text" id="notif" ng-model='postEditing.notif' placeholder="Send a text to all attendees")
 				label(for="notif" ng-class="{error: errorText}")
-					span Notification Text
+					span SMS Notification Text (optional)
 			.input-group
 				input(type="text" id="image" ng-model='postEditing.image' placeholder="http://gopilot.org/img/dc.jpg")
 				label(for="image" ng-class="{error: errorText}")
@@ -41,7 +41,7 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 			.input-group
 				textarea(rows="2" id="title" ng-model='postEditing.body' placeholder="Text of the announcement.")
 				label(for="title" ng-class="{error: errorText}")
-					span Announcement Body
+					span Body
 			button(type="submit") {{postEditing.id ? "Update": "Post"}}  Announcement
 
 	.modal.confirm-delete(ng-if="user.type == 'organizer'" ng-class="{shown: announcementsTab.deleteShown}")

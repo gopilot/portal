@@ -15,7 +15,7 @@ section.tab-section.mentors(ng-if="user.type == 'student'" ng-class="{shown: (ta
 			label(for="platform" ng-class="{error: errors.platform}")
 				span Platform(s)
 		.input-group
-			input(type="text" id="problem" ng-model='mentorRequest.problem' placeholder="e.g. I get an error when I try to compile my app")
+			textarea(rows="3" id="problem" ng-model='mentorRequest.problem' placeholder="e.g. I get an error when I try to compile my app")
 			label(for="problem" ng-class="{error: errors.problem}")
 				span Describe your problem
 		button(type="submit") Submit Request

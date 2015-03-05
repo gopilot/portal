@@ -732,6 +732,7 @@ section.announcements .announcement-block .announcement-container .time {
 section.announcements .announcement-block .announcement-container .text {
   margin: 25px;
   font-size: 20px;
+  line-height: 25px;
 }
 section.announcements .announcement-block .announcement-container .image {
   margin: 25px;

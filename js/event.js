@@ -104,13 +104,13 @@ angular.module('pilot.event', ['ui.router'])
             .success(function(data){
                 console.log("Success!", data);
                 $scope.announcements.splice($scope.postEditing.index, 1);
-
                 $scope.postEditing = {}
-                $scope.announcementsTab.deleteShown = false;
             })
             .error(function(data){
                 console.log("Error deleting post", data);
             })
+
+            $scope.announcementsTab.deleteShown = false;
         }
         $scope.submitPost = function(){
             console.log("Submitting post", $scope.postEditing);
@@ -132,11 +132,12 @@ angular.module('pilot.event', ['ui.router'])
                 }
                 console.log("Success!", data);
                 $scope.postEditing = {}
-                $scope.announcementsTab.modalShown = false;
             })
             .error(function(data){
                 console.log("Error submitting post", data)
             })
+
+            $scope.announcementsTab.modalShown = false;
         }
     }
 
