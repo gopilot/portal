@@ -351,6 +351,52 @@ button:hover {
   color: #fff;
   border-color: #54a2d6;
 }
+.toggle {
+  height: 50px;
+  display: inline-block;
+}
+.toggle .option {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  background: none;
+  display: inline-block;
+  position: relative;
+  padding: 0.75em;
+  font-size: 20px;
+  font-family: 'DIN';
+  font-weight: 400;
+  cursor: pointer;
+  color: #252a2b;
+  border-top: 2px solid #252a2b;
+  border-bottom: 2px solid #252a2b;
+  -webkit-transition: border 0.3s, color 0.3s, background 0.3s;
+  -moz-transition: border 0.3s, color 0.3s, background 0.3s;
+  -o-transition: border 0.3s, color 0.3s, background 0.3s;
+  -ms-transition: border 0.3s, color 0.3s, background 0.3s;
+  transition: border 0.3s, color 0.3s, background 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -ms-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.toggle .option:first-of-type {
+  border-left: 2px solid #252a2b;
+}
+.toggle .option:last-of-type {
+  border-right: 2px solid #252a2b;
+}
+.toggle .option:hover {
+  background: #aad1eb;
+  color: #fff;
+}
+.toggle .option.selected {
+  background: #54a2d6;
+  color: #fff;
+}
 .error-text {
   color: #ff4d4d;
 }
@@ -1041,6 +1087,77 @@ section.team .add-teammate .error-text {
   width: 100%;
   text-align: center;
   margin-bottom: none;
+}
+section.attendees .table-container {
+  display: block;
+  width: 95%;
+  height: 100%;
+  background: #fff;
+  padding: 0px 40px;
+  margin: 25px auto;
+}
+section.attendees .toggle {
+  margin-top: 25px;
+}
+section.attendees .input-group {
+  float: right;
+}
+section.attendees table {
+  display: block;
+  width: 100%;
+  min-width: 400px;
+  max-height: 700px;
+  margin: 25px 0px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  position: relative;
+}
+section.attendees table th,
+section.attendees table td {
+  padding: 10px 10px;
+  white-space: nowrap;
+}
+section.attendees table th {
+  background: #54a2d6;
+  color: #fff;
+  padding: 18px 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+section.attendees table th i.icon {
+  display: none;
+  font-size: 25px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+section.attendees table th.selected {
+  background: #236490;
+}
+section.attendees table th.selected i.icon {
+  display: inline-block;
+}
+section.attendees table tbody tr {
+  -webkit-transition: background 0.2s;
+  -moz-transition: background 0.2s;
+  -o-transition: background 0.2s;
+  -ms-transition: background 0.2s;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+section.attendees table tbody tr td {
+  font-weight: 200;
+}
+section.attendees table tbody tr:nth-child(even) {
+  background: #d1d4d6;
+}
+section.attendees table tbody tr:nth-child(odd) {
+  background: #e3e5e6;
+}
+section.attendees table tbody tr:hover {
+  background: #bbdaef;
 }
 section.settings {
   min-height: 400px;

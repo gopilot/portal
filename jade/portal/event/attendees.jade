@@ -1,2 +1,129 @@
 section.tab-section.attendees(ng-if="user.type == 'organizer'" ng-class="{shown: (tab == 'attendees')}")
-	p Attendees
+	.table-container
+		.toggle
+			.option(ng-click="viewTable = 'students'" ng-class="{selected: (viewTable == 'students')}") Students
+			.option(ng-click="viewTable = 'mentors'" ng-class="{selected: (viewTable == 'mentors')}") Mentors
+		.input-group
+			input(type="text" id="filter" ng-model='query' placeholder="")
+			label(for="filter")
+				span Filter
+		table.students(ng-show="viewTable == 'students'")
+			thead
+				tr
+					th(ng-class="{selected: (sortCol == 'name')}" ng-click="changeSort('name')") Name
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'email')}" ng-click="changeSort('email')") Email
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'grade')}" ng-click="changeSort('grade')") Grade
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'school')}" ng-click="changeSort('school')") School
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'gender')}" ng-click="changeSort('gender')") Gender
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'experience_years')}" ng-click="changeSort('experience_years')") Experience
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'birth_date')}" ng-click="changeSort('birth_date')") Birth Date
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'phone')}" ng-click="changeSort('phone')") Phone
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'shirt_type')}" ng-click="changeSort('shirt_type')") Shirt Type
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'shirt_size')}" ng-click="changeSort('shirt_size')") Shirt Size
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'emergency_name')}" ng-click="changeSort('emergency_name')") Emergency Name
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'emergency_email')}" ng-click="changeSort('emergency_email')") Emergency Email
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'emergency_phone')}" ng-click="changeSort('emergency_phone')") Emergency Phone
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'dietary')}" ng-click="changeSort('dietary')") Dietary Restrictions
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'notes')}" ng-click="changeSort('notes')") Notes
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+			tbody
+				tr(ng-repeat="student in attendees.students | orderBy:sortCol:reverse | filter:query" ng-click="openAttendee(student)")
+					td {{student.name}}
+					td {{student.email}}
+					td {{student.grade}}
+					td {{student.school}}
+					td {{student.gender}}
+					td {{student.experience_years}}
+					td {{student.birth_date}}
+					td {{student.phone}}
+					td {{student.shirt_type}}
+					td {{student.shirt_size}}
+					td {{student.emergency_name}}
+					td {{student.emergency_email}}
+					td {{student.emergency_phone}}
+					td {{student.dietary}}
+					td {{student.notes[event.id]}}
+
+		table.mentors(ng-show="viewTable == 'mentors'")
+			thead
+				tr
+					th(ng-class="{selected: (sortCol == 'name')}" ng-click="changeSort('name')") Name
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'email')}" ng-click="changeSort('email')") Email
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'title')}" ng-click="changeSort('title')") Title
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'company')}" ng-click="changeSort('company')") Company
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'gender')}" ng-click="changeSort('gender')") Gender
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'phone')}" ng-click="changeSort('phone')") Phone
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'experience_years')}" ng-click="changeSort('experience_years')") Experience
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'skills')}" ng-click="changeSort('skills')") Skills
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'profiles')}" ng-click="changeSort('profiles')") Profiles
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'shirt_type')}" ng-click="changeSort('shirt_type')") Shirt Type
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'shirt_size')}" ng-click="changeSort('shirt_size')") Shirt Size
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'dietary')}" ng-click="changeSort('dietary')") Dietary Restrictions
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+					th(ng-class="{selected: (sortCol == 'notes')}" ng-click="changeSort('notes')") Notes
+						i.icon(ng-class="{'pe-7s-angle-up': !reverse, 'pe-7s-angle-down': reverse}")
+			tbody
+				tr(ng-repeat="mentor in attendees.mentors | orderBy:sortCol:reverse | filter:query" ng-click="openAttendee(mentor)")
+					td {{mentor.name}}
+					td {{mentor.email}}
+					td {{mentor.title}}
+					td {{mentor.company}}
+					td {{mentor.gender}}
+					td {{mentor.phone}}
+					td {{mentor.experience_years}}
+					td {{mentor.skills}}
+					td {{mentor.profiles}}
+					td {{mentor.shirt_type}}
+					td {{mentor.shirt_size}}
+					td {{mentor.dietary}}
+					td {{mentor.notes[event.id]}}
+
+	//- TODO Make this work when you click on an attendee
+	.modal.edit-attendee(ng-class="{shown: attendeesTab.modalShown}")
+		.close-button.pe-7s-close(ng-click="attendeesTab.modalShown = false")
+		p.error-text(ng-bind="errorText")
+		form(ng-submit="updateAttendee()")
+			.input-group
+				input(type="text" id="title" ng-model='postEditing.title' placeholder="New Post")
+				label(for="title" ng-class="{error: errorText}")
+					span Title
+			.input-group
+				input(type="text" id="notif" ng-model='postEditing.notif' placeholder="Send a text to all attendees")
+				label(for="notif" ng-class="{error: errorText}")
+					span SMS Notification Text (optional)
+			.input-group
+				input(type="text" id="image" ng-model='postEditing.image' placeholder="http://gopilot.org/img/dc.jpg")
+				label(for="image" ng-class="{error: errorText}")
+					span Image URL (optional)
+			.input-group
+				textarea(rows="2" id="title" ng-model='postEditing.body' placeholder="Text of the announcement.")
+				label(for="title" ng-class="{error: errorText}")
+					span Body
+			button(type="submit") {{postEditing.id ? "Update": "Post"}}  Announcement
+
+

@@ -54,7 +54,7 @@ angular.module('pilot.event', ['ui.router'])
 
 // GET /event/(slug)
 .controller("EventController", function($stateParams, $scope, $http, AllEvents) {
-    $scope.tab = "announcements" // Default tab
+    $scope.tab = "attendees" // Default tab
 
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];
@@ -265,7 +265,42 @@ angular.module('pilot.event', ['ui.router'])
     }
 
     function attendees(){
-        return;
+        $scope.attendees = {
+            students: [],
+            mentors: [],
+            all: []
+        };
+        $scope.viewTable = 'students';
+        $scope.sortCol = 'name'
+        $scope.reverse = false;
+        $scope.changeSort = function(col){
+            console.log("change sort", col, "current is", $scope.sortCol)
+            if($scope.sortCol == col){
+                console.log("reversing")
+                $scope.reverse = !$scope.reverse;
+            }else{
+                $scope.sortCol = col;
+                $scope.reverse = false;
+            }
+        }
+        $scope.openAttendee = function(data){
+            console.log("Opening attendee", data);
+        }
+
+        $.get(server+'/events/'+$stateParams.slug+'/attendees')
+        .success(function(data){
+            for(var i in data.students){
+                if(data.students[i].birth_date)
+                    data.students[i].birth_date = moment(data.students[i].birth_date, serverDateFormat).format('MM/DD/YYYY')
+            }
+            $scope.attendees.students = data.students
+            $scope.attendees.mentors = data.mentors
+            $scope.attendees.all = data.students.concat(data.mentors)
+            console.log("Got data", $scope.attendees);
+        })
+        .error(function(data){
+            console.log("error", data);
+        })
     }
 
     function checkin(){

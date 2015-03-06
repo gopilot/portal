@@ -167,6 +167,37 @@ button
 		color: white
 		border-color: $colors.blue
 
+.toggle
+	height 50px
+	display inline-block
+	.option
+		box-sizing border-box
+		outline none
+		border none
+		background none
+		display inline-block
+		position relative
+		padding 0.75em
+		font-size 20px
+		font-family 'DIN'
+		font-weight 400
+		cursor pointer
+		color: $colors.slate
+		border-top: 2px solid $colors.slate	
+		border-bottom: 2px solid $colors.slate	
+		transition border 0.3s, color 0.3s, background 0.3s
+		transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
+		&:first-of-type
+			border-left: 2px solid $colors.slate
+		&:last-of-type
+			border-right: 2px solid $colors.slate
+		&:hover
+			background: lighten($colors.blue, 50%)
+			color: white
+		&.selected
+			background: $colors.blue
+			color: white
+
 .error-text
 	color: $colors.red
 	
