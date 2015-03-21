@@ -43,6 +43,12 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
         Session.destroy();
         $state.go('login')
     }
+
+    $scope.openSelect = function (event){
+        console.log("opening", event.target)
+        $(event.target).toggleClass('open');
+        return event.stopPropagation()();
+    }
 })
 
 // GET /
@@ -58,7 +64,22 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 })
 
 // GET /settings
-.controller("SettingsController", function($scope, $state, $http) {
+.controller("SettingsController", function($scope, $state, $http, Session) {
     $scope.pageTitle = "Settings";
-    $scope.fullHeader = true; 
+    $scope.fullHeader = true;
+    console.log($scope.user);
+    $scope.updateUser = function(){
+        console.log("Updating...", $scope.user);
+        if($scope.user.has_experience)
+            $scope.user.has_experience = $scope.user.has_experience=='true';
+        delete $scope.user.events;
+        $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
+        .success(function(data){
+            console.log("User updated!", data);
+            Session.refresh();
+        })
+        .error(function(data){
+            alert("Error: "+data);
+        })
+    }
 })

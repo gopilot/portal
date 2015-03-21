@@ -2,7 +2,7 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 	.button-container
 		button(ng-if="user.type == 'organizer'" ng-click="newPost()") New Announcement
 	.announcement-block
-		.repeat-announcement(ng-repeat="a in announcements | orderBy:'time':true")
+		.repeat-announcement(ng-repeat="a in announcements track by $index | orderBy:'time':true")
 			.announcement-container
 				h3.title {{ a.title }}
 				.time {{ a.fromNow }}

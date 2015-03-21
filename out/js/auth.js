@@ -18,7 +18,6 @@ angular.module('pilot.auth', ['ui.router'])
         return $cookieStore.get('pilotUser')
     }
 })
-
 .factory('Session', function($cookieStore, $http) {
     return {
         create: function(t, user) {

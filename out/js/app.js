@@ -5,16 +5,32 @@ var sessionCache = {
     user: null
 };
 
+$(document).click(function() {
+    // all dropdowns
+    $('.select-element').removeClass('open');
+});
+
 angular.module('app', [
     'ui.router',
     'pilot.auth',
     'pilot.portal',
     'ngCookies'
 ])
-.config(function($urlRouterProvider, $locationProvider, $httpProvider){
-    
-});
-
+.directive("customSelect", function(){
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attr, ngModel){
+            console.log("customSelect");
+            new CustomSelect(element[0], {
+                onChange: function(value){
+                    ngModel.$setViewValue(value);
+                    scope.$apply()
+                },
+                ngModel: ngModel
+            }, scope, attr);
+        }
+    }
+})
 /*
     TODOs:
         - Make custom <select> element for use with forms

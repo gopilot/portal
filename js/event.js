@@ -54,7 +54,7 @@ angular.module('pilot.event', ['ui.router'])
 
 // GET /event/(slug)
 .controller("EventController", function($stateParams, $scope, $http, AllEvents) {
-    $scope.tab = "attendees" // Default tab
+    $scope.tab = "announcements" // Default tab
 
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];

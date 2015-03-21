@@ -205,12 +205,19 @@ a {
   position: relative;
 }
 .input-group {
-  position: relative;
+  position: static;
   z-index: 1;
   display: block;
-  max-width: 400px;
+  max-width: 450px;
+  min-height: 80px;
   vertical-align: top;
   font-size: 20px;
+}
+.input-group .divider {
+  width: 100%;
+  display: block;
+  position: relative;
+  height: 100px;
   overflow: hidden;
 }
 .input-group input,
@@ -252,6 +259,134 @@ a {
 .input-group textarea:focus + label span {
   color: #54a2d6;
   font-weight: 400;
+}
+.input-group .custom-select {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  text-align: left;
+  background: #fff;
+  z-index: 100;
+  width: 100%;
+  max-width: 500px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.input-group .custom-select:focus {
+  outline: none;
+}
+.input-group .custom-select.cs-active {
+  z-index: 200;
+}
+.input-group .custom-select select {
+  display: none;
+}
+.input-group .custom-select > span {
+  padding: 0;
+  padding-right: 3em;
+}
+.input-group .custom-select > span::after {
+  content: '\25BE';
+  right: 1em;
+}
+.input-group .custom-select span {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.input-group .custom-select span.cs-placeholder {
+  padding: 0.75em 0.1em 0.25em;
+}
+.input-group .custom-select li {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+  background: #fff;
+}
+.input-group .custom-select li.cs-focus span,
+.input-group .custom-select li:hover {
+  background: #54a2d6;
+  color: #fff;
+}
+.input-group .custom-select li.cs-selected span::after {
+  content: '\2713';
+  margin-left: 1em;
+}
+.input-group .custom-select.cs-active > span::after {
+  -webkit-transform: translateY(-50%) rotate(180deg);
+  -moz-transform: translateY(-50%) rotate(180deg);
+  -o-transform: translateY(-50%) rotate(180deg);
+  -ms-transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
+}
+.input-group .custom-select.cs-active .cs-options {
+  pointer-events: auto;
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.input-group .custom-select.unpicked .cs-placeholder {
+  color: #8b999c;
+}
+.input-group .custom-select.unpicked .cs-placeholder:after {
+  color: #252a2b;
+}
+.input-group .custom-select .cs-options {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  background: #fff;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  margin-top: 4px;
+  pointer-events: none;
+  -webkit-box-shadow: 0px 0px 5px #8b999c;
+  box-shadow: 0px 0px 5px #8b999c;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.input-group .custom-select ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.input-group .custom-select ul span {
+  padding: 1em;
+}
+.input-group .custom-select ul li.cs-optgroup ul {
+  padding-left: 1em;
+}
+.input-group .custom-select ul li.cs-optgroup > span {
+  cursor: default;
+}
+.input-group .custom-select > span::after,
+.input-group .custom-select .cs-selected span::after {
+  speak: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .input-group label {
   display: inline-block;

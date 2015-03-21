@@ -14,7 +14,7 @@ body
   background: $colors.gray
 
 a
-    text-decoration: none
+	text-decoration: none
 
 .modal-cover
 	display block
@@ -75,14 +75,22 @@ a
 	position relative
 		
 .input-group
-	position relative
+	position static
 	z-index 1
 	display block
-	max-width 400px
+	max-width 450px
+	min-height 80px
 	vertical-align top
 	font-size 20px
-	overflow hidden
 	
+	.divider
+		width 100%
+		display block
+		position relative
+		height 100px
+		overflow hidden
+		
+
 	input, textarea
 		position relative
 		display block
@@ -109,6 +117,96 @@ a
 				span
 					color: $colors.blue
 					font-weight 400
+
+	.custom-select
+		display inline-block
+		vertical-align middle
+		position relative
+		text-align left
+		background #fff
+		z-index 100
+		width 100%
+		max-width 500px
+		-webkit-touch-callout none
+		user-select none
+		&:focus
+		  outline none
+		&.cs-active
+			z-index 200
+		select
+			display none
+		& > span
+			padding 0
+			padding-right 3em
+			&::after
+				content '\25BE'
+				right 1em
+		span
+			display block
+			position relative
+			cursor pointer
+			padding 1em
+			white-space nowrap
+			overflow hidden
+			text-overflow ellipsis
+			&.cs-placeholder
+				padding 0.75em 0.1em 0.25em
+				
+		li
+			transition all 0.3s	
+			background white
+			&.cs-focus span, &:hover
+				background: $colors.blue
+				color white
+
+		li.cs-selected span::after
+			content '\2713'
+			margin-left 1em
+			
+		&.cs-active
+			& > span::after
+				transform translateY(-50%) rotate(180deg)
+			.cs-options
+				pointer-events auto
+				opacity 1
+		&.unpicked
+			.cs-placeholder
+				color: lighten($colors.slate, 50%)
+				&:after
+					color: $colors.slate
+		.cs-options
+			position absolute
+			overflow hidden
+			width 100%
+			background #fff
+			opacity 0
+			margin-top 4px
+			pointer-events none
+			box-shadow: 0px 0px 5px lighten($colors.slate, 50%)
+			transition opacity 0.3s
+		ul
+			list-style none
+			margin 0
+			padding 0
+			width 100%
+			span
+				padding 1em
+			li.cs-optgroup
+				ul
+					padding-left 1em
+				& > span
+					cursor default
+			
+
+		& > span::after, .cs-selected span::after
+			speak none
+			position absolute
+			top 50%
+			-webkit-transform translateY(-50%)
+			transform translateY(-50%)
+			-webkit-font-smoothing antialiased
+			-moz-osx-font-smoothing grayscale
+
 
 	label
 		display inline-block

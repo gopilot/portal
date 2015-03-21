@@ -10,8 +10,12 @@
 				input(type="text" id="email" ng-model='user.email' placeholder="johnny.appleseed@example.com")
 				label(for="email" ng-class="{error: errors.email}")
 					span Email
+			.divider
 			.input-group
-				input(type="text" id="gender" ng-model='user.gender' placeholder="Male/Female")
+				select(custom-select class="custom-select unpicked" id="gender" ng-model="user.gender")
+					option(value="" disabled selected) Select
+					option(value="male") Male
+					option(value="female") Female
 				label(for="gender" ng-class="{error: errors.gender}")
 					span Gender
 			.input-group
@@ -22,17 +26,33 @@
 				input(type="phone" id="phone" ng-model='user.phone' placeholder="555-555-5555")
 				label(for="phone" ng-class="{error: errors.phone}")
 					span Phone
+			.divider
 			.input-group
-				input(type="text" id="shirt_type" ng-model='user.shirt_type' placeholder="Unisex/Women's")
+				select(custom-select class="custom-select unpicked" id="shirt_type" ng-model="user.shirt_type")
+					option(value="" disabled selected) Select
+					option(value="unisex") Unisex
+					option(value="womens") Women's
 				label(for="shirt_type" ng-class="{error: errors.shirt_type}")
 					span Shirt Type
 			.input-group
-				input(type="text" id="shirt_size" ng-model='user.shirt_size' placeholder="S/M/L/XL")
+				select(custom-select class="custom-select unpicked" id="shirt_size" ng-model="user.shirt_size")
+					option(value="" disabled selected) Select
+					option(value="small") Small
+					option(value="medium") Medium
+					option(value="large") Large
+					option(value="xl") XL
 				label(for="shirt_size" ng-class="{error: errors.shirt_size}")
 					span Shirt Size
 			div(ng-if="user.type == 'student'")
+				.divider
 				.input-group
-					input(type="text" id="grade" ng-model='user.grade' placeholder="")
+					select(custom-select class="custom-select unpicked" id="grade" ng-model="user.grade")
+						option(value="" disabled selected) Select
+						option(value="9") 9
+						option(value="10") 10
+						option(value="11") 11
+						option(value="12") 12
+						option(value="other") Other
 					label(for="grade" ng-class="{error: errors.grade}")
 						span Grade
 				.input-group
@@ -47,15 +67,26 @@
 					input(type="email" id="emergency_email" ng-model='user.emergency_email' placeholder="parent@example.com")
 					label(for="emergency_email" ng-class="{error: errors.emergency_email}")
 						span Emergency Contact Email
+				.divider
 				.input-group
-					input(type="text" id="has_experience" ng-model='user.has_experience' placeholder="Yes/No")
+					select(custom-select class="custom-select unpicked" id="has_experience" ng-model="user.has_experience")
+						option(value="" disabled selected) Select
+						option(value="true") Yes
+						option(value="false") No
 					label(for="has_experience" ng-class="{error: errors.has_experience}")
 						span Do you have experience in building Web/Mobile apps?
-				.input-group
-					input(type="text" id="experience_years" ng-model='user.experience_years' placeholder="1 year")
+				.input-group(ng-if="user.has_experience && user.has_experience=='true'")
+					select(custom-select class="custom-select unpicked" id="experience_years" ng-model="user.experience_years")
+						option(value="" disabled selected) Select
+						option(value="0") Less than 1
+						option(value="1") 1 Year
+						option(value="2") 2 Years
+						option(value="3") 3 Years
+						option(value="4") 4+ Years
 					label(for="experience_years" ng-class="{error: errors.experience_years}")
-						span How many years?
+						span How many years of experience?
 			div(ng-if="user.type == 'mentor'")
+				.divider
 				.input-group
 					input(type="text" id="title" ng-model='user.title' placeholder="")
 					label(for="title" ng-class="{error: errors.title}")
@@ -64,8 +95,12 @@
 					input(type="text" id="company" ng-model='user.company' placeholder="")
 					label(for="company" ng-class="{error: errors.company}")
 						span Company
+				.divider
 				.input-group
-					input(type="text" id="has_experience" ng-model='user.has_experience' placeholder="Yes/No")
+					select(custom-select class="custom-select unpicked" id="has_experience" ng-model="user.has_experience")
+						option(value="" disabled selected) Select
+						option(value="true") Yes
+						option(value="false") No
 					label(for="has_experience" ng-class="{error: errors.has_experience}")
 						span Do you have experience in building Web/Mobile apps?
 				.input-group
@@ -76,13 +111,13 @@
 					textarea(rows="2" id="profiles" ng-model='user.profiles' placeholder="LinkedIn, Github, Angellist, etc")
 					label(for="profiles" ng-class="{error: errors.profiles}")
 						span Online Profiles
-
+			.divider
 			.input-group
 				input(type="password" id="password" ng-model='user.password' placeholder="Fill to change password")
 				label(for="password"  ng-class="{error: errors.password}")
 					span Password
 			.input-group
-				input(type="password" id="confirm-password" ng-model='user.confirm-password' placeholder="Fill to change password")
+				input(type="password" id="confirm-password" ng-model='user.confirmpassword' placeholder="Fill to change password")
 				label(for="confirm-password" ng-class="{error: errors.confirm-password}")
 					span Confirm Password
 			button(type="submit") Update User
