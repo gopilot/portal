@@ -3,7 +3,7 @@ section.tab-section.attendees(ng-if="user.type == 'organizer'" ng-class="{shown:
 		.toggle
 			.option(ng-click="viewTable = 'students'" ng-class="{selected: (viewTable == 'students')}") Students
 			.option(ng-click="viewTable = 'mentors'" ng-class="{selected: (viewTable == 'mentors')}") Mentors
-		.input-group
+		.input-group.filter
 			input(type="text" id="filter" ng-model='query' placeholder="")
 			label(for="filter")
 				span Filter
@@ -107,23 +107,143 @@ section.tab-section.attendees(ng-if="user.type == 'organizer'" ng-class="{shown:
 	.modal.edit-attendee(ng-class="{shown: attendeesTab.modalShown}")
 		.close-button.pe-7s-close(ng-click="attendeesTab.modalShown = false")
 		p.error-text(ng-bind="errorText")
-		form(ng-submit="updateAttendee()")
-			.input-group
-				input(type="text" id="title" ng-model='postEditing.title' placeholder="New Post")
-				label(for="title" ng-class="{error: errorText}")
-					span Title
-			.input-group
-				input(type="text" id="notif" ng-model='postEditing.notif' placeholder="Send a text to all attendees")
-				label(for="notif" ng-class="{error: errorText}")
-					span SMS Notification Text (optional)
-			.input-group
-				input(type="text" id="image" ng-model='postEditing.image' placeholder="http://gopilot.org/img/dc.jpg")
-				label(for="image" ng-class="{error: errorText}")
-					span Image URL (optional)
-			.input-group
-				textarea(rows="2" id="title" ng-model='postEditing.body' placeholder="Text of the announcement.")
-				label(for="title" ng-class="{error: errorText}")
-					span Body
-			button(type="submit") {{postEditing.id ? "Update": "Post"}}  Announcement
+		//- include ./../settings.jade
+		h3 User Settings
+		.form-container
+			form(ng-submit='updateUser(attendeesTab.modalUser)')
+				.input-group
+					input(type="text" id="name" ng-model='attendeesTab.modalUser.name' placeholder="Johnny Appleseed")
+					label(for="name"  ng-class="{error: errors.name}")
+						span Name
+				.input-group
+					input(type="text" id="email" ng-model='attendeesTab.modalUser.email' placeholder="johnny.appleseed@example.com")
+					label(for="email" ng-class="{error: errors.email}")
+						span Email
+				.divider
+				.input-group
+					select(custom-select class="custom-select unpicked" id="gender" ng-model="attendeesTab.modalUser.gender")
+						option(value="" disabled selected) Select
+						option(value="male") Male
+						option(value="female") Female
+					label(for="gender" ng-class="{error: errors.gender}")
+						span Gender
+				.input-group
+					input(type="text" id="image" ng-model='attendeesTab.modalUser.image' placeholder="https://gopilot.org/img/dc.jpg")
+					label(for="image" ng-class="{error: errors.image}")
+						span Image URL
+				.input-group
+					input(type="phone" id="phone" ng-model='attendeesTab.modalUser.phone' placeholder="555-555-5555")
+					label(for="phone" ng-class="{error: errors.phone}")
+						span Phone
+				.divider
+				.input-group
+					select(custom-select class="custom-select unpicked" id="shirt_type" ng-model="attendeesTab.modalUser.shirt_type")
+						option(value="" disabled selected) Select
+						option(value="unisex") Unisex
+						option(value="womens") Women's
+					label(for="shirt_type" ng-class="{error: errors.shirt_type}")
+						span Shirt Type
+				.input-group
+					select(custom-select class="custom-select unpicked" id="shirt_size" ng-model="attendeesTab.modalUser.shirt_size")
+						option(value="" disabled selected) Select
+						option(value="small") Small
+						option(value="medium") Medium
+						option(value="large") Large
+						option(value="xl") XL
+					label(for="shirt_size" ng-class="{error: errors.shirt_size}")
+						span Shirt Size
+				.input-group
+					input(type="text" id="dietary" ng-model='attendeesTab.modalUser.dietary' placeholder="(optional)")
+					label(for="dietary" ng-class="{error: errors.dietary}")
+						span Dietary Restrictions
+				div(ng-if="attendeesTab.modalUser.type == 'student'")
+					.divider
+					.input-group
+						select(custom-select class="custom-select unpicked" id="grade" ng-model="attendeesTab.modalUser.grade")
+							option(value="" disabled selected) Select
+							option(value="9") 9
+							option(value="10") 10
+							option(value="11") 11
+							option(value="12") 12
+							option(value="other") Other
+						label(for="grade" ng-class="{error: errors.grade}")
+							span Grade
+					.input-group
+						input(type="text" id="school" ng-model='attendeesTab.modalUser.school' placeholder="Example High School")
+						label(for="school" ng-class="{error: errors.school}")
+							span School
+					.input-group
+						input(type="text" id="birth_date" ng-model='attendeesTab.modalUser.birth_date' placeholder="MM/DD/YYYY")
+						label(for="birth_date" ng-class="{error: errors.birth_date}")
+							span Birth Date
+					.input-group
+						input(type="text" id="emergency_name" ng-model='attendeesTab.modalUser.emergency_name' placeholder="Parent/Guardian")
+						label(for="emergency_name" ng-class="{error: errors.emergency_name}")
+							span Emergency Contact Name
+					.input-group
+						input(type="email" id="emergency_email" ng-model='attendeesTab.modalUser.emergency_email' placeholder="parent@example.com")
+						label(for="emergency_email" ng-class="{error: errors.emergency_email}")
+							span Emergency Contact Email
+					.input-group
+						input(type="text" id="emergency_phone" ng-model='attendeesTab.modalUser.emergency_phone' placeholder="555-555-5555")
+						label(for="emergency_phone" ng-class="{error: errors.emergency_phone}")
+							span Emergency Phone
+					.divider
+					.input-group
+						select(custom-select class="custom-select unpicked" id="has_experience" ng-model="attendeesTab.modalUser.has_experience")
+							option(value="" disabled selected) Select
+							option(value="true") Yes
+							option(value="false") No
+						label(for="has_experience" ng-class="{error: errors.has_experience}")
+							span Do you have experience in building Web/Mobile apps?
+					.input-group(ng-if="attendeesTab.modalUser.has_experience && attendeesTab.modalUser.has_experience=='true'")
+						select(custom-select class="custom-select unpicked" id="experience_years" ng-model="attendeesTab.modalUser.experience_years")
+							option(value="" disabled selected) Select
+							option(value="0") Less than 1
+							option(value="1") 1 Year
+							option(value="2") 2 Years
+							option(value="3") 3 Years
+							option(value="4") 4+ Years
+						label(for="experience_years" ng-class="{error: errors.experience_years}")
+							span How many years of experience?
+				div(ng-if="attendeesTab.modalUser.type == 'mentor'")
+					.divider
+					.input-group
+						input(type="text" id="title" ng-model='attendeesTab.modalUser.title' placeholder="")
+						label(for="title" ng-class="{error: errors.title}")
+							span Title
+					.input-group
+						input(type="text" id="company" ng-model='attendeesTab.modalUser.company' placeholder="")
+						label(for="company" ng-class="{error: errors.company}")
+							span Company
+					.divider
+					.input-group
+						select(custom-select class="custom-select unpicked" id="has_experience" ng-model="attendeesTab.modalUser.has_experience")
+							option(value="" disabled selected) Select
+							option(value="true") Yes
+							option(value="false") No
+						label(for="has_experience" ng-class="{error: errors.has_experience}")
+							span Do you have experience in building Web/Mobile apps?
+					.input-group
+						textarea(rows="2" id="skills" ng-model='attendeesTab.modalUser.skills' placeholder="Yes/No")
+						label(for="skills" ng-class="{error: errors.skills}")
+							span What technical, business, or design skills do you feel confident teaching?
+					.input-group
+						textarea(rows="2" id="profiles" ng-model='attendeesTab.modalUser.profiles' placeholder="LinkedIn, Github, Angellist, etc")
+						label(for="profiles" ng-class="{error: errors.profiles}")
+							span Online Profiles
+				.divider
+				.input-group
+					input(type="password" id="password" ng-model='attendeesTab.modalUser.password' placeholder="Fill to change password")
+					label(for="password"  ng-class="{error: errors.password}")
+						span Password
+				.input-group
+					input(type="password" id="confirm-password" ng-model='attendeesTab.modalUser.confirmpassword' placeholder="Fill to change password")
+					label(for="confirm-password" ng-class="{error: errors.confirm-password}")
+						span Confirm Password
+				button(type="submit") Update User
+
+
+	.modal-cover(ng-class="{shown: attendeesTab.modalShown}" ng-click="attendeesTab.modalShown = false")
 
 

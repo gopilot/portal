@@ -28,9 +28,10 @@ angular.module('pilot.auth', ['ui.router'])
         },
 
         refresh: function() {
-            return $http(window.server + "/auth/retrieve_user")
+            console.log("Refreshing", window.server + "/auth/retrieve_user");
+            return $http.get(window.server + "/auth/retrieve_user")
             .success(function(data) {
-                $cookieStore.put("pilotUser", user);
+                $cookieStore.put("pilotUser", data);
             });
         },
 
@@ -57,6 +58,8 @@ angular.module('pilot.auth', ['ui.router'])
     }
 
     $scope.user = {};
+    var rand = Math.floor(Math.random()*16)+1;
+    $scope.backgroundImage = "url(/img/backgrounds/"+rand+".jpg)";
 
     $scope.doLogin = function() {
         $http.post(window.server + "/auth/login", {

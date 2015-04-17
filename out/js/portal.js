@@ -9,7 +9,7 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
     .state('portal.dashboard', {
     	url: '/',
     	templateUrl: '/portal/dashboard.html',
-    	controller: 'DashboardController'
+    	controller: 'DashboardController',
     })
     .state('portal.events', {
         url: '/events',
@@ -68,12 +68,11 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
     $scope.pageTitle = "Settings";
     $scope.fullHeader = true;
     console.log($scope.user);
-    $scope.updateUser = function(){
-        console.log("Updating...", $scope.user);
-        if($scope.user.has_experience)
-            $scope.user.has_experience = $scope.user.has_experience=='true';
-        delete $scope.user.events;
-        $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
+    $scope.updateUser = function(user){
+        if(user.has_experience)
+            user.has_experience = user.has_experience=='true';
+        delete user.events;
+        $http.put(server+'/users/'+user.id+"", user)
         .success(function(data){
             console.log("User updated!", data);
             Session.refresh();

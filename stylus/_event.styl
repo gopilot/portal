@@ -63,7 +63,7 @@
 	&.shown
 		display block	
 
-section.announcements
+.container > section.announcements
 	padding-top 25px
 	.button-container
 		overflow hidden
@@ -202,7 +202,7 @@ section.announcements
 					text-transfrom uppercase
 					color: lighten($colors.slate, 50%)
 				
-section.mentors
+.container > section.mentors
 	min-height 400px
 	padding 25px
 	width: $sizes.inner-width
@@ -219,7 +219,7 @@ section.mentors
 	.error-text
 		margin-top 25px
 
-section.team
+.container > section.team
 	.team-size
 		width 100%
 		text-align center
@@ -318,7 +318,7 @@ section.team
 			text-align center
 			margin-bottom none
 
-section.attendees
+.container > section.attendees
 	.table-container
 		display block
 		width 95%
@@ -328,7 +328,7 @@ section.attendees
 		margin 25px auto
 	.toggle
 		margin-top 25px
-	.input-group
+	.input-group.filter
 		float right
 	table
 		display block
@@ -369,6 +369,15 @@ section.attendees
 				background: lighten($colors.gray, 40%)
 			tr:hover
 				background: lighten($colors.blue, 60%)
+	.edit-attendee
+		h3
+			font-size 40px
+			margin-bottom 10px
+		.form-container
+			background none
+			width auto
+		.input-group
+			display block		
 
 section.settings
 	min-height 400px

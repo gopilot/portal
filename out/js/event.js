@@ -270,6 +270,10 @@ angular.module('pilot.event', ['ui.router'])
             mentors: [],
             all: []
         };
+        $scope.attendeesTab = {
+            modalShown: false,
+            modalUser: false
+        }
         $scope.viewTable = 'students';
         $scope.sortCol = 'name'
         $scope.reverse = false;
@@ -285,6 +289,22 @@ angular.module('pilot.event', ['ui.router'])
         }
         $scope.openAttendee = function(data){
             console.log("Opening attendee", data);
+            $scope.attendeesTab.modalUser = data;
+            $scope.attendeesTab.modalShown = true;
+        }
+        $scope.updateUser = function(user){
+            if(user.has_experience)
+                user.has_experience = user.has_experience=='true';
+            delete user.events;
+            $http.put(server+'/users/'+user.id+"", user)
+            .success(function(data){
+                console.log("User updated!", data);
+                $scope.attendeesTab.modalUser = false;
+                $scope.attendeesTab.modalShown = false;
+            })
+            .error(function(data){
+                alert("Error: "+data);
+            })
         }
 
         $.get(server+'/events/'+$stateParams.slug+'/attendees')

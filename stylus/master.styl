@@ -36,13 +36,15 @@ a
 .modal
 	display block
 	position fixed
-	bottom 150%
+	bottom 300%
 	right 50%
 	transform translate(50%, 50%)
 	background white
 	padding 25px
 	width: $sizes.inner-width
 	height auto
+	max-height 90%
+	overflow-y scroll
 	z-index 102
 	pointer-events none
 	transition bottom 0.5s
@@ -79,7 +81,7 @@ a
 	z-index 1
 	display block
 	max-width 450px
-	min-height 80px
+	min-height 100px
 	vertical-align top
 	font-size 20px
 	
@@ -95,7 +97,7 @@ a
 		position relative
 		display block
 		float right
-		padding 0.75em 0.1em 0.25em
+		padding 0.75em 0.1em 0em
 		width 100%
 		border none
 		background: white

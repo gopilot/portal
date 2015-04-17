@@ -1,7 +1,7 @@
 .settings.container
 	.form-container
 		h3 User Settings
-		form(ng-submit='updateUser()')
+		form(ng-submit='updateUser(user)')
 			.input-group
 				input(type="text" id="name" ng-model='user.name' placeholder="Johnny Appleseed")
 				label(for="name"  ng-class="{error: errors.name}")
@@ -43,6 +43,10 @@
 					option(value="xl") XL
 				label(for="shirt_size" ng-class="{error: errors.shirt_size}")
 					span Shirt Size
+			.input-group
+				input(type="text" id="dietary" ng-model='user.dietary' placeholder="(optional)")
+				label(for="dietary" ng-class="{error: errors.dietary}")
+					span Dietary Restrictions
 			div(ng-if="user.type == 'student'")
 				.divider
 				.input-group
@@ -56,6 +60,10 @@
 					label(for="grade" ng-class="{error: errors.grade}")
 						span Grade
 				.input-group
+					input(type="text" id="school" ng-model='user.school' placeholder="Example High School")
+					label(for="school" ng-class="{error: errors.school}")
+						span School
+				.input-group
 					input(type="text" id="birth_date" ng-model='user.birth_date' placeholder="MM/DD/YYYY")
 					label(for="birth_date" ng-class="{error: errors.birth_date}")
 						span Birth Date
@@ -67,6 +75,10 @@
 					input(type="email" id="emergency_email" ng-model='user.emergency_email' placeholder="parent@example.com")
 					label(for="emergency_email" ng-class="{error: errors.emergency_email}")
 						span Emergency Contact Email
+				.input-group
+					input(type="text" id="emergency_phone" ng-model='user.emergency_phone' placeholder="555-555-5555")
+					label(for="emergency_phone" ng-class="{error: errors.emergency_phone}")
+						span Emergency Phone
 				.divider
 				.input-group
 					select(custom-select class="custom-select unpicked" id="has_experience" ng-model="user.has_experience")
