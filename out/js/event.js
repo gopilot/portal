@@ -53,8 +53,8 @@ angular.module('pilot.event', ['ui.router'])
 })
 
 // GET /event/(slug)
-.controller("EventController", function($stateParams, $scope, $http, AllEvents) {
-    $scope.tab = "announcements" // Default tab
+.controller("EventController", function($stateParams, $scope, $http, $interval, AllEvents) {
+    $scope.tab = "schedule" // Default tab
 
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];
@@ -142,6 +142,87 @@ angular.module('pilot.event', ['ui.router'])
     }
 
     function schedule(){
+        console.log($scope.event);
+        $scope.currTime = moment().format("h:mm A");
+        $scope.schedule = [];
+        
+        function scrollToCurrent(){
+            if($('li.dot.current').length > 0){
+                console.log('dot current ', $('li.dot.current'));
+                var top = $('li.dot.current').offset().top - $('.dots-container').offset().top;
+                console.log('move text to ', top);
+                $('.time-text').attr('style', 'top: '+top+'px;');
+            }
+            
+            var step = function step(){
+                setTimeout(function(){
+                    var pos = $('.schedule-item.current').position().top,
+                        top = $('.items-container').scrollTop(),
+                        delta = (pos+12) / (100 / 15);
+
+                    if ( pos < -10 || pos > 10) {
+                        $('.items-container').scrollTop(top + delta);
+                        requestAnimationFrame(step);
+                    }else{
+                        // We're done here
+                        step = function(){}
+                    }
+                },15);
+            }
+            requestAnimationFrame(step);
+        }
+
+        $('.items-container').bind('scroll', function(event){
+            requestAnimationFrame(function(){
+                var items = $('.schedule-item');
+                for(var i=0; i<items.length; i++){
+                    var item = $(items[i]);
+                    if( Math.abs(item.position().top) < 40 && !item.hasClass('scrolledTo')){
+                        console.log('found it', $('li.dot[data-index="'+i+'"]'));
+                        $('.scrolledTo').removeClass('scrolledTo');
+                        item.addClass('scrolledTo');
+                        $('li.dot[data-index="'+i+'"]').addClass('scrolledTo');
+                        break;
+                    }
+                }
+            });
+        });
+
+        $interval(function tick(){
+            $scope.currTime = moment().format("h:mm A");
+            console.log('restart', $scope.currTime);
+            for(var i=0; i<$scope.schedule.length; i++){
+                var isNewCurrent = $scope.schedule[i].time.isBefore() && 
+                                            (!$scope.schedule[i+1] || $scope.schedule[i+1].time.isAfter())
+                
+                if(!$scope.schedule[i].isCurrent && isNewCurrent)
+                    scrollToCurrent();
+
+                $scope.schedule[i].isCurrent = isNewCurrent;
+            }
+        }, 60 * 1000)
+
+        $http.get(server+"/events/"+$stateParams.slug+"/schedule")
+        .success(function(data){
+            console.log("Done!");
+            for(var i in data){
+                data[i].time = moment.utc(data[i].time).local();
+                data[i].index = i;
+                if(i-1 >= 0 && data[i].time.isAfter() && data[i-1].time.isBefore())
+                    data[i-1].isCurrent = true;
+            }
+            console.log(data[i]);
+            if(data[i].time.isBefore() && moment.utc($scope.event.end_date).local().isAfter())
+                data[i].isCurrent = true;
+            $scope.schedule = data;
+            setTimeout(scrollToCurrent, 250);
+        });
+
+        $('.items-container').attr('style', 'height: '+(window.innerHeight - $('.event-cover').innerHeight())+'px');
+        window.onresize = function(){
+            console.log('re');
+            $('.items-container').attr('style', 'height: '+(window.innerHeight - $('.event-cover').innerHeight())+'px');
+        }
         return;
     }
 

@@ -60,10 +60,11 @@
 					margin-left -15px
 .tab-section
 	display none
+	margin-bottom 25px
 	&.shown
 		display block	
 
-.container > section.announcements
+section.announcements
 	padding-top 25px
 	.button-container
 		overflow hidden
@@ -201,8 +202,85 @@
 					font-size 12px
 					text-transfrom uppercase
 					color: lighten($colors.slate, 50%)
+	
+section.schedule
+	width auto
+	margin auto	
+	margin-bottom 0px
+	margin-left 120px
+	.dots-container
+		margin-top 25px
+		display inline-block
+		height 400px
+		float left
+		.time-text
+			position relative
+			display inline-block
+			margin 0
+			vertical-align top
+			top 0px
+			color: $colors.blue
+		ul
+			list-style-type none
+			padding 0
+			display inline-block
+			margin auto
+			li
+				width 15px
+				height 15px
+				border-radius 7.5px
+				background-color: lighten($colors.slate, 70%)
+				margin 10px
+				cursor pointer
+				transition background-color 0.4s
+				&.scrolledTo
+					background-color: $colors.blue
+				&:hover:not(.current)
+					background-color: lighten($colors.blue, 30%)
 				
-.container > section.mentors
+	.items-container
+		display block
+		overflow scroll
+		height 0
+		padding-left 120px
+		padding-right 12px
+
+		.schedule-item
+			box-sizing:border-box;
+			width 700px
+			height 105px
+			margin 18px 0px
+			padding 20px 0px
+			background white
+			&.current
+				border: 2px solid $colors.blue
+			.time
+				display inline-block
+				width 105px
+				height 65px
+				text-align center
+				font-size 25px
+				color: $colors.blue
+				vertical-align middle
+				position relative
+				top -5px
+			.info
+				padding-left 20px
+				border-left: 2px solid $colors.slate
+				display inline-block
+				height 100%
+				.title
+					font-size 45px
+					position relative
+					top -5px
+				.location
+					font-size 20px
+					position relative
+					color: darken($colors.gray, 25%)
+		
+		
+
+section.mentors
 	min-height 400px
 	padding 25px
 	width: $sizes.inner-width
@@ -219,7 +297,7 @@
 	.error-text
 		margin-top 25px
 
-.container > section.team
+section.team
 	.team-size
 		width 100%
 		text-align center
@@ -318,7 +396,7 @@
 			text-align center
 			margin-bottom none
 
-.container > section.attendees
+section.attendees
 	.table-container
 		display block
 		width 95%

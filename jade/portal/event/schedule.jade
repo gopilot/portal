@@ -1,2 +1,16 @@
 section.tab-section.schedule(ng-class="{shown: (tab == 'schedule')}")
-	p Schedule
+	.dots-container
+		.time-text Current time
+		ul
+			li.dot(ng-repeat="s in schedule track by $index | orderBy:'time':true" ng-class="{current: s.isCurrent}" data-index="{{s.index}}")
+			
+		.time-text {{ currTime }}
+
+	.items-container
+		.button-container
+			button(ng-if="user.type == 'organizer'" ng-click="newItem()") New Item
+		.schedule-item(ng-repeat="s in schedule track by $index | orderBy:'time':true" ng-class="{current: s.isCurrent}" data-index="{{s.index}}")
+			.time {{ s.time.format('h:mm') }}
+			.info
+				.title {{ s.title }}
+				.location {{ s.location }}

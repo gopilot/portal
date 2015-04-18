@@ -199,7 +199,6 @@ a {
   min-height: 100vh;
   position: relative;
   top: 0;
-  padding-bottom: 25px;
 }
 .container {
   max-width: 1400px;
@@ -890,18 +889,19 @@ button:hover {
 }
 .tab-section {
   display: none;
+  margin-bottom: 25px;
 }
 .tab-section.shown {
   display: block;
 }
-.container > section.announcements {
+section.announcements {
   padding-top: 25px;
 }
-.container > section.announcements .button-container {
+section.announcements .button-container {
   overflow: hidden;
   width: 800px;
 }
-.container > section.announcements .button-container button {
+section.announcements .button-container button {
   width: 220px;
   height: 50px;
   float: right;
@@ -909,41 +909,41 @@ button:hover {
   padding-top: 10px;
   margin-bottom: 10px;
 }
-.container > section.announcements .announcement-block {
+section.announcements .announcement-block {
   display: inline-block;
   height: auto;
   width: 800px;
   background: #fff;
 }
-.container > section.announcements .announcement-block .announcement-container {
+section.announcements .announcement-block .announcement-container {
   padding-bottom: 10px;
   position: relative;
 }
-.container > section.announcements .announcement-block .announcement-container .title {
+section.announcements .announcement-block .announcement-container .title {
   display: inline-block;
   font-size: 50px;
   color: #54a2d6;
   margin: 25px;
   margin-bottom: 0;
 }
-.container > section.announcements .announcement-block .announcement-container .time {
+section.announcements .announcement-block .announcement-container .time {
   display: inline-block;
   font-size: 20px;
   text-transfrom: uppercase;
   color: #8b999c;
 }
-.container > section.announcements .announcement-block .announcement-container .text {
+section.announcements .announcement-block .announcement-container .text {
   margin: 25px;
   font-size: 20px;
   line-height: 25px;
 }
-.container > section.announcements .announcement-block .announcement-container .image {
+section.announcements .announcement-block .announcement-container .image {
   margin: 25px;
   margin-top: 0;
   max-width: 600px;
   max-height: 600px;
 }
-.container > section.announcements .announcement-block .announcement-container .icon {
+section.announcements .announcement-block .announcement-container .icon {
   font-size: 30px;
   position: absolute;
   top: 40px;
@@ -958,70 +958,70 @@ button:hover {
   filter: alpha(opacity=0);
   cursor: pointer;
 }
-.container > section.announcements .announcement-block .announcement-container .icon.edit {
+section.announcements .announcement-block .announcement-container .icon.edit {
   right: 70px;
 }
-.container > section.announcements .announcement-block .announcement-container .icon.edit:hover {
+section.announcements .announcement-block .announcement-container .icon.edit:hover {
   color: #54a2d6;
 }
-.container > section.announcements .announcement-block .announcement-container .icon.delete {
+section.announcements .announcement-block .announcement-container .icon.delete {
   right: 40px;
 }
-.container > section.announcements .announcement-block .announcement-container .icon.delete:hover {
+section.announcements .announcement-block .announcement-container .icon.delete:hover {
   color: #ff4d4d;
 }
-.container > section.announcements .announcement-block .announcement-container:hover .icon {
+section.announcements .announcement-block .announcement-container:hover .icon {
   opacity: 1;
   -ms-filter: none;
   filter: none;
 }
-.container > section.announcements .announcement-block .post-divider {
+section.announcements .announcement-block .post-divider {
   width: 135px;
   border-bottom: 2px solid #d1d4d6;
 }
-.container > section.announcements .announcement-block .repeat-announcement:last-of-type .post-divider {
+section.announcements .announcement-block .repeat-announcement:last-of-type .post-divider {
   display: none;
 }
-.container > section.announcements .confirm-delete {
+section.announcements .confirm-delete {
   width: 600px;
   text-align: center;
 }
-.container > section.announcements .confirm-delete .confirm {
+section.announcements .confirm-delete .confirm {
   width: 100%;
   text-align: center;
   font-size: 20px;
   margin: 15px;
   margin-top: 25px;
 }
-.container > section.announcements .confirm-delete button:hover {
+section.announcements .confirm-delete button:hover {
   background: #ff4d4d;
   border-color: #ff4d4d;
 }
-.container > section.announcements .edit-post {
+section.announcements .edit-post {
   width: 600px;
 }
-.container > section.announcements .edit-post form {
+section.announcements .edit-post form {
   width: 500px;
   display: block;
   margin: auto;
   position: relative;
 }
-.container > section.announcements .edit-post form .input-group {
+section.announcements .edit-post form .input-group {
   max-width: 500px;
   margin-bottom: 10px;
 }
-.container > section.announcements .edit-post form button {
+section.announcements .edit-post form button {
   height: 60px;
   width: 300px;
   position: relative;
 }
-.container > section.announcements .twitter {
+section.announcements .twitter {
   vertical-align: top;
   display: inline-block;
   margin-left: 40px;
   width: 360px;
 }
-.container > section.announcements .twitter .hashtag {
+section.announcements .twitter .hashtag {
   display: inline-block;
   width: 50%;
   font-size: 18px;
@@ -1032,7 +1032,7 @@ button:hover {
   background: #fff;
   color: #252a2b;
 }
-.container > section.announcements .twitter .twitter-content {
+section.announcements .twitter .twitter-content {
   display: block;
   width: 100%;
   height: 300px;
@@ -1040,69 +1040,162 @@ button:hover {
   overflow-y: scroll;
   padding: 0px 12px;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container {
+section.announcements .twitter .twitter-content .tweet-container {
   padding: 15px;
   font-size: 15px;
   border-top: 1px solid #d1d4d6;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container .tweet-link {
+section.announcements .twitter .twitter-content .tweet-container .tweet-link {
   display: block;
   text-decoration: none;
   color: #252a2b;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container:first-of-type {
+section.announcements .twitter .twitter-content .tweet-container:first-of-type {
   border-top: none;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container .handle {
+section.announcements .twitter .twitter-content .tweet-container .handle {
   display: inline;
   font-weight: 400;
   margin-right: 6px;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container .tweet {
+section.announcements .twitter .twitter-content .tweet-container .tweet {
   display: inline;
 }
-.container > section.announcements .twitter .twitter-content .tweet-container .time {
+section.announcements .twitter .twitter-content .tweet-container .time {
   margin-left: 6px;
   display: inline;
   font-size: 12px;
   text-transfrom: uppercase;
   color: #8b999c;
 }
-.container > section.mentors {
+section.schedule {
+  width: auto;
+  margin: auto;
+  margin-bottom: 0px;
+  margin-left: 120px;
+}
+section.schedule .dots-container {
+  margin-top: 25px;
+  display: inline-block;
+  height: 400px;
+  float: left;
+}
+section.schedule .dots-container .time-text {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+  top: 0px;
+  color: #54a2d6;
+}
+section.schedule .dots-container ul {
+  list-style-type: none;
+  padding: 0;
+  display: inline-block;
+  margin: auto;
+}
+section.schedule .dots-container ul li {
+  width: 15px;
+  height: 15px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 7.5px;
+  background-color: #bac2c3;
+  margin: 10px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s;
+  -o-transition: background-color 0.4s;
+  -ms-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+section.schedule .dots-container ul li.scrolledTo {
+  background-color: #54a2d6;
+}
+section.schedule .dots-container ul li:hover:not(.current) {
+  background-color: #87bee2;
+}
+section.schedule .items-container {
+  display: block;
+  overflow: scroll;
+  height: 0;
+  padding-left: 120px;
+  padding-right: 12px;
+}
+section.schedule .items-container .schedule-item {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 700px;
+  height: 105px;
+  margin: 18px 0px;
+  padding: 20px 0px;
+  background: #fff;
+}
+section.schedule .items-container .schedule-item.current {
+  border: 2px solid #54a2d6;
+}
+section.schedule .items-container .schedule-item .time {
+  display: inline-block;
+  width: 105px;
+  height: 65px;
+  text-align: center;
+  font-size: 25px;
+  color: #54a2d6;
+  vertical-align: middle;
+  position: relative;
+  top: -5px;
+}
+section.schedule .items-container .schedule-item .info {
+  padding-left: 20px;
+  border-left: 2px solid #252a2b;
+  display: inline-block;
+  height: 100%;
+}
+section.schedule .items-container .schedule-item .info .title {
+  font-size: 45px;
+  position: relative;
+  top: -5px;
+}
+section.schedule .items-container .schedule-item .info .location {
+  font-size: 20px;
+  position: relative;
+  color: #99a0a4;
+}
+section.mentors {
   min-height: 400px;
   padding: 25px;
   width: 800px;
   margin-top: 25px;
   background: #fff;
 }
-.container > section.mentors p {
+section.mentors p {
   font-size: 20px;
 }
-.container > section.mentors .input-group {
+section.mentors .input-group {
   margin: 25px 0px;
   max-width: 70%;
 }
-.container > section.mentors button {
+section.mentors button {
   width: 400px;
   height: 70px;
 }
-.container > section.mentors .error-text {
+section.mentors .error-text {
   margin-top: 25px;
 }
-.container > section.team .team-size {
+section.team .team-size {
   width: 100%;
   text-align: center;
   font-size: 30px;
   margin-top: 25px;
   margin-bottom: 15px;
 }
-.container > section.team .team-container {
+section.team .team-container {
   display: block;
   margin: auto;
   overflow: hidden;
   text-align: center;
 }
-.container > section.team .teammate-card {
+section.team .teammate-card {
   position: relative;
   width: 250px;
   height: 280px;
@@ -1111,12 +1204,12 @@ button:hover {
   background: #fff;
   margin: 15px;
 }
-.container > section.team .teammate-card:hover .icon {
+section.team .teammate-card:hover .icon {
   opacity: 1;
   -ms-filter: none;
   filter: none;
 }
-.container > section.team .teammate-card img.profile {
+section.team .teammate-card img.profile {
   width: 150px;
   height: 150px;
   margin: 30px 40px;
@@ -1124,7 +1217,7 @@ button:hover {
   -webkit-border-radius: 75px;
   border-radius: 75px;
 }
-.container > section.team .teammate-card .name {
+section.team .teammate-card .name {
   width: 100%;
   text-align: center;
   font-size: 25px;
@@ -1135,13 +1228,13 @@ button:hover {
   transition: color 0.3s;
   margin-bottom: 15px;
 }
-.container > section.team .teammate-card .email {
+section.team .teammate-card .email {
   width: 100%;
   text-align: center;
   font-size: 15px;
   color: #616e70;
 }
-.container > section.team .teammate-card .icon {
+section.team .teammate-card .icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -1158,10 +1251,10 @@ button:hover {
   filter: alpha(opacity=0);
   cursor: pointer;
 }
-.container > section.team .teammate-card .icon:hover {
+section.team .teammate-card .icon:hover {
   color: #54a2d6;
 }
-.container > section.team .teammate-card.empty {
+section.team .teammate-card.empty {
   background: none;
   border: 4px dashed #8b999c;
   -webkit-transition: border 0.5s;
@@ -1172,24 +1265,24 @@ button:hover {
   cursor: default;
   font-size: 200px;
 }
-.container > section.team .teammate-card.empty img.profile,
-.container > section.team .teammate-card.empty .name,
-.container > section.team .teammate-card.empty .icon {
+section.team .teammate-card.empty img.profile,
+section.team .teammate-card.empty .name,
+section.team .teammate-card.empty .icon {
   display: none;
 }
-.container > section.team .teammate-card.empty.icon {
+section.team .teammate-card.empty.icon {
   cursor: pointer;
 }
-.container > section.team .teammate-card.empty.icon:before {
+section.team .teammate-card.empty.icon:before {
   content: '+';
 }
-.container > section.team .teammate-card.empty.icon:hover {
+section.team .teammate-card.empty.icon:hover {
   border-color: #54a2d6;
 }
-.container > section.team .teammate-card.empty.icon:hover:before {
+section.team .teammate-card.empty.icon:hover:before {
   color: #54a2d6;
 }
-.container > section.team .teammate-card.empty:before {
+section.team .teammate-card.empty:before {
   width: 100%;
   height: 100%;
   color: #8b999c;
@@ -1205,17 +1298,17 @@ button:hover {
   position: relative;
   top: 28px;
 }
-.container > section.team .add-teammate form {
+section.team .add-teammate form {
   width: auto;
   display: block;
   margin: auto;
   text-align: center;
   position: relative;
 }
-.container > section.team .add-teammate form .input-group {
+section.team .add-teammate form .input-group {
   display: inline-block;
 }
-.container > section.team .add-teammate form button {
+section.team .add-teammate form button {
   display: inline-block;
   margin-left: 25px;
   height: 60px;
@@ -1223,12 +1316,12 @@ button:hover {
   position: relative;
   margin-top: 15px;
 }
-.container > section.team .add-teammate .error-text {
+section.team .add-teammate .error-text {
   width: 100%;
   text-align: center;
   margin-bottom: none;
 }
-.container > section.attendees .table-container {
+section.attendees .table-container {
   display: block;
   width: 95%;
   height: 100%;
@@ -1236,13 +1329,13 @@ button:hover {
   padding: 0px 40px;
   margin: 25px auto;
 }
-.container > section.attendees .toggle {
+section.attendees .toggle {
   margin-top: 25px;
 }
-.container > section.attendees .input-group.filter {
+section.attendees .input-group.filter {
   float: right;
 }
-.container > section.attendees table {
+section.attendees table {
   display: block;
   width: 100%;
   min-width: 400px;
@@ -1252,12 +1345,12 @@ button:hover {
   overflow-x: scroll;
   position: relative;
 }
-.container > section.attendees table th,
-.container > section.attendees table td {
+section.attendees table th,
+section.attendees table td {
   padding: 10px 10px;
   white-space: nowrap;
 }
-.container > section.attendees table th {
+section.attendees table th {
   background: #54a2d6;
   color: #fff;
   padding: 18px 10px;
@@ -1267,19 +1360,19 @@ button:hover {
   -ms-user-select: none;
   user-select: none;
 }
-.container > section.attendees table th i.icon {
+section.attendees table th i.icon {
   display: none;
   font-size: 25px;
   margin-left: 5px;
   vertical-align: middle;
 }
-.container > section.attendees table th.selected {
+section.attendees table th.selected {
   background: #236490;
 }
-.container > section.attendees table th.selected i.icon {
+section.attendees table th.selected i.icon {
   display: inline-block;
 }
-.container > section.attendees table tbody tr {
+section.attendees table tbody tr {
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
@@ -1287,27 +1380,27 @@ button:hover {
   transition: background 0.2s;
   cursor: pointer;
 }
-.container > section.attendees table tbody tr td {
+section.attendees table tbody tr td {
   font-weight: 200;
 }
-.container > section.attendees table tbody tr:nth-child(even) {
+section.attendees table tbody tr:nth-child(even) {
   background: #d1d4d6;
 }
-.container > section.attendees table tbody tr:nth-child(odd) {
+section.attendees table tbody tr:nth-child(odd) {
   background: #e3e5e6;
 }
-.container > section.attendees table tbody tr:hover {
+section.attendees table tbody tr:hover {
   background: #bbdaef;
 }
-.container > section.attendees .edit-attendee h3 {
+section.attendees .edit-attendee h3 {
   font-size: 40px;
   margin-bottom: 10px;
 }
-.container > section.attendees .edit-attendee .form-container {
+section.attendees .edit-attendee .form-container {
   background: none;
   width: auto;
 }
-.container > section.attendees .edit-attendee .input-group {
+section.attendees .edit-attendee .input-group {
   display: block;
 }
 section.settings {
