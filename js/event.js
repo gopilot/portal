@@ -54,7 +54,7 @@ angular.module('pilot.event', ['ui.router'])
 
 // GET /event/(slug)
 .controller("EventController", function($stateParams, $scope, $http, $interval, AllEvents) {
-    $scope.tab = "schedule" // Default tab
+    $scope.tab = "announcements" // Default tab
 
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];
@@ -154,22 +154,22 @@ angular.module('pilot.event', ['ui.router'])
                 $('.time-text').attr('style', 'top: '+top+'px;');
             }
             
-            var step = function step(){
-                setTimeout(function(){
-                    var pos = $('.schedule-item.current').position().top,
-                        top = $('.items-container').scrollTop(),
-                        delta = (pos+12) / (100 / 15);
+            // var step = function step(){
+            //     setTimeout(function(){
+            //         var pos = $('.schedule-item.current').position().top,
+            //             top = $('.items-container').scrollTop(),
+            //             delta = (pos+12) / (100 / 15);
 
-                    if ( pos < -10 || pos > 10) {
-                        $('.items-container').scrollTop(top + delta);
-                        requestAnimationFrame(step);
-                    }else{
-                        // We're done here
-                        step = function(){}
-                    }
-                },15);
-            }
-            requestAnimationFrame(step);
+            //         if ( pos < -10 || pos > 10) {
+            //             $('.items-container').scrollTop(top + delta);
+            //             requestAnimationFrame(step);
+            //         }else{
+            //             // We're done here
+            //             step = function(){}
+            //         }
+            //     },15);
+            // }
+            // requestAnimationFrame(step);
         }
 
         $('.items-container').bind('scroll', function(event){
@@ -388,7 +388,7 @@ angular.module('pilot.event', ['ui.router'])
             })
         }
 
-        $.get(server+'/events/'+$stateParams.slug+'/attendees')
+        $http.get(server+'/events/'+$stateParams.slug+'/attendees')
         .success(function(data){
             for(var i in data.students){
                 if(data.students[i].birth_date)

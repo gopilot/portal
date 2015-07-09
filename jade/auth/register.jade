@@ -1,0 +1,167 @@
+.error-container(ng-if="!event")
+	.centered
+		h3.error-title Uh oh... Something went wrong.
+		.error-subject Try to reload the page.
+			| If that doesn't work, send us an email at
+			a.email-link(href="mailto:fly@gopilot.org")  fly@gopilot.org
+			|  and we'll help fix it.
+			|  (You might’ve already filled this out.)
+//- TODO: Style all of this
+.auth-screen(ng-style="{'background-image': backgroundImage}")
+.registration-form
+	img.logo(src="/img/logo_blue.png" alt="Pilot")
+	h1 Register
+	form(novalidate name="form" ng-submit='register(user)')
+		.input-group(ng-class="{error: !form.name.$valid}")
+			input(type="text" name="name" id="name" ng-model='user.name' placeholder="Johnny Appleseed" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/^[a-zA-Z\\s]+ /i" required)
+			label(for="name")
+				span.normal Name
+				span.error-text Invalid Name
+		.input-group(ng-class="{error: form.email.$error.pattern}")
+			input(type="text" name="email" id="email" ng-model='user.email' placeholder="johnny.appleseed@example.com" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}/i" required)
+			label(for="email")
+				span.normal Email
+				span.error-text Invalid Email
+		.divider
+		.input-group(ng-class="{error: form.gender.$error.required}")
+			select(custom-select name="gender" class="custom-select unpicked" id="gender" ng-model="user.gender" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				option(value="" disabled selected) Select
+				option(value="male") Male
+				option(value="female") Female
+			label(for="gender")
+				span.normal Gender
+				span.error-text Gender Required
+		.input-group(ng-class="{error: !form.phone.$valid}")
+			input(type="phone" name="phone" id="phone" ng-model='user.phone' placeholder="555-555-5555" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/[0-9-\(\)]{10,12}/" required)
+			label(for="phone")
+				span.normal Phone
+				span.error-text Invalid Phone
+		.divider
+		.input-group(ng-class="{error: form.shirt_type.$error.required}")
+			select(custom-select name="shirt_type" class="custom-select unpicked" id="shirt_type" ng-model="user.shirt_type" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				option(value="" disabled selected) Select
+				option(value="unisex") Unisex
+				option(value="womens") Women's
+			label(for="shirt_type")
+				span.normal Shirt Type
+				span.error-text Shirt Type Required
+		.input-group(ng-class="{error: form.shirt_size.$error.required}")
+			select(custom-select name="shirt_size" class="custom-select unpicked" id="shirt_size" ng-model="user.shirt_size" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				option(value="" disabled selected) Select
+				option(value="small") Small
+				option(value="medium") Medium
+				option(value="large") Large
+				option(value="xl") XL
+			label(for="shirt_size")
+				span.normal Shirt Size
+				span.error-text Shirt Size Required
+		.input-group
+			input(type="text" name="dietary" id="dietary" ng-model='user.dietary' placeholder="(optional)" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }")
+			label(for="dietary")
+				span Dietary Restrictions
+		div(ng-if="user.type == 'student'")
+			.divider
+			.input-group(ng-class="{error: form.grade.$error.required}")
+				select(custom-select class="custom-select unpicked" name="grade" id="grade" ng-model="user.grade" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+					option(value="" disabled selected) Select
+					option(value="9") 9
+					option(value="10") 10
+					option(value="11") 11
+					option(value="12") 12
+					option(value="other") Other
+				label(for="grade")
+					span.normal Grade
+					span.error-text Grade Required
+			.input-group(ng-class="{error: form.school.$error.required}")
+				input(type="text" name="school" id="school" ng-model='user.school' placeholder="Example High School" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				label(for="school")
+					span.normal School
+					span.error-text School Required
+			.input-group(ng-class="{error: !form.birth_date.$valid}")
+				input(type="text" name="birth_date" id="birth_date" ng-model='user.birth_date' placeholder="MM/DD/YYYY" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/" required)
+				label(for="birth_date")
+					span.normal Birth Date
+					span.error-text Invalid Birth Date (should be mm/dd/yyyy)
+			.input-group(ng-class="{error: !form.emergency_name.$valid}")
+				input(type="text" name="emergency_name" id="emergency_name" ng-model='user.emergency_name' placeholder="Parent/Guardian" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/^[a-zA-Z\\s]+ /i" required)
+				label(for="emergency_name")
+					span.normal Emergency Contact Name
+					span.error-text Invalid Emergency Contact Name
+			.input-group(ng-class="{error: form.emergency_email.$error.pattern}")
+				input(type="email" name="emergency_email" id="emergency_email" ng-model='user.emergency_email' placeholder="parent@example.com" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}/i" required)
+				label(for="emergency_email")
+					span.normal Emergency Contact Email
+					span.error-text Invalid Emergency Contact Email
+			.input-group(ng-class="{error: !form.emergency_phone.$valid}")
+				input(type="text" name="emergency_phone" id="emergency_phone" ng-model='user.emergency_phone' placeholder="555-555-5555" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/[0-9-\(\)]{10,12}/" required)
+				label(for="emergency_phone")
+					span.normal Emergency Phone
+					span.error-text Invalid Emergency Phone
+			.divider
+			.input-group(ng-class="{error: form.has_experience.$error.required}")
+				select(custom-select name="has_experience" class="custom-select unpicked" id="has_experience" ng-model="user.has_experience" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+					option(value="" disabled selected) Select
+					option(value="true") Yes
+					option(value="false") No
+				label(for="has_experience" ng-class="{error: errors.has_experience}")
+					span.normal Do you have experience in building Web/Mobile apps?
+					span.error-text Do you have experience in building Web/Mobile apps? (required)
+			.input-group(ng-if="user.has_experience && user.has_experience=='true'")
+				select(custom-select name="experience_years" class="custom-select unpicked" id="experience_years" ng-model="user.experience_years" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }")
+					option(value="" disabled selected) Select
+					option(value="0") Less than 1
+					option(value="1") 1 Year
+					option(value="2") 2 Years
+					option(value="3") 3 Years
+					option(value="4") 4+ Years
+				label(for="experience_years")
+					span.normal How many years of experience?
+		div(ng-if="user.type == 'mentor'")
+			.divider
+			.input-group(ng-class="{error: form.title.$error.required}")
+				input(type="text" name="title" id="title" ng-model='user.title' placeholder="CEO" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				label(for="title")
+					span.normal Title
+					span.error-text Title Required
+			.input-group(ng-class="{error: form.company.$error.required}")
+				input(type="text" name="company" id="company" ng-model='user.company' placeholder="Acme Co" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				label(for="company")
+					span.normal Company
+					span.error-text Company Required
+			.divider
+			.input-group(ng-class="{error: form.has_experience.$error.required}")
+				select(custom-select name="has_experience" class="custom-select unpicked" id="has_experience" ng-model="user.has_experience" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+					option(value="" disabled selected) Select
+					option(value="true") Yes
+					option(value="false") No
+				label(for="has_experience")
+					span.normal Do you have experience in building Web/Mobile apps?
+					span.error-text Do you have experience in building Web/Mobile apps? (required)
+			.input-group(ng-class="{error: form.skills.$error.required}")
+				textarea(rows="2" name="skills" id="skills" ng-model='user.skills' placeholder="Yes/No" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				label(for="skills")
+					span.normal What technical, business, or design skills do you feel confident teaching?
+					span.error-text What technical, business, or design skills do you feel confident teaching? (required)
+			.input-group(ng-class="{error: form.profiles.$error.required}")
+				textarea(rows="2" name="profiles" id="profiles" ng-model='user.profiles' placeholder="LinkedIn, Github, Angellist, etc" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				label(for="profiles")
+					span.normal Online Profiles
+					span.error-text Online Profiles Required
+		.divider
+		.input-group(ng-class="{error: !form.password.$valid}")
+			input(type="password" name="password" id="password" ng-model='user.password' placeholder="Important: Remember this" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/.{8,}/" required)
+			label(for="password")
+				span.normal Password
+				span.error-text Password Invalid
+		.input-group(ng-class="{error: (!form.password.$valid || user.password !== user.confirmpassword)}")
+			input(type="password" name="confirm-password" id="confirm-password" ng-model='user.confirmpassword' placeholder="Same as above" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/.{8,}/" required)
+			label(for="confirm-password")
+				span.normal Confirm Password
+				span.error-text Confirm Password Invalid
+		.input-group(ng-class="{error: (!form.name.$valid && !form.name.$pristine)}")
+			textarea(rows="2" id="notes" ng-model='user.event_notes' placeholder="(optional)")
+			label(for="notes" ng-class="{error: errors.profiles}")
+				span Any other notes for the organizer?
+		button(type="submit" ng-class="{disabled: (form.$dirty && form.$invalid)}") Register
+
+//- script(type="text/javascript" src="https://static.gopilot.org/complete.js" async)

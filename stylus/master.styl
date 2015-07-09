@@ -141,6 +141,7 @@ a
 			padding-right 3em
 			&::after
 				content '\25BE'
+				transition transform 0.25s
 				right 1em
 		span
 			display block
@@ -161,7 +162,7 @@ a
 				color white
 
 		li.cs-selected span::after
-			content '\2713'
+			transform rotate(180deg)
 			margin-left 1em
 			
 		&.cs-active
@@ -239,11 +240,21 @@ a
 			font-weight 400
 			transition opacity 0.3s, transform 0.3s
 			transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
-		&.error
-			span
+			&.error-text
 				color: $colors.red
+				display none
+	&.error
+		input.ng-dirty + label
+			span.error-text
+				color: $colors.red
+				display block
+			span.normal
+				display none
 			&::before
 				background: $colors.red
+		input.ng-dirty:focus + label::before
+			background: $colors.red
+				
 
 button
 	box-sizing border-box
@@ -259,12 +270,16 @@ button
 	cursor pointer
 	color: $colors.slate
 	border: 2px solid $colors.slate	
-	transition border 0.3s, color 0.3s, background 0.3s
+	transition border 0.3s, color 0.3s, background 0.3s, opacity 0.3s
 	transition-timing-function cubic-bezier(0.2, 1, 0.3, 1)
 	&:hover
 		background: $colors.blue
 		color: white
 		border-color: $colors.blue
+	&.disabled
+		cursor default
+		pointer-events none
+		opacity 0.5
 
 .toggle
 	height 50px

@@ -291,6 +291,11 @@ a {
 }
 .input-group .custom-select > span::after {
   content: '\25BE';
+  -webkit-transition: -webkit-transform 0.25s;
+  -moz-transition: -moz-transform 0.25s;
+  -o-transition: -o-transform 0.25s;
+  -ms-transition: -ms-transform 0.25s;
+  transition: transform 0.25s;
   right: 1em;
 }
 .input-group .custom-select span {
@@ -320,7 +325,11 @@ a {
   color: #fff;
 }
 .input-group .custom-select li.cs-selected span::after {
-  content: '\2713';
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
   margin-left: 1em;
 }
 .input-group .custom-select.cs-active > span::after {
@@ -449,10 +458,21 @@ a {
   -ms-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-.input-group label.error span {
+.input-group label span.error-text {
   color: #ff4d4d;
+  display: none;
 }
-.input-group label.error::before {
+.input-group.error input.ng-dirty + label span.error-text {
+  color: #ff4d4d;
+  display: block;
+}
+.input-group.error input.ng-dirty + label span.normal {
+  display: none;
+}
+.input-group.error input.ng-dirty + label::before {
+  background: #ff4d4d;
+}
+.input-group.error input.ng-dirty:focus + label::before {
   background: #ff4d4d;
 }
 button {
@@ -471,11 +491,11 @@ button {
   cursor: pointer;
   color: #252a2b;
   border: 2px solid #252a2b;
-  -webkit-transition: border 0.3s, color 0.3s, background 0.3s;
-  -moz-transition: border 0.3s, color 0.3s, background 0.3s;
-  -o-transition: border 0.3s, color 0.3s, background 0.3s;
-  -ms-transition: border 0.3s, color 0.3s, background 0.3s;
-  transition: border 0.3s, color 0.3s, background 0.3s;
+  -webkit-transition: border 0.3s, color 0.3s, background 0.3s, opacity 0.3s;
+  -moz-transition: border 0.3s, color 0.3s, background 0.3s, opacity 0.3s;
+  -o-transition: border 0.3s, color 0.3s, background 0.3s, opacity 0.3s;
+  -ms-transition: border 0.3s, color 0.3s, background 0.3s, opacity 0.3s;
+  transition: border 0.3s, color 0.3s, background 0.3s, opacity 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   -moz-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -486,6 +506,13 @@ button:hover {
   background: #54a2d6;
   color: #fff;
   border-color: #54a2d6;
+}
+button.disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
 }
 .toggle {
   height: 50px;
@@ -537,16 +564,18 @@ button:hover {
   color: #ff4d4d;
 }
 .auth-screen {
-  position: absolute;
+  position: fixed;
   background-image: #252a2b;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   background-position: center;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-.auth-screen form.login {
+form.login {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -557,14 +586,14 @@ button:hover {
   transform: translate(-50%, -70%);
   width: 450px;
 }
-.auth-screen form.login img.logo {
+form.login img.logo {
   display: block;
   width: 160px;
   height: auto;
   margin: auto;
   margin-bottom: 30px;
 }
-.auth-screen form.login input {
+form.login input {
   border: none;
   margin: none;
   margin-bottom: 3px;
@@ -575,15 +604,15 @@ button:hover {
   font-family: 'DIN';
   font-weight: 200;
 }
-.auth-screen form.login input:first-of-type {
+form.login input:first-of-type {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-.auth-screen form.login input:last-of-type {
+form.login input:last-of-type {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.auth-screen form.login button {
+form.login button {
   border: none;
   outline: none;
   display: block;
@@ -607,13 +636,71 @@ button:hover {
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.auth-screen form.login button:hover {
+form.login button:hover {
   color: #54a2d6;
   background: rgba(54,132,184,0);
 }
-.auth-screen form.login button:active {
+form.login button:active {
   color: #1d5478;
   border-color: #1d5478;
+}
+.registration-form {
+  display: block;
+  max-width: 600px;
+  padding: 25px 75px;
+  margin: 50px auto;
+  position: relative;
+  background-color: #fff;
+}
+.registration-form img.logo {
+  display: inline-block;
+  height: 100px;
+  margin-bottom: 25px;
+}
+.registration-form h1 {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 120px;
+  margin-left: 20px;
+  font-size: 2.5em;
+}
+.error-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #252a2b;
+  color: #fff;
+  z-index: 100;
+  display: none;
+}
+.error-container.shown {
+  display: block;
+}
+.error-container .centered {
+  position: absolute;
+  width: 500px;
+  max-width: 500px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -200px;
+}
+.error-container .centered .error-title {
+  font-weight: 200;
+  font-size: 2rem;
+}
+.error-container .centered .email-link {
+  text-decoration: none;
+  color: #54a2d6;
+  padding-bottom: 2px;
+}
+.error-container .centered .email-link:hover {
+  border-bottom: 1px solid #54a2d6;
 }
 .header {
   position: absolute;
@@ -1074,27 +1161,28 @@ section.schedule {
   margin-bottom: 0px;
   margin-left: 120px;
 }
-section.schedule .dots-container {
+section.schedule .side-container {
   margin-top: 25px;
   display: inline-block;
   height: 400px;
   float: left;
 }
-section.schedule .dots-container .time-text {
+section.schedule .side-container .time-text {
   position: relative;
-  display: inline-block;
+  display: block;
   margin: 0;
-  vertical-align: top;
+  vertical-align: middle;
   top: 0px;
   color: #54a2d6;
+  font-size: 20px;
 }
-section.schedule .dots-container ul {
+section.schedule .side-container ul {
   list-style-type: none;
   padding: 0;
   display: inline-block;
   margin: auto;
 }
-section.schedule .dots-container ul li {
+section.schedule .side-container ul li {
   width: 15px;
   height: 15px;
   -webkit-border-radius: 7.5px;
@@ -1108,10 +1196,10 @@ section.schedule .dots-container ul li {
   -ms-transition: background-color 0.4s;
   transition: background-color 0.4s;
 }
-section.schedule .dots-container ul li.scrolledTo {
+section.schedule .side-container ul li.scrolledTo {
   background-color: #54a2d6;
 }
-section.schedule .dots-container ul li:hover:not(.current) {
+section.schedule .side-container ul li:hover:not(.current) {
   background-color: #87bee2;
 }
 section.schedule .items-container {

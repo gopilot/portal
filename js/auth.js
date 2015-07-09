@@ -8,6 +8,11 @@ angular.module('pilot.auth', ['ui.router'])
         templateUrl: '/auth/login.html',
         controller: "LoginController"
     })
+    .state('register', {
+        url: '/register?token',
+        templateUrl: '/auth/register.html',
+        controller: "RegisterController"
+    })
 })
 .factory('CurrentUser', function($cookieStore, $http) {
     return function(){
@@ -71,3 +76,40 @@ angular.module('pilot.auth', ['ui.router'])
         });
     };
 })
+
+.controller("RegisterController", function($scope, $http, $stateParams, Session, $state){
+    console.log("RegisterController");
+    $scope.fullHeader = true;
+    $scope.user = {};
+
+    var rand = Math.floor(Math.random()*16)+1;
+    $scope.backgroundImage = "url(/img/backgrounds/"+rand+".jpg)";
+    
+    $http.get("https://api.gopilot.org/users/find_incomplete/"+$stateParams.token)
+    .error(function(data){
+
+    })
+    .success(function(data){
+        Session.create(data.session, data.user);
+        $scope.user = data.user;
+        $scope.event_id = data.user.events[0]
+    });
+
+    $scope.register = function(user){
+        $scope.user.notes = {}
+        $scope.user.notes[$scope.event_id] = $scope.user.event_notes
+        $scope.user.has_experience = user['has_experience'] === "true";
+        delete $scope.user[ 'events' ];
+        delete $scope.user[ 'event_notes' ];
+
+        $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
+        .success(function(data){
+            console.log("User updated!", data);
+            Session.refresh();
+            $state.go('portal.dashboard');
+        })
+        .error(function(data){
+            alert("Error: "+data);
+        })
+    }
+});
