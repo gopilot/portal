@@ -687,6 +687,23 @@ form.login button:active {
   margin-left: 20px;
   font-size: 2.5em;
 }
+.welcome {
+  max-width: 700px;
+}
+.welcome h3 {
+  display: block;
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.welcome p {
+  margin: 20px;
+}
+.welcome button {
+  display: block;
+  margin: auto;
+}
 .error-container {
   position: fixed;
   width: 100%;

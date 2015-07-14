@@ -77,7 +77,7 @@ angular.module('pilot.auth', ['ui.router'])
     };
 })
 
-.controller("RegisterController", function($scope, $http, $stateParams, Session, $state){
+.controller("RegisterController", function($scope, $http, $stateParams, Session, $state, AllEvents){
     console.log("RegisterController");
     $scope.fullHeader = true;
     $scope.user = {};
@@ -93,6 +93,7 @@ angular.module('pilot.auth', ['ui.router'])
         Session.create(data.session, data.user);
         $scope.user = data.user;
         $scope.event_id = data.user.events[0]
+        
     });
 
     $scope.register = function(user){
@@ -106,7 +107,7 @@ angular.module('pilot.auth', ['ui.router'])
         .success(function(data){
             console.log("User updated!", data);
             Session.refresh();
-            $state.go('portal.dashboard');
+            $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
         })
         .error(function(data){
             alert("Error: "+data);

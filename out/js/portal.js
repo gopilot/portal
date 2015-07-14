@@ -7,7 +7,7 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
         controller: "PortalController"
     })
     .state('portal.dashboard', {
-    	url: '/',
+    	url: '/?event&registered',
     	templateUrl: '/portal/dashboard.html',
     	controller: 'DashboardController',
     })
@@ -66,9 +66,20 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
 })
 
 // GET /
-.controller("DashboardController", function($filter, $scope, $state) {
+.controller("DashboardController", function($filter, $scope, $stateParams, AllEvents, $timeout) {
     $scope.pageTitle = "Dashboard";
     $scope.fullHeader = true; 
+    $scope.event = {}
+
+    if($stateParams.registered){
+        AllEvents.then(function(events){
+            $scope.event = events.byId[$stateParams.event];
+            $timeout(function(){
+                console.log('timeout')
+                $scope.showModal = true;
+            }, 500)
+        })
+    }
 })
 
 // GET /events

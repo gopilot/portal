@@ -20,3 +20,14 @@
 					.event-name {{event.name + " " + event.date.format('YYYY') }}
 					.event-date {{event.date.format('MMMM D, YYYY')}}
 				.background-darken
+	
+	.modal.welcome(ng-class="{'shown': showModal}")
+		h3 Welcome to the Pilot portal!
+		p This is where you'll be able to view important details about your upcoming events. Be sure to write down your login and keep it in a safe place, because you'll need to log in here during the event.
+		p For now, go ahead and take a look around - this is just a preview of all the fun you're going to have at {{event.name}}!
+		button(ng-click="showModal = false") Great, let's go!
+
+
+
+	.modal-cover(ng-class="{shown: showModal}" ng-click="showModal = false")
+
