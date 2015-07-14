@@ -36,31 +36,25 @@
 			label(for="phone")
 				span.normal Phone
 				span.error-text Invalid Phone
-		.divider
-		.input-group(ng-class="{error: form.shirt_type.$error.required}")
-			select(custom-select name="shirt_type" class="custom-select unpicked" id="shirt_type" ng-model="user.shirt_type" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
-				option(value="" disabled selected) Select
-				option(value="unisex") Unisex
-				option(value="womens") Women's
-			label(for="shirt_type")
-				span.normal Shirt Type
-				span.error-text Shirt Type Required
-		.input-group(ng-class="{error: form.shirt_size.$error.required}")
-			select(custom-select name="shirt_size" class="custom-select unpicked" id="shirt_size" ng-model="user.shirt_size" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
-				option(value="" disabled selected) Select
-				option(value="small") Small
-				option(value="medium") Medium
-				option(value="large") Large
-				option(value="xl") XL
-			label(for="shirt_size")
-				span.normal Shirt Size
-				span.error-text Shirt Size Required
-		.input-group
-			input(type="text" name="dietary" id="dietary" ng-model='user.dietary' placeholder="(optional)" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }")
-			label(for="dietary")
-				span Dietary Restrictions
+		//- .input-group(ng-class="{error: form.shirt_type.$error.required}")
+		//- 	select(custom-select name="shirt_type" class="custom-select unpicked" id="shirt_type" ng-model="user.shirt_type" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+		//- 		option(value="" disabled selected) Select
+		//- 		option(value="unisex") Unisex
+		//- 		option(value="womens") Women's
+		//- 	label(for="shirt_type")
+		//- 		span.normal Shirt Type
+		//- 		span.error-text Shirt Type Required
+		//- .input-group(ng-class="{error: form.shirt_size.$error.required}")
+		//- 	select(custom-select name="shirt_size" class="custom-select unpicked" id="shirt_size" ng-model="user.shirt_size" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+		//- 		option(value="" disabled selected) Select
+		//- 		option(value="small") Small
+		//- 		option(value="medium") Medium
+		//- 		option(value="large") Large
+		//- 		option(value="xl") XL
+		//- 	label(for="shirt_size")
+		//- 		span.normal Shirt Size
+		//- 		span.error-text Shirt Size Required
 		div(ng-if="user.type == 'student'")
-			.divider
 			.input-group(ng-class="{error: form.grade.$error.required}")
 				select(custom-select class="custom-select unpicked" name="grade" id="grade" ng-model="user.grade" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
 					option(value="" disabled selected) Select
@@ -97,7 +91,6 @@
 				label(for="emergency_phone")
 					span.normal Emergency Phone
 					span.error-text Invalid Emergency Phone
-			.divider
 			.input-group(ng-class="{error: form.has_experience.$error.required}")
 				select(custom-select name="has_experience" class="custom-select unpicked" id="has_experience" ng-model="user.has_experience" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
 					option(value="" disabled selected) Select
@@ -117,7 +110,6 @@
 				label(for="experience_years")
 					span.normal How many years of experience?
 		div(ng-if="user.type == 'mentor'")
-			.divider
 			.input-group(ng-class="{error: form.title.$error.required}")
 				input(type="text" name="title" id="title" ng-model='user.title' placeholder="CEO" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
 				label(for="title")
@@ -128,7 +120,6 @@
 				label(for="company")
 					span.normal Company
 					span.error-text Company Required
-			.divider
 			.input-group(ng-class="{error: form.has_experience.$error.required}")
 				select(custom-select name="has_experience" class="custom-select unpicked" id="has_experience" ng-model="user.has_experience" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
 					option(value="" disabled selected) Select
@@ -147,7 +138,10 @@
 				label(for="profiles")
 					span.normal Online Profiles
 					span.error-text Online Profiles Required
-		.divider
+		.input-group
+			input(type="text" name="dietary" id="dietary" ng-model='user.dietary' placeholder="(optional)" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }")
+			label(for="dietary")
+				span Dietary Restrictions
 		.input-group(ng-class="{error: !form.password.$valid}")
 			input(type="password" name="password" id="password" ng-model='user.password' placeholder="Important: Remember this" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" ng-pattern="/.{8,}/" required)
 			label(for="password")
