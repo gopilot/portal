@@ -7,17 +7,6 @@ html(ng-app='app')
     body(ng-cloak='')
         .main(ui-view='')
 
-        script(src='/vendor/jquery-2.1.0.min.js')
-        script(src='/vendor/jquery-scrollto.js')
-        script(src='/vendor/lodash.js')
-        script(src='/vendor/moment.min.js')
-        script(src='/vendor/angular.min.js')
-        script(src='/vendor/angular-ui-router.min.js')
-        script(src='/vendor/angular-cookies.min.js')
-        script(src='/js/custom-select.js')
-        script(src='/js/auth.js')
-        script(src='/js/event.js')
-        script(src='/js/portal.js')
-        script(src='/js/app.js')
+        script(src='/js/main.js')
         script.
             if(window.location.hash == '') window.location = '#/'

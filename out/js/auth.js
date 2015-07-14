@@ -87,7 +87,7 @@ angular.module('pilot.auth', ['ui.router'])
     
     if($stateParams.token == "mentor"){
         $scope.user.type = "mentor";
-        $scope.user.event_id = $stateParams.event
+        $scope.event_id = $stateParams.event
     }else{
         $http.get("https://api.gopilot.org/users/find_incomplete/"+$stateParams.token)
         .error(function(data){
@@ -108,14 +108,22 @@ angular.module('pilot.auth', ['ui.router'])
         delete $scope.user[ 'events' ];
         delete $scope.user[ 'event_notes' ];
 
-        $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
-        .success(function(data){
-            console.log("User updated!", data);
-            Session.refresh();
-            $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
-        })
-        .error(function(data){
-            alert("Error: "+data);
-        })
+        if($scope.user.type == 'mentor'){
+            $http.post("https://api.gopilot.org/events/"+$scope.event_id+"/register/mentor",user)
+            .success(function( data ){
+                console.log("DONE!!!", data);
+                $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
+            });
+        }else{
+            $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
+            .success(function(data){
+                console.log("User updated!", data);
+                Session.refresh();
+                $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
+            })
+            .error(function(data){
+                alert("Error: "+data);
+            })
+        }
     }
 });

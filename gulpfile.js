@@ -2,7 +2,9 @@ var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 var jade = require('gulp-jade');
 var when = require('when');
- var fs = require('fs');
+var fs = require('fs');
+var minifyJS = require('gulp-uglify');
+var concat = require('gulp-concat');
 
 var deploy = require("gulp-gh-pages");
 var static = require('node-static');
@@ -57,13 +59,10 @@ gulp.task('static', function(){
 });
 
 gulp.task('scripts', function(){
-    return when.all([
-        gulp.src('./js/**')
-        .pipe(gulp.dest('./out/js')),
-
-        gulp.src('./vendor/**')
-        .pipe(gulp.dest('./out/vendor'))
-    ]);
+    return gulp.src(['./vendor/_*.js', './vendor/[!_]*.js', './js/_*.js', './js/[!_]*.js'])
+        .pipe(concat('main.js'))
+        .pipe(minifyJS())
+        .pipe(gulp.dest('./out/js'));
 });
 
 gulp.task('watch', function() {
