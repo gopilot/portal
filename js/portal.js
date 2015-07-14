@@ -33,10 +33,24 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
         $scope.user = CurrentUser();
     }
 
-
+    
     AllEvents.then(function(events){
-        $scope.upcomingEvents = events.upcoming;
-        $scope.pastEvents = events.past;
+        if($scope.user.type === 'organizer'){
+            $scope.upcomingEvents = events.upcoming;
+            $scope.pastEvents = events.past;
+        }else{
+            $scope.upcomingEvents = [];
+            $scope.pastEvents = [];
+            $scope.user.events.forEach(function(id){
+                var event = events.byId[id];
+                console.log(event.name, Date(event.end_date), Date(), Date(event.end_date) > Date())
+                if(moment.utc(event.end_date).unix() > moment.utc().unix()){
+                    $scope.upcomingEvents.push(event);
+                }else{
+                    $scope.pastEvents.push(event);
+                }
+            });
+        }
     });
 
     $scope.doLogout = function() {

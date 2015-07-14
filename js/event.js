@@ -15,7 +15,8 @@ angular.module('pilot.event', ['ui.router'])
         all: [],
         upcoming: [],
         past: [],
-        bySlug: {}
+        bySlug: {},
+        byId: {}
     }
 
     var deferred = $q.defer();
@@ -35,6 +36,7 @@ angular.module('pilot.event', ['ui.router'])
 
                 results.all.push(data[e]);
                 results.bySlug[data[e].slug] = data[e]
+                results.byId[data[e].id] = data[e]
                 if(data[e].date.unix() < moment().unix()){
                     results.past.push(data[e]);
                 }else{
@@ -202,6 +204,7 @@ angular.module('pilot.event', ['ui.router'])
             }
         }, 60 * 1000)
 
+        // TODO fix schedule
         $http.get(server+"/events/"+$stateParams.slug+"/schedule")
         .success(function(data){
             console.log("Done!");

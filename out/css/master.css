@@ -475,6 +475,12 @@ a {
 .input-group.error input.ng-dirty:focus + label::before {
   background: #ff4d4d;
 }
+.input-group button[file-upload] + label {
+  display: none;
+}
+.input-group button[file-upload] + label:before {
+  display: none;
+}
 button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -513,6 +519,23 @@ button.disabled {
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
+}
+button[file-upload='file-upload'] {
+  overflow: hidden;
+  position: relative;
+}
+button[file-upload='file-upload'] input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  cursor: pointer;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  z-index: 10;
 }
 .toggle {
   height: 50px;
@@ -1490,6 +1513,17 @@ section.attendees .edit-attendee .form-container {
 }
 section.attendees .edit-attendee .input-group {
   display: block;
+}
+section.projects {
+  positon: relative;
+}
+section.projects h3.kilo {
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  margin: auto;
+  padding: 25px 150px;
+  margin-top: 20px;
 }
 section.settings {
   min-height: 400px;

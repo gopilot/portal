@@ -1,3 +1,4 @@
+
 section.tab-section.settings(ng-if="user.type == 'organizer'" ng-class="{shown: (tab == 'settings')}")
 	h3 Event Settings
 	form(ng-submit='updateEvent()')
@@ -22,7 +23,7 @@ section.tab-section.settings(ng-if="user.type == 'organizer'" ng-class="{shown: 
 			label(for="address" ng-class="{error: errors.address}")
 				span Address
 		.input-group
-			input(type="text" id="image" ng-model='event.image' placeholder="https://gopilot.org/img/dc.jpg")
+			button(file-upload context="event" name="image" id="image" ng-model='event.image') Upload Header Image 
 			label(for="image" ng-class="{error: errors.image}")
 				span Image URL
 		.input-group
