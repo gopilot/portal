@@ -61,7 +61,7 @@ gulp.task('static', function(){
 gulp.task('scripts', function(){
     return gulp.src(['./vendor/_*.js', './vendor/[!_]*.js', './js/_*.js', './js/[!_]*.js'])
         .pipe(concat('main.js'))
-        .pipe(minifyJS())
+        //.pipe(minifyJS())
         .pipe(gulp.dest('./out/js'));
 });
 
