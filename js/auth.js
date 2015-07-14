@@ -9,7 +9,7 @@ angular.module('pilot.auth', ['ui.router'])
         controller: "LoginController"
     })
     .state('register', {
-        url: '/register?token',
+        url: '/register?token&event',
         templateUrl: '/auth/register.html',
         controller: "RegisterController"
     })
@@ -85,16 +85,21 @@ angular.module('pilot.auth', ['ui.router'])
     var rand = Math.floor(Math.random()*16)+1;
     $scope.backgroundImage = "url(/img/backgrounds/"+rand+".jpg)";
     
-    $http.get("https://api.gopilot.org/users/find_incomplete/"+$stateParams.token)
-    .error(function(data){
+    if($stateParams.token == "mentor"){
+        $scope.user.type = "mentor";
+        $scope.user.event_id = $stateParams.event
+    }else{
+        $http.get("https://api.gopilot.org/users/find_incomplete/"+$stateParams.token)
+        .error(function(data){
 
-    })
-    .success(function(data){
-        Session.create(data.session, data.user);
-        $scope.user = data.user;
-        $scope.event_id = data.user.events[0]
-        
-    });
+        })
+        .success(function(data){
+            Session.create(data.session, data.user);
+            $scope.user = data.user;
+            $scope.event_id = data.user.events[0]
+            
+        });
+    }
 
     $scope.register = function(user){
         $scope.user.notes = {}
