@@ -52,7 +52,6 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
             });
         }
     });
-
     $scope.doLogout = function() {
         Session.destroy();
         $state.go('login')

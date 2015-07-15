@@ -3,12 +3,14 @@
     .page-title-container
         .page-title {{$$childHead.pageTitle}}
     .right
-        .greet Hello, 
-            span.name {{user.name.split(' ')[0]}}
-        .links
-            a(ui-sref="portal.settings" ui-sref-opts="{ reload: true }") Settings
-            |  | 
-            a(ng-click='doLogout()', href='') Log out
+        .profile(ng-if='user.image' ng-style="{'background-image': 'url('+user.image+')'}")
+        .text-container
+            .greet Hello, 
+                span.name {{user.name.split(' ')[0]}}
+            .links
+                a(ui-sref="portal.settings" ui-sref-opts="{ reload: true }") Settings
+                |  | 
+                a(ng-click='doLogout()', href='') Log out
     .header-middle(ng-show="$$childHead.fullHeader")
         .border-container
             div.next-event(ng-if="upcomingEvents.length > 0")

@@ -858,16 +858,34 @@ form.login button:active {
   text-align: right;
   background-color: #fff;
 }
-.header .right .greet {
+.header .right .profile {
+  height: 44px;
+  width: 44px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  -webkit-border-radius: 22px;
+  border-radius: 22px;
+  float: right;
+  display: inline-block;
+  margin-left: 10px;
+  position: relative;
+  top: -4px;
+}
+.header .right .text-container {
+  display: inline-block;
+}
+.header .right .text-container .greet {
   padding-bottom: 4px;
 }
-.header .right .greet .name {
+.header .right .text-container .greet .name {
   font-weight: 400;
 }
-.header .right .links a {
+.header .right .text-container .links a {
   color: #252a2b;
 }
-.header .right .links a:hover {
+.header .right .text-container .links a:hover {
   color: #54a2d6;
 }
 .dashboard {
