@@ -222,7 +222,8 @@ a {
   overflow: hidden;
 }
 .input-group input,
-.input-group textarea {
+.input-group textarea,
+.input-group [file-upload] {
   position: relative;
   display: block;
   float: right;
@@ -240,15 +241,18 @@ a {
   resize: none;
 }
 .input-group input:focus,
-.input-group textarea:focus {
+.input-group textarea:focus,
+.input-group [file-upload]:focus {
   outline: none;
 }
 .input-group input:focus + label,
-.input-group textarea:focus + label {
+.input-group textarea:focus + label,
+.input-group [file-upload]:focus + label {
   pointer-events: none;
 }
 .input-group input:focus + label::before,
-.input-group textarea:focus + label::before {
+.input-group textarea:focus + label::before,
+.input-group [file-upload]:focus + label::before {
   background-color: #54a2d6;
   -webkit-transform: scale3d(1, 1, 1);
   -moz-transform: scale3d(1, 1, 1);
@@ -257,9 +261,49 @@ a {
   transform: scale3d(1, 1, 1);
 }
 .input-group input:focus + label span,
-.input-group textarea:focus + label span {
+.input-group textarea:focus + label span,
+.input-group [file-upload]:focus + label span {
   color: #54a2d6;
   font-weight: 400;
+}
+.input-group [file-upload] {
+  overflow: hidden;
+  position: relative;
+  color: #bbb;
+  height: 2em;
+}
+.input-group [file-upload] input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 400px;
+  cursor: pointer;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  z-index: 10;
+}
+.input-group [file-upload] img.preview {
+  height: 100px;
+  display: none;
+  float: left;
+  vertical-align: top;
+}
+.input-group [file-upload] span.ng-scope {
+  display: inline-block;
+  vertical-align: baseline;
+}
+.input-group [file-upload].show {
+  height: 120px;
+}
+.input-group [file-upload].show span.ng-scope {
+  margin-top: 40px;
+  margin-left: 10px;
+}
+.input-group [file-upload].show img {
+  display: inline-block;
 }
 .input-group .custom-select {
   display: inline-block;
@@ -475,12 +519,6 @@ a {
 .input-group.error input.ng-dirty:focus + label::before {
   background: #ff4d4d;
 }
-.input-group button[file-upload] + label {
-  display: none;
-}
-.input-group button[file-upload] + label:before {
-  display: none;
-}
 button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -519,23 +557,6 @@ button.disabled {
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
-}
-button[file-upload='file-upload'] {
-  overflow: hidden;
-  position: relative;
-}
-button[file-upload='file-upload'] input.upload {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 40px;
-  cursor: pointer;
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  z-index: 10;
 }
 .toggle {
   height: 50px;
