@@ -23,9 +23,10 @@ section.tab-section.settings(ng-if="user.type == 'organizer'" ng-class="{shown: 
 			label(for="address" ng-class="{error: errors.address}")
 				span Address
 		.input-group
-			button(file-upload context="event" name="image" id="image" ng-model='event.image') Upload Header Image 
+			div(file-upload ng-class="{show: event.image}" context="event" name="image" id="image" ng-model='event.image') Click to upload a header image 
+				img.preview(ng-src="{{event.image}}")
 			label(for="image" ng-class="{error: errors.image}")
-				span Image URL
+				span Header Image
 		.input-group
 			input(type="text" id="start_date" ng-model='event.start_date_string' placeholder="06/06/2015 9:00AM")
 			label(for="start_date" ng-class="{error: errors.start_date}")

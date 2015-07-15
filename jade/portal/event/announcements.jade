@@ -35,9 +35,10 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 				label(for="notif" ng-class="{error: errorText}")
 					span SMS Notification Text (optional)
 			.input-group
-				input(type="text" id="image" ng-model='postEditing.image' placeholder="http://gopilot.org/img/dc.jpg")
-				label(for="image" ng-class="{error: errorText}")
-					span Image URL (optional)
+				div(file-upload ng-class="{show: postEditing.image}" context="event" name="image" id="image" ng-model='postEditing.image') Click to upload image (optional)
+					img.preview(ng-src="{{postEditing.image}}")
+				label(for="image" ng-class="{error: errors.image}")
+					span Image
 			.input-group
 				textarea(rows="2" id="title" ng-model='postEditing.body' placeholder="Text of the announcement.")
 				label(for="title" ng-class="{error: errorText}")

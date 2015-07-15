@@ -92,7 +92,7 @@ a
 		overflow hidden
 		
 
-	input, textarea
+	input, textarea, [file-upload]
 		position relative
 		display block
 		float right
@@ -118,6 +118,38 @@ a
 				span
 					color: $colors.blue
 					font-weight 400
+					
+	[file-upload]
+		overflow hidden
+		position relative
+		color #BBB
+		height 2em
+		input.upload
+		   position: absolute
+		   top 0
+		   right 0
+		   margin 0
+		   padding 0
+		   font-size 400px
+		   cursor pointer
+		   opacity 0
+		   z-index 10
+		img.preview   
+			height 100px
+			display none
+			float left
+			vertical-align top
+		span.ng-scope
+			display inline-block
+			vertical-align baseline
+		&.show
+			height 120px
+			span.ng-scope
+				margin-top 40px
+				margin-left 10px
+			img
+				display: inline-block
+				
 
 	.custom-select
 		display inline-block
@@ -254,10 +286,6 @@ a
 				background: $colors.red
 		input.ng-dirty:focus + label::before
 			background: $colors.red
-	button[file-upload] + label
-		display none
-		&:before
-			display none
 			
 
 button
@@ -284,20 +312,6 @@ button
 		cursor default
 		pointer-events none
 		opacity 0.5
-		
-button[file-upload='file-upload']
-	overflow hidden
-	position relative
-	input.upload
-	   position: absolute
-	   top 0
-	   right 0
-	   margin 0
-	   padding 0
-	   font-size 40px
-	   cursor pointer
-	   opacity 0
-	   z-index 10
 
 .toggle
 	height 50px

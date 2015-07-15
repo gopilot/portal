@@ -19,9 +19,10 @@
 				label(for="gender" ng-class="{error: errors.gender}")
 					span Gender
 			.input-group
-				input(type="text" id="image" ng-model='user.image' placeholder="https://gopilot.org/img/dc.jpg")
+				div(file-upload ng-class="{show: user.image}" context="user" name="image" id="image" ng-model='user.image') Click to upload a profile image
+					img.preview(ng-src="{{user.image}}")
 				label(for="image" ng-class="{error: errors.image}")
-					span Image URL
+					span Profile Image
 			.input-group
 				input(type="phone" id="phone" ng-model='user.phone' placeholder="555-555-5555")
 				label(for="phone" ng-class="{error: errors.phone}")

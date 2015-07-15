@@ -39,7 +39,7 @@ angular.module('app', [
         }
     }
 })
-.directive("fileUpload", function($http){
+.directive("fileUpload", function($http, $parse){
     function getType(ext){
         switch(ext) {
             case 'png':
@@ -60,20 +60,21 @@ angular.module('app', [
 
         element.find('input').on('change', function(evt){
             var filetype = this.value.match(/(\w+)$/)[0]
-            var formdata = new FormData();
-            formdata.append('file', this.files[0]);
+            var image = this.files[0];
             
             $http.get(server+'/auth/request_upload/'+attrs.context+"?filetype="+filetype)
             .success(function(data){
                 var url = data.file_url
-                $http.put(data.upload_url, formdata, {
+                $http.put(data.upload_url, image, {
                     headers: {
                         'Content-Type': getType(filetype),
                         'x-ms-blob-type': "BlockBlob"
                     }
                 })
                 .success(function(data){
-                    console.log('done!', url);
+                    $parse(attrs['ngModel']).assign(scope, url);
+
+                    console.log("URL is", $parse(attrs['ngModel'])(scope));
                 })
             });
 
@@ -81,6 +82,7 @@ angular.module('app', [
     }
 
     return {
+        require: '?ngModel',
         transclude: true,
         template: "<span ng-transclude></span><input type='file' accept='image/*' class='upload' ng-model='fileupload_data'/>",
         link: fileUpload
