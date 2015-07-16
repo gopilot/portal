@@ -7477,7 +7477,6 @@ angular.module('pilot.auth', ['ui.router'])
             Session.create(data.session, data.user);
             $scope.user = data.user;
             $scope.event_id = data.user.events[0]
-            
         });
     }
 
@@ -7488,10 +7487,18 @@ angular.module('pilot.auth', ['ui.router'])
         delete $scope.user[ 'events' ];
         delete $scope.user[ 'event_notes' ];
 
-        if($scope.user.type == 'mentor'){
-            $http.post("https://api.gopilot.org/events/"+$scope.event_id+"/register/mentor",user)
+        if($stateParams.token == 'mentor'){
+            console.log('ismentor')
+            $http.post("https://api.gopilot.org/events/"+$scope.event_id+"/register/mentor",$scope.user)
             .success(function( data ){
-                console.log("DONE!!!", data);
+                console.log('POSTED ', data);
+                return $http.post(server + "/auth/login", {
+                    email: data.email,
+                    password: $scope.user.password,
+                })
+            }).success(function(data) {
+                console.log('logged in', data);
+                Session.create(data.session, data.user);
                 $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
             });
         }else{

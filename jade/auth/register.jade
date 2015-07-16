@@ -1,4 +1,4 @@
-.error-container(ng-if="!event")
+.error-container(ng-if="!event_id")
 	.centered
 		h3.error-title Uh oh... Something went wrong.
 		.error-subject Try to reload the page.
@@ -129,7 +129,7 @@
 					span.normal Do you have experience in building Web/Mobile apps?
 					span.error-text Do you have experience in building Web/Mobile apps? (required)
 			.input-group(ng-class="{error: form.skills.$error.required}")
-				textarea(rows="2" name="skills" id="skills" ng-model='user.skills' placeholder="Yes/No" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
+				textarea(rows="2" name="skills" id="skills" ng-model='user.skills' placeholder="e.g. Android, iOS, Web, UI/UX design, business modeling, etc" ng-model-options="{ updateOn: 'default blur mousedown', debounce: { default: 500, blur: 0, mousedown: 0 } }" required)
 				label(for="skills")
 					span.normal What technical, business, or design skills do you feel confident teaching?
 					span.error-text What technical, business, or design skills do you feel confident teaching? (required)
