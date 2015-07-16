@@ -7492,15 +7492,15 @@ angular.module('pilot.auth', ['ui.router'])
             $http.post("https://api.gopilot.org/events/"+$scope.event_id+"/register/mentor",$scope.user)
             .success(function( data ){
                 console.log('POSTED ', data);
-                return $http.post(server + "/auth/login", {
+                $http.post(server + "/auth/login", {
                     email: data.email,
                     password: $scope.user.password,
-                })
-            }).success(function(data) {
-                console.log('logged in', data);
-                Session.create(data.session, data.user);
-                $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
-            });
+                }).success(function(loginData) {
+                    console.log('logged in 2', loginData);
+                    Session.create(loginData.session, loginData.user);
+                    $state.go('portal.dashboard', {'registered': true, 'event': $scope.event_id});
+                });
+            })
         }else{
             $http.put(server+'/users/'+$scope.user.id+"", $scope.user)
             .success(function(data){
@@ -8029,13 +8029,15 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
     $scope.pageTitle = "Dashboard";
     $scope.fullHeader = true; 
     $scope.event = {}
+    var modalShown = false;
 
-    if($stateParams.registered){
+    if($stateParams.registered && !modalShown){
         AllEvents.then(function(events){
             $scope.event = events.byId[$stateParams.event];
             $timeout(function(){
                 console.log('timeout')
                 $scope.showModal = true;
+                modalShown = true;
             }, 500)
         })
     }

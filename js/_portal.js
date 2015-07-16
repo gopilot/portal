@@ -69,13 +69,15 @@ angular.module('pilot.portal', ['ui.router', 'pilot.event'])
     $scope.pageTitle = "Dashboard";
     $scope.fullHeader = true; 
     $scope.event = {}
+    var modalShown = false;
 
-    if($stateParams.registered){
+    if($stateParams.registered && !modalShown){
         AllEvents.then(function(events){
             $scope.event = events.byId[$stateParams.event];
             $timeout(function(){
                 console.log('timeout')
                 $scope.showModal = true;
+                modalShown = true;
             }, 500)
         })
     }
