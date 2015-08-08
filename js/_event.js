@@ -56,7 +56,7 @@ angular.module('pilot.event', ['ui.router'])
 
 // GET /event/(slug)
 .controller("EventController", function($stateParams, $scope, $http, $interval, AllEvents) {
-    $scope.tab = "announcements" // Default tab
+    $scope.tab = "projects" // Default tab
 
     AllEvents.then(function(events){
         $scope.event = events.bySlug[$stateParams.slug];
@@ -249,7 +249,7 @@ angular.module('pilot.event', ['ui.router'])
             }
             $scope.formError = false;
 
-            alert($scope.mentorRequest.name+" is requesting a "+$scope.mentorRequest.platform+" mentor to come to "+$scope.mentorRequest.location+" to help him solve his problem: "+$scope.mentorRequest.problem);
+            // alert($scope.mentorRequest.name+" is requesting a "+$scope.mentorRequest.platform+" mentor to come to "+$scope.mentorRequest.location+" to help him solve his problem: "+$scope.mentorRequest.problem);
         }
     }
 

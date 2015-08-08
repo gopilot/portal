@@ -1,2 +1,21 @@
-section.tab-section.projects(ng-class="{shown: (tab == 'projects')}")
-	h3.kilo Be sure to check back during the event - this is where you'll show off your project to the world!
+section.tab-section.projects(ng-class="{shown: (tab == 'projects')}" ng-init="query = ''")
+	.input-group.filter
+			input(type="text" id="filter" ng-model='query' placeholder="")
+			label(for="filter")
+				span Search
+	.project-list
+		.label Your Project
+		.project-background(ng-style="{'background-image':'url(https://gopilot.org/img/dc.jpg)'}")
+			.project-labels
+				.project-name Some Project
+				.project-authors Peter Andringa, Kristin Myers
+			.background-darken
+			
+	.project-list
+		.label All Projects
+		div(ng-repeat="project in eventProjects | filter:query")
+			.project-background(ng-style="{'background-image':'url('+event.image+')'}")
+				.project-labels
+					.project-name {{event.name + " " + event.date.format('YYYY') }}
+					.project-authors {{event.date.format('MMMM D, YYYY')}}
+				.background-darken
