@@ -55,7 +55,7 @@ angular.module('pilot.event', ['ui.router'])
 })
 
 // GET /event/(slug)
-.controller("EventController", function($stateParams, $scope, $http, $interval, AllEvents) {
+.controller("EventController", function($stateParams, $scope, $http, $interval, $timeout, AllEvents) {
     $scope.tab = "announcements" // Default tab
 
     AllEvents.then(function(events){
@@ -262,6 +262,7 @@ angular.module('pilot.event', ['ui.router'])
         $scope.team = [false, false, false, false];
         $scope.teamCount = 0;
         $scope.project = {};
+        $scope.errors = {};
 
         $http.get(server+"/events/"+$stateParams.slug+"/projects?team="+$scope.user.id)
         .success(function(data){
@@ -342,10 +343,57 @@ angular.module('pilot.event', ['ui.router'])
                 console.log("Error removing user", data);
             });
         }
+        $scope.updateProject = function(){
+            var project = {
+                name: $scope.project.name,
+                description: $scope.project.description,
+                image: $scope.project.image
+            }
+            if(!project.name || !project.description){
+                $scope.errorText = "Name and Description are required.";
+                return;
+            }
+
+            $scope.errors = {};
+            $scope.errorText = "";
+            $scope.putWaiting = true;
+            console.log("submitting project", project);
+            $http.put(server+'/projects/'+$scope.project.id, project)
+            .success(function(data){
+                $scope.putWaiting = false;
+                $scope.putDone = true;
+                $timeout(function(){
+                    $scope.putDone = false;
+                }, 1000)
+                $scope.successText = "Your project has been submitted!"
+            })
+        }
     }
 
     function projects(){
-        return;
+        $scope.eventProjects = [];
+        $scope.projectTab = {};
+
+        $scope.openProject = function(project){
+            $scope.currentProject = project;
+            $scope.projectTab.modalShown = true;
+        }
+
+        $http.get(server+'/events/'+$stateParams.slug+'/projects')
+        .success(function(data){
+            data.forEach(function(project){
+                if(project.name){
+                    project.authors = project.team.map(function(user){
+                        return user.name;
+                    });
+                    var last = project.authors.pop();
+                    console.log(project.authors, last);
+                    project.authors = project.authors.join(', ') + (project.authors.length > 2 ? ',' : '') + " and " + last;
+                    $scope.eventProjects.push(project);
+                }
+            });
+            console.log('got projects', $scope.eventProjects);
+        });
     }
 
     function attendees(){

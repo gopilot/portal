@@ -1,2 +1,20 @@
-section.tab-section.projects(ng-class="{shown: (tab == 'projects')}")
-	h3.kilo Be sure to check back during the event - this is where you'll show off your project to the world!
+section.tab-section.projects(ng-class="{shown: (tab == 'projects')}" ng-init="query = ''")
+	.input-group.filter
+			input(type="text" id="filter" ng-model='query' placeholder="")
+			label(for="filter")
+				span Search
+	.project-list
+		.project-background(ng-repeat="project in eventProjects | filter:query" ng-click="openProject(project);" ng-style="{'background-image':'url('+project.image+')'}")
+			.project-labels
+				.project-name {{project.name }}
+				.project-authors {{ project.authors }}
+			.background-darken
+
+	.modal.view-project(ng-class="{shown: projectTab.modalShown}")
+		.close-container
+			.close-button.pe-7s-close(ng-click="projectTab.modalShown = false")
+		.project-container
+			.project-image(ng-style="{'background-image': 'linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4))' + (', url(' + currentProject.image + ')' || '')}")
+				.project-title {{currentProject.name}} 
+			.project-description.markdown(ng-if="currentProject && currentProject.description" ng-bind-html="currentProject.description | markdown") 
+	.modal-cover(ng-class="{shown: projectTab.modalShown}" ng-click="invite.modalShown = false")

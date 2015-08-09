@@ -9,6 +9,8 @@ var concat = require('gulp-concat');
 var deploy = require("gulp-gh-pages");
 var static = require('node-static');
 
+var livereload = require('gulp-livereload');
+
 //
 // Create a node-static server instance to serve the './public' folder
 //
@@ -19,7 +21,7 @@ function runServer(port) {
         request.addListener('end', function () {
             file.serve(request, response);
         }).resume();
-    }).listen(port || 7000);
+    }).listen(port || 80);
 }
 
 
@@ -33,8 +35,12 @@ gulp.task('deploy', ['stylus', 'jade', 'static', 'scripts'], function () {
 // compile css
 gulp.task('stylus', function () {
     return gulp.src('./stylus/[!_]*.styl')
-        .pipe(stylus({use: ['nib']}))
+        .pipe(stylus({
+            use: ['nib'],
+            'include css': true
+        }))
         .pipe(gulp.dest('./out/css'))
+        .pipe(livereload({ start: true }))
 });
 
 // compile our HTML
@@ -71,5 +77,7 @@ gulp.task('watch', function() {
     gulp.watch('./stylus/*.styl', ['stylus']);
     gulp.watch(['./js/**/*.js', './vendor/**'], ['scripts'])
     gulp.watch(['./jade/**/*.jade'], ['jade']);
+
+    livereload.listen();
 });
 

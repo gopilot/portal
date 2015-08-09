@@ -21,7 +21,8 @@ angular.module('app', [
     'ui.router',
     'pilot.auth',
     'pilot.portal',
-    'ngCookies'
+    'ngCookies',
+    'ngSanitize'
 ])
 // Custom drop-down directive
 .directive("customSelect", function(){
@@ -62,6 +63,8 @@ angular.module('app', [
             var filetype = this.value.match(/(\w+)$/)[0]
             var image = this.files[0];
             
+            scope.uploadWaiting = true
+
             $http.get(server+'/auth/request_upload/'+attrs.context+"?filetype="+filetype)
             .success(function(data){
                 var url = data.file_url
@@ -73,6 +76,10 @@ angular.module('app', [
                 })
                 .success(function(data){
                     $parse(attrs['ngModel']).assign(scope, url);
+
+                    if(scope.uploadWaiting){
+                        scope.uploadWaiting = false;
+                    }
 
                     console.log("URL is", $parse(attrs['ngModel'])(scope));
                 })
@@ -86,5 +93,10 @@ angular.module('app', [
         transclude: true,
         template: "<span ng-transclude></span><input type='file' accept='image/*' class='upload' ng-model='fileupload_data'/>",
         link: fileUpload
+    }
+})
+.filter('markdown', function($sanitize){
+    return function(input){
+        return $sanitize(marked(input));
     }
 })
