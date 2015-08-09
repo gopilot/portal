@@ -1636,6 +1636,11 @@ section.projects .project-list {
   display: block;
   width: 1000px;
 }
+section.projects .project-list .no-projects {
+  font-size: 30px;
+  width: 100%;
+  text-align: center;
+}
 section.projects .project-list .label {
   display: inline-block;
   padding: 15px 25px;
