@@ -8,6 +8,27 @@ section.tab-section.team(ng-if="user.type == 'student'" ng-class="{shown: (tab =
 				.email {{teammate.email}}
 				.icon.pe-7s-close(ng-click="removeTeammate($index)")
 
+	.project-container#your-project(ng-if="project.id")
+		h3.title Your Project
+		form(ng-submit='updateProject()')
+			.project-image(ng-style="{'background-image': ('url(' + project.image + ')' || 'none')}" file-upload context="project" name="image" id="image" ng-model='project.image')
+				.centered(ng-if="!uploadWaiting" ng-class="{'hidden': project.image || waiting}")
+					.icon.pe-7s-cloud-upload
+					label(for="upload") Upload an image
+				.centered(ng-if="uploadWaiting")
+					.icon.pe-7s-refresh-2.pe-spin
+			p.error-text(ng-if="errorText") {{errorText}}
+			.input-group
+				input(type="text" id="name" ng-model='project.name' placeholder="Short and Descriptive Title")
+				label(for="name"  ng-class="{error: errors.name}")
+					span Title
+			.input-group
+				textarea(rows="4" id="problem" ng-model='project.description' placeholder="Describe and sell your app to the reader. (Supports markdown)")
+				label(for="problem" ng-class="{error: errors.description}")
+					span Description
+			button(type="submit") Update Project
+			.indicator.icon(ng-class="{'pe-7s-refresh-2 pe-spin': putWaiting, 'pe-7s-check': putDone}")
+
 	.modal.add-teammate(ng-class="{shown: invite.modalShown}")
 		.close-button.pe-7s-close(ng-click="invite.modalShown = false")
 		p.error-text(ng-bind="errorText")

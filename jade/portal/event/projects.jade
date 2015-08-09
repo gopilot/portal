@@ -4,18 +4,17 @@ section.tab-section.projects(ng-class="{shown: (tab == 'projects')}" ng-init="qu
 			label(for="filter")
 				span Search
 	.project-list
-		.label Your Project
-		.project-background(ng-style="{'background-image':'url(https://gopilot.org/img/dc.jpg)'}")
+		.project-background(ng-repeat="project in eventProjects | filter:query" ng-click="openProject(project);" ng-style="{'background-image':'url('+project.image+')'}")
 			.project-labels
-				.project-name Some Project
-				.project-authors Peter Andringa, Kristin Myers
+				.project-name {{project.name }}
+				.project-authors {{ project.authors }}
 			.background-darken
-			
-	.project-list
-		.label All Projects
-		div(ng-repeat="project in eventProjects | filter:query")
-			.project-background(ng-style="{'background-image':'url('+event.image+')'}")
-				.project-labels
-					.project-name {{event.name + " " + event.date.format('YYYY') }}
-					.project-authors {{event.date.format('MMMM D, YYYY')}}
-				.background-darken
+
+	.modal.view-project(ng-class="{shown: projectTab.modalShown}")
+		.close-container
+			.close-button.pe-7s-close(ng-click="projectTab.modalShown = false")
+		.project-container
+			.project-image(ng-style="{'background-image': 'linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4))' + (', url(' + currentProject.image + ')' || '')}")
+				.project-title {{currentProject.name}} 
+			.project-description.markdown(ng-if="currentProject && currentProject.description" ng-bind-html="currentProject.description | markdown") 
+	.modal-cover(ng-class="{shown: projectTab.modalShown}" ng-click="invite.modalShown = false")

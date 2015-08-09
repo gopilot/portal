@@ -1,8 +1,12 @@
 @import nib
 
 global-reset()
+
 @import _font
 @import _settings
+@import '/font/icon-7/css/icons.css'
+@import '/font/icon-7/css/helper.css'
+
 
 *
   box-sizing: border-box
@@ -54,9 +58,9 @@ a
 	.close-button
 		display block
 		position absolute
-		width 25px
-		height 100px
-		background white
+		width 40px
+		height 40px
+		background transparent
 		right 25px
 		top 5px
 		font-size 50px
@@ -346,6 +350,26 @@ button
 
 .error-text
 	color: $colors.red
+	
+.markdown
+    h1, h2, h3, h4, h5, h6
+        font-weight 700
+        margin 0.8em 0
+    h1
+        font-size 2em
+    h2
+        font-size 1.5em
+    h3
+        font-size 1.17em
+    h5
+        font-size 0.85em
+    h6
+        font-size 0.67em
+    a
+    	color: $colors.blue
+    	border-bottom: 1px solid $colors.blue
+    p
+    	margin 0.5em 0
 	
 @import _auth
 @import _header

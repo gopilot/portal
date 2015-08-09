@@ -108,6 +108,8 @@ a img {
   font-weight: normal;
   font-style: normal;
 }
+@import '/font/icon-7/css/icons.css';
+@import '/font/icon-7/css/helper.css';
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -179,9 +181,9 @@ a {
 .modal .close-button {
   display: block;
   position: absolute;
-  width: 25px;
-  height: 100px;
-  background: #fff;
+  width: 40px;
+  height: 40px;
+  background: transparent;
   right: 25px;
   top: 5px;
   font-size: 50px;
@@ -606,6 +608,37 @@ button.disabled {
 }
 .error-text {
   color: #ff4d4d;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 700;
+  margin: 0.8em 0;
+}
+.markdown h1 {
+  font-size: 2em;
+}
+.markdown h2 {
+  font-size: 1.5em;
+}
+.markdown h3 {
+  font-size: 1.17em;
+}
+.markdown h5 {
+  font-size: 0.85em;
+}
+.markdown h6 {
+  font-size: 0.67em;
+}
+.markdown a {
+  color: #54a2d6;
+  border-bottom: 1px solid #54a2d6;
+}
+.markdown p {
+  margin: 0.5em 0;
 }
 .auth-screen {
   position: fixed;
@@ -1380,6 +1413,7 @@ section.team .teammate-card img.profile {
   margin-bottom: 15px;
   -webkit-border-radius: 75px;
   border-radius: 75px;
+  background-color: #333;
 }
 section.team .teammate-card .name {
   width: 100%;
@@ -1485,6 +1519,110 @@ section.team .add-teammate .error-text {
   text-align: center;
   margin-bottom: none;
 }
+section.team .project-container {
+  background: #fff;
+  padding: 25px;
+  margin: 50px auto;
+  max-width: 800px;
+}
+section.team .project-container .input-group {
+  max-width: none;
+}
+section.team .project-container button {
+  margin-top: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+section.team .project-container .indicator {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 35px;
+  line-height: 20px;
+  margin: 20px;
+  margin-top: 40px;
+}
+section.team .project-container .indicator.pe-7s-check {
+  color: #008000;
+}
+section.team .project-container .title {
+  font-size: 3em;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+section.team .project-container .error-text {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 10px 0px;
+}
+section.team .project-container .project-image {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 100%;
+  height: 200px;
+  margin: 0 -25px 25px;
+  padding: 0px 25px;
+  background-color: #333;
+  color: #fff;
+  position: relative;
+  -webkit-transition: color 0.25s;
+  -moz-transition: color 0.25s;
+  -o-transition: color 0.25s;
+  -ms-transition: color 0.25s;
+  transition: color 0.25s;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
+section.team .project-container .project-image input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 1000px;
+  cursor: pointer;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  z-index: 100;
+}
+section.team .project-container .project-image:hover {
+  color: #54a2d6;
+}
+section.team .project-container .project-image:hover .centered.hidden {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  color: #fff;
+}
+section.team .project-container .project-image .centered {
+  position: absolute;
+  width: 150px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -50px;
+  text-align: center;
+  -webkit-transition: opacity 0.25s;
+  -moz-transition: opacity 0.25s;
+  -o-transition: opacity 0.25s;
+  -ms-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+section.team .project-container .project-image .centered.hidden {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+section.team .project-container .project-image .centered .icon {
+  display: block;
+  font-size: 40px;
+}
 section.projects .filter {
   background: #fff;
   padding: 10px 20px;
@@ -1496,7 +1634,6 @@ section.projects .filter {
 section.projects .project-list {
   clear: right;
   display: block;
-  padding: 40px 0px;
   width: 1000px;
 }
 section.projects .project-list .label {
@@ -1559,6 +1696,56 @@ section.projects .project-list .project-background .project-labels .project-auth
   font-size: 22px;
   text-transform: uppercase;
   color: #e5e5e5;
+}
+section.projects .modal.view-project {
+  overflow: hidden;
+  padding: 0;
+  padding-top: 60px;
+  max-height: none;
+}
+section.projects .modal.view-project .close-container {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+}
+section.projects .modal.view-project .project-container {
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+section.projects .modal.view-project .project-image {
+  position: relative;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 100%;
+  height: 200px;
+  margin: 0 -25px 25px;
+  padding: 0px 25px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
+section.projects .modal.view-project .project-image .project-title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  height: 60px;
+  font-size: 60px;
+  top: 50%;
+  margin-top: -15px;
+  margin-left: -25px;
+  text-shadow: 0 1px 0 #333;
+  color: #fff;
+}
+section.projects .modal.view-project .project-description {
+  margin: 40px;
+}
+section.projects .modal.view-project .project-description h1 {
+  text-align: center;
 }
 section.attendees .table-container {
   display: block;
@@ -1641,17 +1828,6 @@ section.attendees .edit-attendee .form-container {
 }
 section.attendees .edit-attendee .input-group {
   display: block;
-}
-section.projects {
-  positon: relative;
-}
-section.projects h3.kilo {
-  display: block;
-  text-align: center;
-  font-size: 30px;
-  margin: auto;
-  padding: 25px 150px;
-  margin-top: 20px;
 }
 section.settings {
   min-height: 400px;
