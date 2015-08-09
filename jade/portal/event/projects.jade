@@ -4,11 +4,12 @@ section.tab-section.projects(ng-class="{shown: (tab == 'projects')}" ng-init="qu
 			label(for="filter")
 				span Search
 	.project-list
-		.project-background(ng-repeat="project in eventProjects | filter:query" ng-click="openProject(project);" ng-style="{'background-image':'url('+project.image+')'}")
+		.project-background(ng-repeat="project in filteredProjects = (eventProjects | filter:query)" ng-click="openProject(project);" ng-style="{'background-image':'url('+project.image+')'}")
 			.project-labels
 				.project-name {{project.name }}
 				.project-authors {{ project.authors }}
 			.background-darken
+		.no-projects(ng-hide="filteredProjects.length") No projects found
 
 	.modal.view-project(ng-class="{shown: projectTab.modalShown}")
 		.close-container
