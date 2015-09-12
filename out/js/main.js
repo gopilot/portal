@@ -9385,6 +9385,13 @@ angular.module('pilot.auth', ['ui.router'])
         }).success(function(data) {
             Session.create(data.session, data.user);
             $state.go('portal.dashboard')
+        }).error(function(data, status){
+            if(status === 404)// Email not found
+                $scope.error = 'email';
+            else if(status === 401)
+                $scope.error = 'password';
+            else
+                $scope.error = data;
         });
     };
 })

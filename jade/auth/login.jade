@@ -1,6 +1,6 @@
 .auth-screen(ng-style="{'background-image': backgroundImage}")
 form.login(ng-submit='doLogin()')
     img.logo(src="/img/logo_blue.png" alt="Pilot")
-    input(type='text', placeholder="Email", ng-model='user.email')     
-    input(type='password', placeholder="Password", ng-model='user.password')    
+    input(type='text', placeholder="Email", ng-model='user.email' ng-class="{error: error=='email'}")    
+    input(type='password', placeholder="Password", ng-model='user.password' ng-class="{error: error=='password'}")    
     button(type='submit') Login 

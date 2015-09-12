@@ -6,7 +6,7 @@ section.tab-section.announcements(ng-class="{shown: (tab == 'announcements')}")
 			.announcement-container
 				h3.title {{ a.title }}
 				.time {{ a.fromNow }}
-				.text {{ a.body }}
+				.text(ng-bind-html="a.body | markdown")
 				img.image(ng-if="a.image" ng-src="{{a.image}}")
 				.actions(ng-if="user.type == 'organizer'")
 					.icon.delete.pe-7s-trash(ng-click="confirmDelete(a.index)")

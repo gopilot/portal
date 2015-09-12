@@ -21,7 +21,7 @@ function runServer(port) {
         request.addListener('end', function () {
             file.serve(request, response);
         }).resume();
-    }).listen(port || 80);
+    }).listen(port || 5000);
 }
 
 
